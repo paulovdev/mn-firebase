@@ -111,3 +111,47 @@
     }
   }
 }
+
+@media (max-width: 992px) {
+  #search {
+    position: relative;
+    width: 100%;
+    height: 100%;
+
+    margin: 1rem 0;
+    padding: 0 1rem;
+
+    display: flex;
+    align-items: start;
+    justify-content: start;
+    flex-direction: column;
+    gap: 1rem;
+    .container {
+      position: relative;
+      top: 0rem;
+      width: 100%;
+      height: 100%;
+
+      flex-shrink: 0;
+      flex: 0 0 0px;
+
+      display: flex;
+      align-items: start;
+      justify-content: start;
+      gap: 2rem;
+    }
+
+    .posts {
+      position: relative;
+      width: 100%;
+      flex-shrink: 0;
+      flex: 0 0 0px;
+
+      display: flex;
+      align-items: start;
+      justify-content: start;
+      flex-direction: column;
+      gap: 1rem;
+    }
+  }
+}

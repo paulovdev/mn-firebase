@@ -15,9 +15,9 @@ const Posts = () => {
         </>
       ) : postData && postData.length > 0 ? (
         postData.map((post, i) => (
-          <div className="post-detail" key={i}>
-            <PostDetail post={post} />
-          </div>
+          <>
+            <PostDetail key={i} post={post} />
+          </>
         ))
       ) : (
         <p>Sem posts disponíveis</p>

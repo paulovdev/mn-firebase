@@ -111,3 +111,122 @@
     }
   }
 }
+
+@media (max-width: 992px) {
+  #post-solo {
+    position: relative;
+    width: 100%;
+    height: 100%;
+
+    margin: 1rem 0;
+    padding: 0 1rem;
+
+    display: flex;
+    align-items: start;
+    justify-content: start;
+    flex-direction: column;
+    gap: 2rem;
+    .container {
+      position: relative;
+      top: 1rem;
+      width: 100%;
+
+      flex-shrink: 0;
+      flex: 0 0 0px;
+
+      display: flex;
+      align-items: start;
+      justify-content: start;
+      flex-direction: column;
+      gap: 1rem;
+
+      .title-text {
+        position: relative;
+        width: 100%;
+        display: flex;
+        align-items: start;
+        justify-content: start;
+        flex-direction: column;
+
+        img {
+          width: 50px;
+          height: 50px;
+          border-radius: 100%;
+        }
+        h1 {
+          width: 100%;
+          max-width: 300px;
+          color: var(--p);
+          font-size: 42px;
+
+          margin-bottom: 1rem;
+        }
+
+        p {
+          font-size: 16px;
+          margin-top: 1rem;
+        }
+      }
+      a {
+        color: var(--p);
+        padding: 0.5rem;
+
+        background-color: var(--bg);
+        border-radius: 0.5rem;
+
+        font-size: 14px;
+        font-weight: 500;
+
+        transition: all 0.3s ease;
+        cursor: pointer;
+      }
+      .buttons {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 2rem;
+      }
+    }
+
+    .post {
+      position: relative;
+      width: 100%;
+      flex-shrink: 0;
+      flex: 0 0 0px;
+
+      display: flex;
+      align-items: start;
+      justify-content: start;
+      flex-direction: column;
+      gap: 1rem;
+      img {
+        width: 100%;
+        height: 500px;
+        border-radius: 1rem;
+        margin-bottom: 2rem;
+      }
+
+      h1 {
+        color: var(--p);
+        font-weight: 800;
+        font-size: 36px;
+      }
+
+      p {
+        color: var(--s);
+        font-weight: 400;
+        font-size: 18px;
+      }
+
+      .body {
+        width: 100%;
+        max-width: 100%;
+        p {
+          max-width: 100%;
+          margin-bottom: 0.5rem;
+          line-height: 1.1;
+        }
+      }
+    }
+  }
+}
