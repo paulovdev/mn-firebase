@@ -1,0 +1,21 @@
+@import "../../index.scss";
+
+:root {
+  --p: #{$p};
+  --s: #{$s};
+
+  --border: #{$border};
+  --background: #{$background};
+  --bg: #{$bg};
+  --bg-2: #{$bg-2};
+}
+
+.light {
+  --p: #{$p2};
+  --s: #{$s2};
+
+  --border: #{$border2};
+  --background: #{$background2};
+  --bg: #{$bg2};
+  --bg-2: #{$bg-22};
+}

@@ -1,0 +1,201 @@
+@import "../../index.scss";
+
+#dashboard {
+  position: relative;
+  width: 100%;
+  height: 100%;
+
+  margin: 5rem 0;
+
+  display: flex;
+  align-items: start;
+  justify-content: start;
+  gap: 1rem;
+
+  .container {
+    position: sticky;
+    top: 5rem;
+    width: 100%;
+
+    flex-shrink: 0;
+    flex: 1 0 0px;
+
+    display: flex;
+    align-items: start;
+    justify-content: start;
+
+    h1 {
+      width: 100%;
+      max-width: 300px;
+      color: var(--p);
+      font-size: 42px;
+
+      margin-bottom: 1rem;
+    }
+
+    p {
+      color: var(--s);
+      font-weight: 400;
+      font-size: 18px;
+      max-width: 80%;
+    }
+  }
+
+  .posts {
+    position: relative;
+    width: 100%;
+
+    flex-shrink: 0;
+    flex: 2 0 0px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 3rem;
+
+    .no-result {
+      position: relative;
+      width: 100%;
+
+      display: flex;
+      align-items: start;
+      justify-content: start;
+      flex-direction: column;
+      gap: 3rem;
+
+      span {
+        position: relative;
+
+        display: flex;
+        flex-direction: column;
+        gap: 0.3rem;
+      }
+
+      a {
+        color: var(--p);
+        padding: 0.5rem;
+
+        background-color: var(--bg);
+        border-radius: 0.5rem;
+
+        font-size: 14px;
+        font-weight: 500;
+
+        transition: all 0.3s ease;
+        cursor: pointer;
+      }
+    }
+
+    .posts-dashboard {
+      position: relative;
+      width: 100%;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 3rem;
+
+      .post-dashboard {
+        position: relative;
+        width: 100%;
+        height: 100%;
+
+        padding: 1rem;
+
+        background-color: var(--bg);
+        border: 1px solid var(--border);
+        border-radius: 0.5rem;
+
+        display: flex;
+        align-items: start;
+        justify-content: center;
+        flex-direction: column;
+        gap: 1rem;
+
+        .background {
+          position: absolute;
+          width: 100%;
+          height: 100%;
+
+          left: 0;
+
+          border: 1px solid var(--border);
+          border-radius: 0.5rem;
+          filter: brightness(40%);
+
+          display: flex;
+          align-items: center;
+          justify-content: center;
+
+          img {
+            position: relative;
+            width: 100%;
+            height: 100%;
+
+            border-radius: 0.5rem;
+          }
+
+          z-index: 0;
+        }
+
+        h1 {
+          font-size: 32px;
+          font-weight: 700;
+          letter-spacing: 1px;
+          color: #fff;
+          z-index: 1;
+        }
+
+        span {
+          font-size: 18px;
+          font-weight: 500;
+          letter-spacing: 1px;
+          color: #fff;
+          z-index: 1;
+        }
+
+        .actions {
+          position: relative;
+          width: 100%;
+
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+
+          li {
+            position: relative;
+            width: 100px;
+
+            padding: 0.5rem;
+
+            border-radius: 0.5rem;
+            background: var(--bg);
+            border: 1px solid var(--border);
+
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+
+            transition: all 0.3s ease;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+
+            a,
+            button {
+              color: var(--p);
+
+              &:hover {
+                color: var(--p);
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
