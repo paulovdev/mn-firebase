@@ -34,12 +34,7 @@ const EditProfile = ({ getUserData }) => {
  
   const saveForm = async (e) => {
     e.preventDefault();
-  
-    if (form.username === "" || form.bio === "") {
-      toast.error("All inputs are required!!!");
-      return;
-    }
-  
+
     setLoading(true);
   
     try {
