@@ -32,7 +32,7 @@ const CreatePost = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      if (preview.title === "" || desc === "" || tags.length === 0) {
+      if (preview.title === "" || desc === "" ) {
         toast.error("Todos os campos são obrigatórios!!!");
         return;
       }
@@ -105,6 +105,7 @@ const CreatePost = () => {
             <TagsInput
               value={tags}
               onChange={setTags}
+
               inputProps={{ placeholder: "Adicione tags" }}
             />
           </div>
