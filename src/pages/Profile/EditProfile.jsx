@@ -22,7 +22,7 @@ const EditProfile = ({ getUserData }) => {
     imgRef.current.click();
   };
 
-  // Atualiza o estado do formulário com os dados do usuário ao montar o componente
+
   useEffect(() => {
     if (getUserData) {
       setForm(getUserData);
@@ -31,41 +31,42 @@ const EditProfile = ({ getUserData }) => {
     }
   }, [getUserData]);
 
-  // Salva o formulário
+ 
   const saveForm = async (e) => {
     e.preventDefault();
-
+  
     if (form.username === "" || form.bio === "") {
       toast.error("All inputs are required!!!");
       return;
     }
-
+  
     setLoading(true);
-
+  
     try {
-      // Upload da imagem para o Firebase Storage, se uma imagem foi selecionada
-      if (form.userImg) {
+      let imageUrl = form.userImg; // Initialize imageUrl with existing URL or empty string
+  
+      // Upload the image to Firebase Storage if a new image is selected
+      if (form.userImg instanceof File) {
         const storageRef = ref(storage, `image/${form.userImg.name}`);
         await uploadBytes(storageRef, form.userImg);
-        const imageUrl = await getDownloadURL(storageRef);
-        // Atualiza o formulário com a URL da imagem
-        setForm({ ...form, userImg: imageUrl });
+        imageUrl = await getDownloadURL(storageRef);
       }
-
-      // Atualiza os dados do usuário no Firestore
+  
+      // Update the Firestore document with the image URL
       const docRef = doc(db, "users", getUserData?.userId);
       await updateDoc(docRef, {
         bio: form.bio,
         username: form.username,
-        userImg: form.userImg,
+        userImg: imageUrl, // Update userImg with the image URL
       });
-
+  
       setLoading(false);
-      toast.success("Profile has been updated");
+      toast.success("Perfil atualizado com sucesso!");
     } catch (error) {
       toast.error(error.message);
     }
   };
+  
 
   return (
     <form onSubmit={saveForm}>
@@ -89,6 +90,7 @@ const EditProfile = ({ getUserData }) => {
           accept="image/jpg, image/png, image/jpeg"
           ref={imgRef}
           type="file"
+         
           hidden
         />
 
@@ -99,8 +101,8 @@ const EditProfile = ({ getUserData }) => {
             value={form.username}
             type="text"
             placeholder="username..."
-            maxLength={50}
-            autoFocus
+            maxLength={16}
+            inputMode="text"
           />
         </div>
 
@@ -112,6 +114,7 @@ const EditProfile = ({ getUserData }) => {
             type="text"
             placeholder="bio..."
             maxLength={160}
+            inputMode="text"
           />
         </div>
       </div>

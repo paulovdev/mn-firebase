@@ -56,12 +56,13 @@ const CreatePost = () => {
       await addDoc(collections, {
         userId: currentUser?.uid,
         title: preview.title,
-        category: category, // Atualiza a categoria para a selecionada
+        category: category,
         desc,
         tags,
         postImg: url,
         created: new Date().toISOString(),
       });
+      
       toast.success("O post foi adicionado com sucesso");
       navigate("/");
       setPreview({

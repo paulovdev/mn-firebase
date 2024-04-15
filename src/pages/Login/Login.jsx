@@ -19,7 +19,7 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Improved form validation with a single check
+  
     if (!form.email || !form.password) {
       toast.error("Todos os campos são necessários!");
       return;
@@ -30,9 +30,9 @@ const Login = () => {
     try {
       await signInWithEmailAndPassword(auth, form.email, form.password);
       navigate("/");
-      toast.success("O usuário fez login");
+      toast.success("Logado com sucesso!");
     } catch (error) {
-      toast.error(error.message); // Display a more user-friendly error message
+      toast.error(error.message); 
     } finally {
       setLoading(false);
     }

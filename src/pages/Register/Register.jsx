@@ -63,12 +63,12 @@ const Register = ({ setModal }) => {
           created: Date.now(),
         });
         navigate("/");
-        toast.success("New Account has been Created");
+        toast.success("Conta criada com sucesso!");
         setModal(false);
       }
     } catch (error) {
-      console.error("Error creating user:", error);
-      setError("An error occurred. Please try again.");
+      console.error("Erro ao criar conta:", error);
+      setError("Ocorreu um erro. Tente novamente mais tarde.");
     } finally {
       setLoading(false);
     }
@@ -87,6 +87,7 @@ const Register = ({ setModal }) => {
           required
           minLength={1}
           maxLength={16}
+          inputMode="text"
           value={form.username}
           onChange={(e) => setForm({ ...form, username: e.target.value })}
         />
@@ -97,6 +98,7 @@ const Register = ({ setModal }) => {
           name="email"
           minLength={1}
           required
+          inputMode="email"
           value={form.email}
           onChange={(e) => setForm({ ...form, email: e.target.value })}
         />
@@ -104,7 +106,7 @@ const Register = ({ setModal }) => {
         <label>Senha:</label>
         <input
           type="password"
-          name="password"
+          name="password" 
           minLength={6}
           required
           value={form.password}
