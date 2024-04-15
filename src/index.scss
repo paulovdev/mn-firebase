@@ -1,21 +1,23 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap");
 
-//dark
-$p: #f0f0f0;
-$s: #adadad;
-$background: #141414;
+// Modo escuro
+$p: #f0f0f0; // Cor principal
+$s: #adadad; // Cor secundária
+$background: #141414; // Cor de fundo
 
-$border: #303030;
-$bg: #262626;
-$bg-2: #1d1d1d;
-//light
-$p2: #1c1c1e;
-$s2: #3e3e3e;
-$background2: #ffffff;
+$border: #303030; // Cor da borda
+$bg: #262626; // Cor de fundo secundária
+$bg-2: #1d1d1d; // Outra cor de fundo secundária
 
-$border2: #d1d1d1;
-$bg2: #ffffff;
-$bg-22: #c5c5c5;
+// Modo claro
+$p2: #1c1c1e; // Cor principal
+$s2: #3e3e3e; // Cor secundária
+$background2: #ffffff; // Cor de fundo
+
+$border2: #d1d1d1; // Cor da borda
+$bg2: #f0f0f0; // Cor de fundo secundária
+$bg-22: #c5c5c5; // Outra cor de fundo secundária
+
 
 html {
   scroll-behavior: smooth;
@@ -36,7 +38,7 @@ body {
 }
 
 .container {
-  max-width: 1400px;
+  max-width: 1000px;
   margin: 0 auto;
 
   display: flex;

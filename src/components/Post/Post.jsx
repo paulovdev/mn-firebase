@@ -43,9 +43,20 @@ const Post = () => {
     fetchPost();
   }, [postId]);
 
-  const { title, desc, postImg, username, userImg, userId } = post;
+  const {
+    title,
+    desc,
+    postImg,
+    username,
+    userImg,
+    userId,
+
+    created,
+    category,
+  } = post;
   const isAuthor = currentUser && currentUser.uid === userId;
 
+  
   return (
     <>
       {!loading && (
@@ -56,9 +67,11 @@ const Post = () => {
               {userImg && <img src={userImg} alt={`${username}'s profile`} />}
               <p>Por {username}</p>
               <p> {readTime({ __html: desc })} min de leitura</p>
+              {category}
+              {created}
               <div className="tags-container">
                 <div className="tags-text">
-                  <div className="tags"></div>
+   
                 </div>
               </div>
             </div>

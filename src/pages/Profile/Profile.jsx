@@ -25,12 +25,8 @@ const Profile = () => {
       ) : (
         <section id="my-profile">
           <div className="container">
-            <img
-              src={getUserData?.userImg || "/profile.jpg"}
-              alt="profile-img"
-            />
-            <h1>{getUserData?.username}</h1>
-            <p>{getUserData?.bio}</p>
+            <h1>Meu perfil</h1>
+            <p>Seu perfil está aqui. Edite-o conforme necessário.</p>
           </div>
           <EditProfile getUserData={userData} />
         </section>

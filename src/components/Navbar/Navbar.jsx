@@ -21,10 +21,6 @@ const Navbar = () => {
             {currentUser && (
               <>
                 <li>
-                  <NavLink to="/dashboard">Dashboard</NavLink>
-                </li>
-
-                <li>
                   <NavLink to="/post/create">Novo post</NavLink>
                 </li>
               </>

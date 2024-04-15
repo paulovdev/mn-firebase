@@ -5,7 +5,7 @@ import "./PostDetail.scss";
 import Loading from "../Loading/Loading";
 
 const Posts = () => {
-  const { postData, postLoading } = Blog();
+  const { postData, postLoading, getData } = Blog();
 
   return (
     <>
@@ -16,7 +16,7 @@ const Posts = () => {
       ) : postData && postData.length > 0 ? (
         postData.map((post, i) => (
           <>
-            <PostDetail key={i} post={post} />
+            <PostDetail key={i} post={post}  />
           </>
         ))
       ) : (

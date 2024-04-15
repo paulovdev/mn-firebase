@@ -5,16 +5,20 @@ import { readTime } from "../../utils/ReadTime";
 
 import "./PostDetail.scss";
 
-const PostDetail = ({ post }) => {
-  const { title, desc, postImg, tags, id: postId } = post;
+const PostDetail = ({ post, getData }) => {
+  const { title, desc, postImg, tags, created, category, id: postId } = post;
 
   return (
     <>
-      <div id="post-detail" >
+      <div id="post-detail">
         <img src={postImg} alt="postImg" />
         <div className="title-text">
           <h1>{title}</h1>
+
+=
         </div>
+        <div className="tags-container">{created}</div>
+
         <div className="tags-container">
           <p>{readTime({ __html: desc })} min de leitura</p>
           <div className="tags-text">
@@ -23,6 +27,7 @@ const PostDetail = ({ post }) => {
                 <p>{tag}</p>
               </div>
             ))}
+            {category}
           </div>
         </div>
         <div className="read">

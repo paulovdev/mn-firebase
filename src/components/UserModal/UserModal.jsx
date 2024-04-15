@@ -1,9 +1,8 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { FaUser } from "react-icons/fa";
-import { IoIosArrowDown } from "react-icons/io";
-
-import { FaPowerOff } from "react-icons/fa";
+import { NavLink, useNavigate } from "react-router-dom";
+import { CiUser } from "react-icons/ci";
+import { PiSignOut } from "react-icons/pi";
+import { MdOutlineDashboardCustomize } from "react-icons/md";
 
 import { signOut } from "firebase/auth";
 import { auth } from "../../firebase/Config";
@@ -42,21 +41,36 @@ const UserModal = () => {
         </div>
 
         <div className={`dropdown ${openModal ? "active" : ""}`}>
-          <img width={50} src={getUserData?.userImg || "/profile.jpg"} />
-          <p>{firstWord}</p>
-          <p>{getUserData?.email}</p>
-          <Link to={`/profile/${getUserData?.userId}`}>
+          <div className="drop-profile">
+            <img width={50} src={getUserData?.userImg || "/profile.jpg"} />
+            <p>{firstWord}</p>
+          </div>
+
+          <NavLink to={`/profile/${getUserData?.userId}`}>
             <button
               onClick={() => {
                 setOpenModal(!openModal);
               }}
             >
-              <FaUser size={20} /> Meu Perfil
+              <CiUser size={20} /> Meu Perfil
             </button>
-          </Link>
+          </NavLink>
+
+          <NavLink to={`/dashboard`}>
+            <button
+              onClick={() => {
+                setOpenModal(!openModal);
+              }}
+            >
+              <MdOutlineDashboardCustomize size={20} /> Dashboard
+            </button>
+          </NavLink>
+
+          {/* theme */}
           <Theme size={22} />
+
           <button onClick={logout}>
-            <FaPowerOff size={20} /> Sair
+            <PiSignOut size={20} /> Sair
           </button>
         </div>
       </div>

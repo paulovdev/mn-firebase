@@ -12,6 +12,7 @@ import { GrGallery } from "react-icons/gr";
 import "./CreatePost.scss";
 
 const CreatePost = () => {
+  const [category, setCategory] = useState("Sem Categoria");
   const imageRef = useRef(null);
   const [uploadingImage, setUploadingImage] = useState("");
   const [imageUrl, setImageUrl] = useState("");
@@ -20,6 +21,7 @@ const CreatePost = () => {
   const { currentUser } = Blog();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
+
 
   const [preview, setPreview] = useState({
     title: "",
@@ -54,11 +56,11 @@ const CreatePost = () => {
       await addDoc(collections, {
         userId: currentUser?.uid,
         title: preview.title,
+        category: category, // Atualiza a categoria para a selecionada
         desc,
         tags,
         postImg: url,
         created: new Date().toISOString(),
-        pageViews: 0,
       });
       toast.success("O post foi adicionado com sucesso");
       navigate("/");
@@ -111,10 +113,50 @@ const CreatePost = () => {
         <label>Conteúdo:</label>
         <ReactQuill theme="snow" value={desc} onChange={setDesc} />
 
-        <label>Upload de Imagem:</label>
-        <button type="button" className="prf-file" onClick={handleClick}>
-          {!imageUrl && <GrGallery size={22} />}
-        </button>
+        <div className="input-wrapper">
+
+          <div className="label-wrapper">
+            <label>Categoria:</label>
+            <select
+              value={category}
+              onChange={(e) => setCategory(e.target.value)}
+            >
+              <option value="Sem Categoria">Sem Categoria</option>
+              <option value="Tecnologia e Gadgets">Tecnologia e Gadgets</option>
+              <option value="Viagens e Aventuras">Viagens e Aventuras</option>
+              <option value="Moda e Estilo de Vida">
+                Moda e Estilo de Vida
+              </option>
+              <option value="Saúde e Bem-Estar">Saúde e Bem-Estar</option>
+              <option value="Alimentação e Nutrição">
+                Alimentação e Nutrição
+              </option>
+              <option value="Negócios e Empreendedorismo">
+                Negócios e Empreendedorismo
+              </option>
+              <option value="Arte e Cultura">Arte e Cultura</option>
+              <option value="Educação e Aprendizado">
+                Educação e Aprendizado
+              </option>
+              <option value="Esportes e Fitness">Esportes e Fitness</option>
+              <option value="Meio Ambiente e Sustentabilidade">
+                Meio Ambiente e Sustentabilidade
+              </option>
+            </select>
+            </div>
+
+            <div className="label-wrapper">
+              <label>Upload de Imagem:</label>
+              <button type="button" className="prf-file" onClick={handleClick}>
+                {!imageUrl && <GrGallery size={22} />}
+              </button>
+            </div>
+
+
+
+        
+        </div>
+
         {imageUrl && (
           <img src={imageUrl} alt="Preview" style={{ width: "100px" }} />
         )}

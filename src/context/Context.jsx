@@ -55,6 +55,7 @@ const Context = ({ children }) => {
   }, []);
 
   const { data: postData, loading: postLoading } = useFetch("posts");
+  const { data: getData } = useFetch("users");
 
   return (
     <BlogContext.Provider
@@ -77,6 +78,7 @@ const Context = ({ children }) => {
         setDescription,
         postData,
         postLoading,
+        getData,
         authModel,
         setAuthModel,
       }}

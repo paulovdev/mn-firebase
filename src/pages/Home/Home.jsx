@@ -39,13 +39,22 @@ const Home = () => {
               <div className="search-input">
                 <input
                   type="text"
-                  placeholder="Busca por blogs"
+                  placeholder="Pesquisar em blogs"
                   value={search}
                   onChange={(e) => setSearch(e.target.value)}
                 />
                 <button type="submit">
                   <IoIosSearch size={26} />
                 </button>
+              </div>
+              <div className="tags">
+                <p>Etiquetas</p>
+                <p>Tecnologia</p>
+                <p>Moda</p>
+                <p>Viagem</p>
+                <p>Outros Tópicos</p>
+                <p>Alimentação</p>
+                <p>Música</p>
               </div>
             </form>
           </div>

@@ -58,7 +58,6 @@ const EditProfile = ({ getUserData }) => {
         bio: form.bio,
         username: form.username,
         userImg: form.userImg,
-        userId: getUserData?.userId,
       });
 
       setLoading(false);
@@ -94,18 +93,19 @@ const EditProfile = ({ getUserData }) => {
         />
 
         <div className="label-wrapper">
-          <label>Name:</label>
+          <label>Nome:</label>
           <input
             onChange={(e) => setForm({ ...form, username: e.target.value })}
             value={form.username}
             type="text"
             placeholder="username..."
             maxLength={50}
+            autoFocus
           />
         </div>
 
         <div className="label-wrapper">
-          <label>Bio:</label>
+          <label>Biografia:</label>
           <input
             onChange={(e) => setForm({ ...form, bio: e.target.value })}
             value={form.bio}
@@ -115,14 +115,22 @@ const EditProfile = ({ getUserData }) => {
           />
         </div>
       </div>
+
+      <label>E-mail:</label>
+      <input type="text" readOnly value={getUserData?.email} />
+
       <p>
         Este endereço de e-mail está associado à sua conta M-blog. Atualizar seu
         e-mail de cobrança, vá para Configurações do espaço de trabalho →
         Planos.
       </p>
-      <div style={{ display: "flex", gap: "1rem" }}>
-        <button type="submit">Save</button>
-      </div>
+      {!loading ? (
+        <button type="submit">Salvar</button>
+      ) : (
+        <button disabled type="submit">
+          Salvando...
+        </button>
+      )}
     </form>
   );
 };
