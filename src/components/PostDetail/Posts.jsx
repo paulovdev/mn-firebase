@@ -5,7 +5,7 @@ import "./PostDetail.scss";
 import Loading from "../Loading/Loading";
 
 const Posts = () => {
-  const { postData, postLoading, getData } = Blog();
+  const { postData, postLoading} = Blog();
 
   return (
     <>

@@ -1,26 +1,37 @@
 import React, { useEffect, useState } from "react";
+import { toast } from "react-toastify";
+import { useNavigate, useLocation } from "react-router-dom";
 import { doc, updateDoc } from "firebase/firestore";
 import { db } from "../../firebase/Config";
-import { useNavigate, useParams } from "react-router-dom";
 import Loading from "../../components/Loading/Loading";
-import { toast } from "react-toastify"; 
-/* import ReactQuill from "react-quill"; */
+import Editor from "../../utils/Editor/Editor";
+import { MdEdit } from "react-icons/md";
 import { Blog } from "../../context/Context";
 import "./EditPost.scss";
 
 const EditPost = () => {
+  const [loading, setLoading] = useState(false);
   const {
+    userLoading,
     updateData,
     title,
     setTitle,
     description,
     setDescription,
-    userLoading,
   } = Blog();
 
-  const [loading, setLoading] = useState(false);
+  const { pathname } = useLocation();
+
+  const postId = pathname.split("/")[2];
+
   const navigate = useNavigate();
-  const { postId } = useParams();
+
+  useEffect(() => {
+    if (updateData) {
+      setTitle(updateData.title);
+      setDescription(updateData.description);
+    }
+  }, [updateData, setTitle, setDescription]);
 
   const handleEdit = async (e) => {
     e.preventDefault();
@@ -29,68 +40,47 @@ const EditPost = () => {
       const ref = doc(db, "posts", postId);
       await updateDoc(ref, {
         title,
-        desc: description,
+        description,
       });
-      console.log(description);
-
       navigate(`/post/${postId}`);
-      toast.success("Post atualizado com sucesso!");
+      toast.success("A postagem foi atualizada");
     } catch (error) {
-      toast.error("Ocorreu algum erro: " + error.message); // Corrija a concatenação do erro
+      console.error("Erro ao atualizar o documento: ", error);
     } finally {
       setLoading(false);
     }
   };
 
-  useEffect(() => {
-    if (updateData) {
-      setTitle(updateData.title);
-      setDescription(updateData.description);
-    }
-  }, [updateData]);
-
   return (
-    <>
+    <section id="edit-post">
       {userLoading && <Loading />}
-      <section id="edit-post">
-        <div className="container">
-          <h1>Editar post</h1>
-          <p>Altere os dados do post como desejar</p>
-        </div>
+      <div className="container">
+        <h1>Editar post</h1>
+        <p>Altere os dados do post conforme desejado</p>
+      </div>
 
-        <form onSubmit={handleEdit}>
-          <label>Título:</label>
-          <input
-            type="text"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-          />
-          <label>Conteúdo:</label>
-          <input
-            type="text"
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-          />
-          {/*           <ReactQuill
-            theme="snow"
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-          /> */}
+      <form onSubmit={handleEdit}>
+        <input
+          type="text"
+          placeholder="Titulo do post aqui..."
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+        />
 
-          {!loading && <button type="submit">Editar</button>}
-          {loading && (
-            <button disabled type="submit">
-              Editando post...
-            </button>
-          )}
-        </form>
-      </section>
-    </>
+        <Editor value={description} onChange={setDescription} />
+
+        <button type="submit" className="btn">
+          <MdEdit
+            style={{
+              animation: !loading ? "" : "round 1s infinite",
+            }}
+            size={26}
+            color="#fff"
+          />
+        </button>
+      </form>
+    </section>
   );
 };
 
 export default EditPost;
-
-{
-  /*        */
-}

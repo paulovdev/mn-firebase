@@ -3,10 +3,30 @@
     position: relative;
     width: 100%;
     display: flex;
-    align-items: center;
+    align-items: start;
+    justify-content: end;
     gap: 1rem;
+
     cursor: pointer;
     user-select: none;
+
+    .text {
+      display: flex;
+      align-items: end;
+      justify-content: end;
+      flex-direction: column;
+
+      p {
+        font-size: 14px;
+        font-weight: 400;
+        color: var(--p);
+      }
+      span {
+        font-size: 14px;
+        font-weight: 300;
+        color: var(--s);
+      }
+    }
     img {
       width: 40px;
       height: 40px;
@@ -17,10 +37,6 @@
 
       cursor: pointer;
     }
-    p {
-      font-size: 16px;
-      font-weight: 600;
-    }
   }
   .dropdown {
     position: absolute;
@@ -28,12 +44,13 @@
     height: 0;
     top: 80px;
     right: -90px;
-
-
-    background-color: var(--bg);
+    opacity: 0;
     border-radius: 0.4rem;
 
-    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    background-color: var(--bg-2);
+    box-shadow: rgba(54, 54, 54, 0.4) 0px 0px 0px 2px,
+      rgba(26, 26, 26, 0.65) 0px 4px 6px -1px,
+      rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
     overflow: hidden;
     z-index: 999;
 
@@ -41,24 +58,11 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    .drop-profile {
-      width: 100%;
-      padding: 1rem;
-      display: flex;
-      align-items: center;
-      justify-content: start;
-
-      border-bottom: 1px solid var(--border);
-    }
+    transition: all 0.4s cubic-bezier(0.215, 0.61, 0.355, 1);
     img {
       width: 50px;
       height: 50px;
       border-radius: 100%;
-    }
-    p {
-      font-size: 15px;
-      color: var(--p);
-      padding: 1rem;
     }
     button {
       width: 100%;
@@ -71,7 +75,7 @@
       border: none;
       background-color: transparent;
 
-      font-size: 15px;
+      font-size: 14px;
 
       display: flex;
       align-items: center;
@@ -79,7 +83,8 @@
       gap: 1rem;
 
       &:hover {
-        background-color: var(--bg-2);
+        background-color: var(--bg);
+
         cursor: pointer;
       }
     }
@@ -92,99 +97,24 @@
   }
 
   .active {
-    width: 250px;
-    height: max-content;
+    width: 200px;
+    height: 150px;
     top: 80px;
-    right: -90px;
+    right: 80px;
+    opacity: 1;
   }
 }
 
 @media (max-width: 992px) {
   .user-modal {
-    .profile-image {
-      position: relative;
-      width: 100%;
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      cursor: pointer;
-      user-select: none;
-      img {
-        width: 40px;
-        height: 40px;
-
-        background-color: #323232;
-        border: 1px solid var(--border);
-        border-radius: 100%;
-
-        cursor: pointer;
-      }
-      p {
-        font-size: 16px;
-        font-weight: 600;
-      }
-    }
     .dropdown {
-      position: fixed;
-      width: 0;
-      height: 0;
-      top: 80px;
-      right: -90px;
-      padding: 1rem 0;
-
       background-color: var(--bg);
-      border-radius: 0.4rem;
-
-      box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-      overflow: hidden;
-      z-index: 999;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
-      img {
-        width: 50px;
-        height: 50px;
-        border-radius: 100%;
-      }
-      p {
-        font-size: 15px;
-        color: var(--p);
-        padding: 1rem;
-      }
-      button {
-        width: 100%;
-
-        padding: 1rem;
-
-        color: var(--p);
-
-        outline: none;
-        border: none;
-        background-color: transparent;
-
-        font-size: 15px;
-
-        display: flex;
-        align-items: center;
-        justify-content: start;
-        gap: 1rem;
-
-        &:hover {
-          background-color: var(--bg-2);
-          cursor: pointer;
-        }
-      }
-      a {
-        width: 100%;
-      }
     }
 
     .active {
       width: 100%;
-      height: 40vh;
-      top: 80px;
+      height: 150px;
+      top: 100px;
       right: 0;
     }
   }

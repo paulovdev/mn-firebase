@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate, useLocation, Link } from "react-router-dom";
 import { Blog } from "../../context/Context";
-import { IoIosSearch } from "react-icons/io";
+import { IoIosArrowRoundBack } from "react-icons/io";
+
 import PostDetail from "../../components/PostDetail/PostDetail";
 import "./Search.scss";
 
@@ -21,11 +22,14 @@ const Search = () => {
   return (
     <section id="search">
       <div className="container">
-        <h2>Search</h2>
-        <Link to="/">Voltar para a página inicial</Link>
-      </div>
 
-      <div className="posts">
+        <Link to="/" className="back">
+          <IoIosArrowRoundBack size={32} />
+          <p> Voltar</p>
+        </Link>
+
+        <h1>Busca</h1>
+        
         {posts.length === 0 ? (
           <div className="no-result">
             <span>
@@ -34,15 +38,18 @@ const Search = () => {
             </span>
           </div>
         ) : (
-          <>
-            <p>
-              Encontramos {posts.length} resultados para "{search}":
-            </p>
-            {posts.map((post) => (
-              <PostDetail key={post.id} post={post} />
-            ))}
-          </>
+          <p>
+            Encontramos {posts.length} resultados para "{search}":
+          </p>
         )}
+      </div>
+
+      <div className="posts">
+        <>
+          {posts.map((post) => (
+            <PostDetail key={post.id} post={post} />
+          ))}
+        </>
       </div>
     </section>
   );

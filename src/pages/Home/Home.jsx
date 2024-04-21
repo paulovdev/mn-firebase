@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom"; // Importe useNavigate
+import { useNavigate, Link } from "react-router-dom"; // Importe useNavigate
 import { Blog } from "../../context/Context";
 import { IoIosSearch } from "react-icons/io";
 import Loading from "../../components/Loading/Loading";
 import "./Home.scss";
 import Posts from "../../components/PostDetail/Posts";
+import { LuPlus } from "react-icons/lu";
 
 const Home = () => {
   const [search, setSearch] = useState("");
@@ -39,7 +40,7 @@ const Home = () => {
               <div className="search-input">
                 <input
                   type="text"
-                  placeholder="Pesquisar em blogs"
+                  placeholder="Busca por blogs"
                   value={search}
                   onChange={(e) => setSearch(e.target.value)}
                 />
@@ -47,21 +48,17 @@ const Home = () => {
                   <IoIosSearch size={26} />
                 </button>
               </div>
-              <div className="tags">
-                <p>Etiquetas</p>
-                <p>Tecnologia</p>
-                <p>Moda</p>
-                <p>Viagem</p>
-                <p>Outros Tópicos</p>
-                <p>Alimentação</p>
-                <p>Música</p>
-              </div>
             </form>
+            <div className="posts">
+              <Posts />
+            </div>
           </div>
 
-          <div className="posts">
-            <Posts />
-          </div>
+          {currentUser && (
+            <Link to="/post/create" className="btn">
+              <LuPlus size={32} color="#fff" />
+            </Link>
+          )}
         </section>
       )}
     </>

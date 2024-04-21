@@ -1,16 +1,16 @@
 import React, { useEffect, useRef, useState } from "react";
 import { toast } from "react-toastify";
 import { FaCamera } from "react-icons/fa";
+import { MdOutlineClose } from "react-icons/md";
 
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { db, storage } from "../../firebase/Config";
 import { doc, updateDoc } from "firebase/firestore";
 import "./Profile.scss";
 
-const EditProfile = ({ getUserData }) => {
+const EditProfile = ({ getUserData, modal, setModal }) => {
   const imgRef = useRef(null);
 
-  // loading must be implemented in the button
   const [loading, setLoading] = useState(false);
   const [form, setForm] = useState({
     username: "",
@@ -22,7 +22,6 @@ const EditProfile = ({ getUserData }) => {
     imgRef.current.click();
   };
 
-
   useEffect(() => {
     if (getUserData) {
       setForm(getUserData);
@@ -31,22 +30,21 @@ const EditProfile = ({ getUserData }) => {
     }
   }, [getUserData]);
 
- 
   const saveForm = async (e) => {
     e.preventDefault();
 
     setLoading(true);
-  
+
     try {
       let imageUrl = form.userImg; // Initialize imageUrl with existing URL or empty string
-  
+
       // Upload the image to Firebase Storage if a new image is selected
       if (form.userImg instanceof File) {
         const storageRef = ref(storage, `image/${form.userImg.name}`);
         await uploadBytes(storageRef, form.userImg);
         imageUrl = await getDownloadURL(storageRef);
       }
-  
+
       // Update the Firestore document with the image URL
       const docRef = doc(db, "users", getUserData?.userId);
       await updateDoc(docRef, {
@@ -54,17 +52,23 @@ const EditProfile = ({ getUserData }) => {
         username: form.username,
         userImg: imageUrl, // Update userImg with the image URL
       });
-  
+
       setLoading(false);
       toast.success("Perfil atualizado com sucesso!");
     } catch (error) {
       toast.error(error.message);
     }
   };
-  
 
   return (
-    <form onSubmit={saveForm}>
+    <form onSubmit={saveForm} className={modal ? "active-modal-edit" : ""}>
+      <div className="close-edit">
+        <MdOutlineClose
+          className="close-svg"
+          onClick={() => setModal(!modal)}
+          size={32}
+        />
+      </div>
       <div className="image-profile">
         <img
           width={50}
@@ -74,7 +78,6 @@ const EditProfile = ({ getUserData }) => {
         />
         <FaCamera onClick={openFile} />
       </div>
-
       <div className="input-wrapper">
         <input
           onChange={(e) => {
@@ -85,7 +88,6 @@ const EditProfile = ({ getUserData }) => {
           accept="image/jpg, image/png, image/jpeg"
           ref={imgRef}
           type="file"
-         
           hidden
         />
 
@@ -113,10 +115,8 @@ const EditProfile = ({ getUserData }) => {
           />
         </div>
       </div>
-
       <label>E-mail:</label>
       <input type="text" readOnly value={getUserData?.email} />
-
       <p>
         Este endereço de e-mail está associado à sua conta M-blog. Atualizar seu
         e-mail de cobrança, vá para Configurações do espaço de trabalho →

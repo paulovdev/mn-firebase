@@ -1,35 +1,152 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import "./Profile.scss";
 import Loading from "../../components/Loading/Loading";
 import EditProfile from "./EditProfile";
+
 import { Blog } from "../../context/Context";
+import {
+  doc,
+  getDoc,
+  deleteDoc,
+  collection,
+  query,
+  orderBy,
+  onSnapshot,
+  where,
+} from "firebase/firestore";
+import { db } from "../../firebase/Config";
+import { toast } from "react-toastify";
+import UserFollow from "../../components/UserFollow/UserFollow";
 
 const Profile = () => {
-  const { currentUser, allUsers, userLoading } = Blog();
+  const { currentUser, allUsers } = Blog();
   const { userId } = useParams();
+  const [post, setPost] = useState({});
+  const [loading, setLoading] = useState(false);
+  const { username, userImg, bio } = post;
 
-  const getUserData = allUsers.find((user) => user.id === currentUser?.uid);
+  const [modal, setModal] = useState(false);
+  const [userPosts, setUserPosts] = useState([]);
 
+  const isAuthor = currentUser && currentUser.uid === userId;
   const [userData, setUserData] = useState(null);
 
   useEffect(() => {
-    const foundUser = allUsers.find((user) => user.id === currentUser?.uid);
+    const fetchPost = async () => {
+      setLoading(true);
+      try {
+        const postRef = doc(db, "posts", userId);
+        const getPost = await getDoc(postRef);
+        if (getPost.exists()) {
+          const postData = getPost.data();
+          if (postData?.userId) {
+            const userRef = doc(db, "users", postData.userId);
+            const getUser = await getDoc(userRef);
+            if (getUser.exists()) {
+              const userData = getUser.data();
+              const { created, ...rest } = postData;
+              setPost({ ...rest, ...userData, id: userId });
+            }
+          }
+        }
+      } catch (error) {
+        toast.error(error.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchPost();
+  }, [userId]);
+
+  useEffect(() => {
+    const foundUser = allUsers.find((user) => user.id === userId);
     setUserData(foundUser);
   }, [allUsers, userId]);
 
+  useEffect(() => {
+    const fetchUserPosts = async () => {
+      setLoading(true);
+      try {
+        const collectionRef = collection(db, "posts");
+        const q = query(
+          collectionRef,
+          where("userId", "==", userId),
+          orderBy("created", "desc")
+        );
+
+        const unsubscribe = onSnapshot(q, (querySnapshot) => {
+          const posts = querySnapshot.docs.map((doc) => ({
+            id: doc.id,
+            ...doc.data(),
+          }));
+          setUserPosts(posts);
+        });
+        setLoading(false);
+        return () => unsubscribe();
+      } catch (error) {
+        console.log("Error fetching user posts:", error);
+      }
+    };
+
+    fetchUserPosts();
+  }, [userId]);
+
+  console.log(userPosts, userData);
   return (
     <>
-      {userLoading ? (
+      {loading ? (
         <Loading />
       ) : (
-        <section id="my-profile">
-          <div className="container">
-            <h1>Meu perfil</h1>
-            <p>Seu perfil está aqui. Edite-o conforme necessário.</p>
-          </div>
-          <EditProfile getUserData={userData} />
-        </section>
+        <>
+          {isAuthor ? (
+            <section id="my-profile">
+              <div className="container">
+                <div className="profile-photo">
+                  <img src={userData?.userImg} alt="" />
+                  <div className="wrapper-text">
+                    <h1>{userData?.username}</h1>
+                    <p>{userData?.bio}</p>
+                    <button onClick={() => setModal(!modal)}>
+                      <p>Editar perfil</p>
+                    </button>
+                  </div>
+                </div>
+
+                <div className="followers">
+                  <UserFollow />
+                </div>
+              </div>
+              {modal && (
+                <EditProfile
+                  modal={modal}
+                  setModal={setModal}
+                  getUserData={userData}
+                />
+              )}
+            </section>
+          ) : (
+            <section id="my-profile">
+              <div className="container">
+                <div className="profile-photo">
+                  <img src={userImg} alt="" />
+                  <h1>{username}</h1>
+                  <p>{bio}</p>
+                </div>
+
+                <div className="followers">
+                  <p>
+                    Seguidores: <span>30.000</span>
+                  </p>
+                  <p>
+                    Seguindo: <span> 2.304</span>
+                  </p>
+                </div>
+              </div>
+            </section>
+          )}
+        </>
       )}
     </>
   );

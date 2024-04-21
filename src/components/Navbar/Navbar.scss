@@ -4,19 +4,17 @@ header {
   position: relative;
   width: 100%;
   height: 80px;
-  border-bottom: 1px solid var(--border);
 
   display: flex;
   align-items: center;
   justify-content: space-between;
+  padding: 0 200px;
 
-  .logo {
-    font-size: 18px;
-    font-weight: 700;
-    color: var(--p);
-    text-transform: uppercase;
+  .user-theme-navbar {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
   }
-
 
   nav {
     position: relative;
@@ -31,23 +29,27 @@ header {
 
     li {
       a {
-        color: var(--p);
-        padding: 0.5rem;
+        color: var(--s);
+
+        padding: 10px;
+        border-radius: 10px;
+        font-weight: 500;
         border-radius: 0.5rem;
         text-decoration: none;
         font-size: 16px;
-        font-weight: 500;
-        transition: all 0.3s ease;
-
-        &:hover {
-          color: var(--p);
-        }
 
         &.active {
-          background: var(--bg);
           color: var(--p);
+          background-color: var(--bg-2);
+          border: 1px solid var(--bg);
         }
       }
     }
+  }
+}
+
+@media (max-width: 992px) {
+  header {
+    padding: 0 20px;
   }
 }

@@ -1,28 +1,30 @@
 import React, { useState, useRef } from "react";
-import ReactQuill from "react-quill";
-import TagsInput from "react-tagsinput";
-import { useNavigate } from "react-router-dom";
+import Editor from "../../utils/Editor/Editor";
+import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { db, storage } from "../../firebase/Config";
 import { addDoc, collection } from "firebase/firestore";
 import { Blog } from "../../context/Context";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
-import { GrGallery } from "react-icons/gr";
+import { MdAddPhotoAlternate } from "react-icons/md";
+import { FaSave } from "react-icons/fa";
 
+import ScrollTop from "../../utils/ScrollTop/ScrollTop";
 import "./CreatePost.scss";
 
 const CreatePost = () => {
-  const [category, setCategory] = useState("Sem Categoria");
+  const [category, setCategory] = useState({
+    label: "Sem Categoria",
+    color: "#0055ff",
+  });
   const imageRef = useRef(null);
-  const [uploadingImage, setUploadingImage] = useState("");
+  const [uploadingImage, setUploadingImage] = useState(false);
   const [imageUrl, setImageUrl] = useState("");
   const [tags, setTags] = useState([]);
   const [desc, setDesc] = useState("");
   const { currentUser } = Blog();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
-
-
   const [preview, setPreview] = useState({
     title: "",
     photo: "",
@@ -32,7 +34,7 @@ const CreatePost = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      if (preview.title === "" || desc === "" ) {
+      if (!preview.title || !preview.photo || !desc) {
         toast.error("Todos os campos são obrigatórios!!!");
         return;
       }
@@ -41,7 +43,6 @@ const CreatePost = () => {
         toast.error("O título deve ter pelo menos 6 letras");
         return;
       }
-
       const collections = collection(db, "posts");
 
       let url = "";
@@ -56,21 +57,21 @@ const CreatePost = () => {
       await addDoc(collections, {
         userId: currentUser?.uid,
         title: preview.title,
-        category: category,
+        category: category.label,
+        color: category.color,
         desc,
         tags,
         postImg: url,
         created: new Date().toISOString(),
       });
-      
-      toast.success("O post foi adicionado com sucesso");
-      navigate("/");
-      setPreview({
-        title: "",
-        photo: "",
-      });
+
+      toast.success("Post publicado com sucesso!");
+      navigate(`/`);
     } catch (error) {
-      toast.error(error.message);
+      console.error("Error adding document: ", error);
+      toast.error(
+        "Ocorreu um erro ao publicar o post. Por favor, tente novamente mais tarde."
+      );
     } finally {
       setLoading(false);
     }
@@ -88,80 +89,6 @@ const CreatePost = () => {
       </div>
 
       <form onSubmit={handleSubmit}>
-        <div className="input-wrapper">
-          <div className="label-wrapper">
-            <label>Título:</label>
-            <input
-              type="text"
-              placeholder="Title"
-              value={preview.title}
-              onChange={(e) =>
-                setPreview({ ...preview, title: e.target.value })
-              }
-            />
-          </div>
-
-          <div className="label-wrapper">
-            <label>Tags:</label>
-            <TagsInput
-              value={tags}
-              onChange={setTags}
-
-              inputProps={{ placeholder: "Adicione tags" }}
-            />
-          </div>
-        </div>
-
-        <label>Conteúdo:</label>
-        <ReactQuill theme="snow" value={desc} onChange={setDesc} />
-
-        <div className="input-wrapper">
-
-          <div className="label-wrapper">
-            <label>Categoria:</label>
-            <select
-              value={category}
-              onChange={(e) => setCategory(e.target.value)}
-            >
-              <option value="Sem Categoria">Sem Categoria</option>
-              <option value="Tecnologia e Gadgets">Tecnologia e Gadgets</option>
-              <option value="Viagens e Aventuras">Viagens e Aventuras</option>
-              <option value="Moda e Estilo de Vida">
-                Moda e Estilo de Vida
-              </option>
-              <option value="Saúde e Bem-Estar">Saúde e Bem-Estar</option>
-              <option value="Alimentação e Nutrição">
-                Alimentação e Nutrição
-              </option>
-              <option value="Negócios e Empreendedorismo">
-                Negócios e Empreendedorismo
-              </option>
-              <option value="Arte e Cultura">Arte e Cultura</option>
-              <option value="Educação e Aprendizado">
-                Educação e Aprendizado
-              </option>
-              <option value="Esportes e Fitness">Esportes e Fitness</option>
-              <option value="Meio Ambiente e Sustentabilidade">
-                Meio Ambiente e Sustentabilidade
-              </option>
-            </select>
-            </div>
-
-            <div className="label-wrapper">
-              <label>Upload de Imagem:</label>
-              <button type="button" className="prf-file" onClick={handleClick}>
-                {!imageUrl && <GrGallery size={22} />}
-              </button>
-            </div>
-
-
-
-        
-        </div>
-
-        {imageUrl && (
-          <img src={imageUrl} alt="Preview" style={{ width: "100px" }} />
-        )}
         <input
           onChange={(e) => {
             setImageUrl(URL.createObjectURL(e.target.files[0]));
@@ -172,22 +99,65 @@ const CreatePost = () => {
           hidden
         />
 
+        <div className="image-select">
+          <button type="button" className="prf-file" onClick={handleClick}>
+            {!imageUrl && <MdAddPhotoAlternate size={26} />}
+            <p>{imageUrl ? "Imagem carregada..." : "Adicione uma capa"}</p>
+          </button>
+
+          <select
+            value={category.label} 
+            onChange={(e) => {
+              const selectedCategory = categories.find(
+                (category) => category.label === e.target.value
+              );
+              setCategory(selectedCategory);
+            }}
+          >
+            {categories.map((category) => (
+              <option key={category.label} value={category.label}>
+                {category.label}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        <input
+          type="text"
+          placeholder="Titulo do post aqui..."
+          value={preview.title}
+          minLength={6}
+          onChange={(e) => setPreview({ ...preview, title: e.target.value })}
+        />
+        <Editor value={desc} onChange={setDesc} />
+
         <button
           type="submit"
           className="btn"
-          disabled={
-            uploadingImage || !preview.title || !preview.photo || !desc || !tags
-          }
+          disabled={uploadingImage || !preview.title || !preview.photo || !desc}
         >
-          {uploadingImage
-            ? "Carregando foto..."
-            : loading
-            ? "Criando post..."
-            : "Criar post"}
+          <FaSave
+            style={{
+              animation: !loading ? "" : "round 1s infinite",
+            }}
+            size={26}
+            color="#fff"
+          />
         </button>
       </form>
+      <ScrollTop />
     </section>
   );
 };
 
 export default CreatePost;
+
+const categories = [
+  { label: "Sem Categoria", color: "#34495e" }, // Cinza Azulado
+  { label: "Tecnologia", color: "#3498db" }, // Azul Claro
+  { label: "Filmes e Series", color: "#8855ff" }, // Roxo
+  { label: "Programacao", color: "#2ecc71" }, // Verde Esmeralda
+  { label: "Historias", color: "#f39c12" }, // Laranja
+  { label: "Alimentação", color: "#e74c3c" }, // Vermelho
+  { label: "Negócios", color: "#1abc9c" }, // Azul Claro
+];

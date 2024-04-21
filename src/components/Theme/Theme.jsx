@@ -1,7 +1,9 @@
 import { useState } from "react";
-import { VscColorMode } from "react-icons/vsc";
+import { FiMoon } from "react-icons/fi";
 
-const Theme = (toggleTheme) => {
+import { FiSun } from "react-icons/fi";
+
+const Theme = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);
 
   function toggleTheme(e) {
@@ -11,9 +13,12 @@ const Theme = (toggleTheme) => {
   }
 
   return (
-    <button onClick={toggleTheme} className="toogle-theme">
-      <VscColorMode size={22} color={isDarkMode ? "#000" : "#fff"} />
-      Tema
+    <button onClick={toggleTheme} className="toggle-theme">
+      {isDarkMode ? (
+        <FiSun size={22} color="#000" />
+      ) : (
+        <FiMoon size={22} color="#fff" />
+      )}
     </button>
   );
 };

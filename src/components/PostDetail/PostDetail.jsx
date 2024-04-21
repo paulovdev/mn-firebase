@@ -1,40 +1,24 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { RiArrowRightDownLine } from "react-icons/ri";
 import { readTime } from "../../utils/ReadTime";
-
 import "./PostDetail.scss";
 
-const PostDetail = ({ post, getData }) => {
-  const { title, desc, postImg, tags, created, category, id: postId } = post;
+const PostDetail = ({ post }) => {
+  const { title, desc, postImg, category, color, id: postId } = post;
 
   return (
     <>
       <div id="post-detail">
-        <img src={postImg} alt="postImg" />
-        <div className="title-text">
-          <h1>{title}</h1>
-
-=
-        </div>
-        <div className="tags-container">{created}</div>
-
-        <div className="tags-container">
-          <p>{readTime({ __html: desc })} min de leitura</p>
-          <div className="tags-text">
-            {tags.map((tag, index) => (
-              <div className="tags" key={index}>
-                <p>{tag}</p>
-              </div>
-            ))}
-            {category}
+        <Link to={`/post/${postId}`}>
+          <img src={postImg} alt="postImg" />
+          <div className="title-text">
+            <span className="category-text" style={{ backgroundColor: color }}>
+              {category}
+            </span>
+            <h1>{title}</h1>
+            <p>{readTime({ __html: desc })} min de leitura</p>
           </div>
-        </div>
-        <div className="read">
-          <Link to={`/post/${postId}`}>
-            Ler <RiArrowRightDownLine size={24} />
-          </Link>
-        </div>
+        </Link>
       </div>
     </>
   );

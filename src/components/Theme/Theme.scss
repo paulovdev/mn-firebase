@@ -1,21 +1,21 @@
 @import "../../index.scss";
 
 :root {
-  --p: #{$p};
-  --s: #{$s};
+  --p: #{$p-d};
+  --s: #{$s-d};
 
-  --border: #{$border};
-  --background: #{$background};
-  --bg: #{$bg};
-  --bg-2: #{$bg-2};
+  --border: #{$border-d};
+  --background: #{$background-d};
+  --bg: #{$bg-d};
+  --bg-2: #{$bg-d-2};
 }
 
 .light {
-  --p: #{$p2};
-  --s: #{$s2};
+  --p: #{$p-l};
+  --s: #{$s-l};
 
-  --border: #{$border2};
-  --background: #{$background2};
-  --bg: #{$bg2};
-  --bg-2: #{$bg-22};
+  --border: #{$border-l};
+  --background: #{$background-l};
+  --bg: #{$bg-l};
+  --bg-2: #{$bg-l-2};
 }

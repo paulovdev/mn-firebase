@@ -5,27 +5,27 @@
   width: 100%;
   height: 100%;
 
-  margin: 5rem 0;
+  margin: 1rem 0;
+  padding: 0 600px;
 
   display: flex;
-  align-items: start;
-  justify-content: start;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
   gap: 1rem;
 
   .container {
-    flex-shrink: 0;
-    flex: 2 0 0px;
-
+    width: 100%;
     display: flex;
     align-items: start;
     justify-content: start;
-
+    flex-direction: column;
     h1 {
       color: var(--p);
       font-weight: 700;
       font-size: 36px;
 
-      letter-spacing: 1px;
+      letter-spacing: -1px;
     }
 
     p {
@@ -33,6 +33,7 @@
       font-weight: 400;
       font-size: 18px;
       max-width: 80%;
+      margin-bottom: 3rem;
     }
   }
 
@@ -40,15 +41,116 @@
     position: relative;
     width: 100%;
     height: 100%;
-    padding: 2rem;
 
-    border: 1px solid var(--border);
-    box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,
-      rgba(27, 31, 35, 0.103) 0px 0px 0px 1px;
-    border-radius: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 3rem;
 
-    flex-shrink: 0;
-    flex: 1 0 0px;
+    input {
+      width: 100%;
+      height: 100%;
+
+      outline: none;
+      background-color: transparent;
+      border: none;
+
+      font-size: 64px;
+      font-weight: 700;
+      letter-spacing: -1px;
+      color: var(--p);
+      &::placeholder {
+        font-size: 64px;
+        color: var(--s);
+      }
+    }
+    .image-select {
+      position: relative;
+      width: 100%;
+
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+
+      .prf-file {
+        position: relative;
+        width: 100%;
+        height: 40px;
+        padding: 0 1rem;
+
+        outline: none;
+        border: none;
+        border-radius: 0.4rem;
+        background-color: transparent;
+        border: 1px solid var(--border);
+
+        color: var(--p);
+        font-weight: 400;
+
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        cursor: pointer;
+        svg {
+          color: var(--s);
+        }
+      }
+      select {
+        width: 100%;
+        height: 40px;
+        padding: 0 1rem;
+
+        outline: none;
+        background-color: transparent;
+        border-radius: 0.4rem;
+        border: 1px solid var(--border);
+
+        font-size: 1rem;
+        color: var(--p);
+        option {
+          color: var(--p);
+          background-color: var(--bg);
+        }
+      }
+    }
+    .btn {
+      position: fixed;
+      right: 60px;
+      bottom: 60px;
+      width: 80px;
+      height: 80px;
+
+      background-color: var(--border);
+      border: 1px solid var(--bg-2);
+      border-radius: 100%;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    @keyframes round {
+      from {
+        transform: rotate(0);
+      }
+      to {
+        transform: rotate(360deg);
+      }
+    }
+  }
+}
+
+@media (max-width: 992px) {
+  @import "../../index.scss";
+
+  #create-post {
+    position: relative;
+    width: 100%;
+    height: 100%;
+
+    margin: 1rem 0;
+    padding: 0 20px;
 
     display: flex;
     align-items: center;
@@ -56,138 +158,35 @@
     flex-direction: column;
     gap: 1rem;
 
-    .input-wrapper,
-    .label-wrapper {
-      position: relative;
-      width: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: start;
-      gap: 1rem;
-      margin: 0;
-      padding: 0;
-    }
-    .label-wrapper {
-      flex-direction: column;
-    }
-
-    label {
-      width: 100%;
-      font-size: 16px;
-      font-weight: 400;
-      color: var(--p);
-    }
-    input {
-      width: 100%;
-      height: 40px;
-      padding: 0 1rem;
-
-      outline: none;
-      background-color: transparent;
-      border-radius: 0.4rem;
-      border: 1px solid var(--border);
-      background-color: var(--bg);
-
-      font-size: 1rem;
-      color: var(--p);
-    }
-
-    button {
-      position: relative;
-      width: 100%;
-      height: 40px;
-      margin-bottom: 1rem;
-
-      outline: none;
-      border: none;
-
-      border-radius: 0.5rem;
-      background-color: var(--bg);
-      font-size: 16px;
-      color: var(--p);
-
-      cursor: pointer;
-    }
-
-    select {
-      width: 100%;
-      height: 40px;
-      padding: 0 1rem;
-
-      outline: none;
-      background-color: transparent;
-      border-radius: 0.4rem;
-      border: 1px solid var(--border);
-      background-color: var(--bg);
-
-      font-size: 1rem;
-      color: var(--p);
-    }
-  }
-}
-@media (max-width: 992px) {
-  #create-post {
-    position: relative;
-    width: 100%;
-    height: 100%;
-
-    margin: 1rem 0;
-    padding: 0 1rem;
-
-    display: flex;
-    align-items: start;
-    justify-content: start;
-    flex-direction: column;
-    gap: 1rem;
-
     .container {
-      flex-shrink: 0;
-      flex: 0 0 0px;
 
-      display: flex;
-      align-items: start;
-      justify-content: start;
+      h1 {
+        color: var(--p);
+        font-weight: 700;
+        font-size: 36px;
+
+        letter-spacing: -1px;
+      }
+
+      p {
+        color: var(--s);
+        font-weight: 400;
+        font-size: 18px;
+        max-width: 80%;
+        margin-bottom: 3rem;
+      }
     }
 
     form {
-      position: relative;
-      width: 100%;
-      height: 100%;
-      padding: 1rem;
-
-      border: 1px solid var(--border);
-      box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,
-        rgba(27, 31, 35, 0.103) 0px 0px 0px 1px;
-      border-radius: 0.5rem;
-
-      flex-shrink: 0;
-      flex: 0 0 0px;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
-      gap: 1rem;
-
-      .input-wrapper,
-      .label-wrapper {
-        position: relative;
-        width: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: start;
-        flex-direction: column;
-        gap: 1rem;
+      input {
+        font-size: 42px;
+        &::placeholder {
+          font-size: 42px;
+        }
       }
-      .label-wrapper {
-        flex-direction: column;
-      }
-
-      label {
-        width: 100%;
-        font-size: 16px;
-        font-weight: 400;
-        color: var(--p);
+      .btn {
+        right: 20px;
+        bottom: 20px;
       }
     }
   }

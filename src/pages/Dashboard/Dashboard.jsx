@@ -12,6 +12,10 @@ import {
 } from "firebase/firestore";
 import { db } from "../../firebase/Config";
 import { toast } from "react-toastify";
+import { MdOutlineVisibility } from "react-icons/md";
+import { MdDeleteOutline } from "react-icons/md";
+
+import { MdEdit } from "react-icons/md";
 import Loading from "../../components/Loading/Loading";
 import "./Dashboard.scss";
 
@@ -42,7 +46,7 @@ const Dashboard = () => {
         setLoading(false);
         return () => unsubscribe();
       } catch (error) {
-        console.log("Error fetching user posts:", error);
+        console.log("Erro ao buscar postagens de usuários:", error);
       }
     };
 
@@ -52,10 +56,10 @@ const Dashboard = () => {
   const handleDelete = async (postId) => {
     try {
       await deleteDoc(doc(db, docCollection, postId));
-      toast.success("Post deleted successfully");
+      toast.success("Postagem excluída com sucesso");
     } catch (error) {
-      console.error("Error deleting post:", error);
-      toast.error("An error occurred while deleting the post");
+      console.error("Erro ao excluir postagem:", error);
+      toast.error("Ocorreu um erro ao excluir a postagem");
     }
   };
 
@@ -81,26 +85,32 @@ const Dashboard = () => {
             ) : (
               userPosts.map((post) => (
                 <>
-                  <div className="posts-dashboard" key={post.id}>
-                    <div className="post-dashboard">
-                      <div className="background">
-                        <img src={post.postImg} alt="" />
-                      </div>
+                  <div className="post-dashboard" key={post.id}>
+                    <div className="background">
+                      <img src={post.postImg} alt="" />
+                    </div>
+
+                    <div className="text">
                       <span>Título:</span>
                       <h1>{post.title}</h1>
-                      <div className="actions">
-                        <li>
-                          <Link to={`/post/${post.id}`}>Ver</Link>
-                        </li>
-                        <li>
-                          <Link to={`/editPost/${post.id}`}>Editar</Link>
-                        </li>
-                        <li>
-                          <button onClick={() => handleDelete(post.id)}>
-                            Deletar
-                          </button>
-                        </li>
-                      </div>
+                    </div>
+
+                    <div className="actions">
+                      <li>
+                        <Link to={`/post/${post.id}`}>
+                          <MdOutlineVisibility />
+                        </Link>
+                      </li>
+                      <li>
+                        <Link to={`/editPost/${post.id}`}>
+                          <MdEdit />
+                        </Link>
+                      </li>
+                      <li>
+                        <button onClick={() => handleDelete(post.id)}>
+                          <MdDeleteOutline />
+                        </button>
+                      </li>
                     </div>
                   </div>
                 </>

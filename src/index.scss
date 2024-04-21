@@ -1,23 +1,23 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap");
-
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap");
 // Modo escuro
-$p: #f0f0f0; // Cor principal
-$s: #adadad; // Cor secundária
-$background: #141414; // Cor de fundo
+$p-d: #f0f0f0;
+$s-d: #adadad;
+$background-d: #121212;
 
-$border: #303030; // Cor da borda
-$bg: #262626; // Cor de fundo secundária
-$bg-2: #1d1d1d; // Outra cor de fundo secundária
+$border-d: #262626;
+$bg-d: #2a2a2a;
+$bg-d-2: #1f1f1f;
 
 // Modo claro
-$p2: #1c1c1e; // Cor principal
-$s2: #3e3e3e; // Cor secundária
-$background2: #ffffff; // Cor de fundo
+$p-l: #333333;
+$s-l: #616161;
+$background-l: #ffffff;
 
-$border2: #d1d1d1; // Cor da borda
-$bg2: #f0f0f0; // Cor de fundo secundária
-$bg-22: #c5c5c5; // Outra cor de fundo secundária
+$border-l: #d1d1d1;
+$bg-l: #cecece;
+$bg-l-2: #d8d8d8;
 
+$special: #0766e2;
 
 html {
   scroll-behavior: smooth;
@@ -29,21 +29,14 @@ html {
   text-decoration: none;
   padding: 0;
   margin: 0;
+  font-size: 16px;
   box-sizing: border-box;
 }
 
 body {
   background-color: var(--background);
   color: var(--p);
-}
-
-.container {
-  max-width: 1000px;
-  margin: 0 auto;
-
-  display: flex;
-  align-items: center;
-  flex-direction: column;
+  overflow-x: hidden;
 }
 
 progress {
@@ -58,7 +51,7 @@ button {
   cursor: pointer;
 }
 
-img{
+img {
   image-rendering: optimizeSpeed;
 }
 
@@ -78,81 +71,6 @@ img{
 ::-webkit-scrollbar-thumb {
   background: var(--s);
   border-radius: 1px;
-}
-
-.quill {
-  width: 100%;
-  height: 100%;
-
-  color: var(--p);
-
-  .ql-container {
-    width: 100%;
-    height: 200px;
-    outline: none;
-    padding: 0.2rem;
-    border-radius: 0.4rem;
-    background-color: var(--bg);
-    border: 1px solid var(--border);
-
-    color: var(--p);
-    font-size: 18px;
-    margin: 1rem 0;
-  }
-
-  .ql-toolbar {
-    position: relative;
-    width: 100%;
-    height: 100%;
-
-    display: flex;
-    align-items: start;
-    justify-content: space-between;
-    overflow-x: auto;
-
-    outline: none;
-    padding: 1rem 0;
-    border-radius: 0.4rem;
-    border: 1px solid var(--border);
-    color: var(--p);
-    .ql-formats {
-      position: relative;
-      width: 100%;
-      padding: 1rem 0;
-      border-radius: 0.4rem;
-      border: 1px solid var(--border);
-
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-    }
-
-    span {
-      color: var(--p);
-    }
-  }
-}
-
-.react-tagsinput {
-  width: 100%;
-  border-radius: 0.4rem;
-  border: none;
-  background-color: transparent;
-
-  font-size: 16px;
-  color: var(--p);
-
-  .react-tagsinput-tag {
-    color: var(--p);
-    background: var(--background);
-    border: none;
-    padding: 0.6rem;
-    border-radius: 0.5rem;
-
-    font-size: 14px;
-    font-weight: 500;
-    margin-right: 1rem;
-  }
 }
 
 .Toastify__toast-theme--light {

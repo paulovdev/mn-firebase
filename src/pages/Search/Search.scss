@@ -4,79 +4,62 @@
   position: relative;
   width: 100%;
   height: 100%;
+  margin: 2rem 0;
 
-  margin: 5rem 0;
+  padding: 0 500px;
 
   display: flex;
-  align-items: start;
-  justify-content: start;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
 
   .container {
-    position: sticky;
-    top: 1rem;
+    position: relative;
     width: 100%;
-
-    flex-shrink: 0;
-    flex: 1 0 0px;
 
     display: flex;
     align-items: start;
     justify-content: start;
-    gap: 1rem;
+    flex-direction: column;
+
+    .back {
+      position: relative;
+
+      color: var(--p);
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+
+      gap: 0.2rem;
+
+      cursor: pointer;
+      svg {
+        transition: all 0.3s;
+      }
+      &:hover {
+        svg {
+          transform: translateX(-5px);
+        }
+      }
+    }
 
     h1 {
       color: var(--p);
       font-size: 42px;
-
       margin-bottom: 1rem;
-    }
-
-    a {
-      color: var(--p);
-      padding: 0.5rem;
-
-      background-color: var(--bg);
-      border-radius: 0.5rem;
-
-      font-size: 14px;
-      font-weight: 500;
-
-      transition: all 0.3s ease;
-      cursor: pointer;
     }
   }
 
   .posts {
     position: relative;
     width: 100%;
-    flex-shrink: 0;
-    flex: 2 0 0px;
 
     display: flex;
-    align-items: start;
-    justify-content: start;
-    flex-direction: column;
-    gap: 1rem;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 2rem;
 
-    img {
-      width: 100%;
-      height: 500px;
-      border-radius: 1rem;
-      margin-bottom: 1rem;
-      border: 1px solid var(--border);
-    }
-
-    h1 {
-      color: var(--p);
-      font-weight: 800;
-      font-size: 36px;
-    }
-
-    p {
-      color: var(--s);
-      font-weight: 400;
-      font-size: 18px;
-    }
     .no-result {
       position: relative;
       width: 100%;
@@ -95,20 +78,6 @@
         gap: 0.3rem;
       }
     }
-
-    a {
-      color: var(--p);
-      padding: 0.5rem;
-
-      background-color: var(--bg);
-      border-radius: 0.5rem;
-
-      font-size: 14px;
-      font-weight: 500;
-
-      transition: all 0.3s ease;
-      cursor: pointer;
-    }
   }
 }
 
@@ -117,41 +86,80 @@
     position: relative;
     width: 100%;
     height: 100%;
+    margin: 2rem 0;
 
-    margin: 1rem 0;
-    padding: 0 1rem;
+    padding: 0 20px;
 
     display: flex;
-    align-items: start;
-    justify-content: start;
+    align-items: center;
+    justify-content: center;
     flex-direction: column;
-    gap: 1rem;
+
     .container {
       position: relative;
-      top: 0rem;
       width: 100%;
-      height: 100%;
-
-      flex-shrink: 0;
-      flex: 0 0 0px;
-
-      display: flex;
-      align-items: start;
-      justify-content: start;
-      gap: 2rem;
-    }
-
-    .posts {
-      position: relative;
-      width: 100%;
-      flex-shrink: 0;
-      flex: 0 0 0px;
 
       display: flex;
       align-items: start;
       justify-content: start;
       flex-direction: column;
-      gap: 1rem;
+
+      .back {
+        position: relative;
+
+        color: var(--p);
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+
+        gap: 0.2rem;
+
+        cursor: pointer;
+        svg {
+          transition: all 0.3s;
+        }
+        &:hover {
+          svg {
+            transform: translateX(-5px);
+          }
+        }
+      }
+
+      h1 {
+        color: var(--p);
+        font-size: 42px;
+        margin-bottom: 1rem;
+      }
+    }
+
+    .posts {
+      position: relative;
+      width: 100%;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 2rem;
+
+      .no-result {
+        position: relative;
+        width: 100%;
+
+        display: flex;
+        align-items: start;
+        justify-content: start;
+        flex-direction: column;
+        gap: 3rem;
+
+        span {
+          position: relative;
+
+          display: flex;
+          flex-direction: column;
+          gap: 0.3rem;
+        }
+      }
     }
   }
 }
