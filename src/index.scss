@@ -1,21 +1,13 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap");
-// Modo escuro
-$p-d: #f0f0f0;
-$s-d: #adadad;
-$background-d: #121212;
 
-$border-d: #262626;
-$bg-d: #2a2a2a;
-$bg-d-2: #1f1f1f;
+$p: #333333;
+$p-2:#ffffff;
+$s: #616161;
+$background: #ffffff;
 
-// Modo claro
-$p-l: #333333;
-$s-l: #616161;
-$background-l: #ffffff;
-
-$border-l: #d1d1d1;
-$bg-l: #cecece;
-$bg-l-2: #d8d8d8;
+$border: #d1d1d1;
+$bg: #cecece;
+$bg-2: #d8d8d8;
 
 $special: #0766e2;
 
@@ -34,14 +26,14 @@ html {
 }
 
 body {
-  background-color: var(--background);
-  color: var(--p);
+  background-color: $background;
+  color: $p;
   overflow-x: hidden;
 }
 
 progress {
   width: 100%;
-  background-color: var(--bg);
+  background-color: $bg;
 }
 
 button {
@@ -61,7 +53,7 @@ img {
 
 ::selection {
   background-color: #b4b4b4;
-  color: var(--p);
+  color: $p;
 }
 
 ::-webkit-scrollbar {
@@ -69,14 +61,14 @@ img {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--s);
+  background: $s;
   border-radius: 1px;
 }
 
 .Toastify__toast-theme--light {
-  background-color: var(--bg);
-  color: var(--p);
+  background-color: $bg;
+  color: $p;
   .Toastify__close-button--light {
-    color: var(--p);
+    color: $p;
   }
 }

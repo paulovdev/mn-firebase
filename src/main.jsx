@@ -6,16 +6,12 @@ import { BrowserRouter } from "react-router-dom";
 import "./index.scss";
 import "react-toastify/dist/ReactToastify.css";
 import "react-tagsinput/react-tagsinput.css";
-import "./components/Theme/Theme.scss";
-
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <BrowserRouter>
       <Context>
-        <App>
-         
-        </App>
+        <App />
       </Context>
     </BrowserRouter>
   </React.StrictMode>

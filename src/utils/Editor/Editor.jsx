@@ -11,12 +11,12 @@ const modules = {
   ],
 };
 
-const Editor = ({ value, onChange }) => {
+const Editor = ({ value, onChange, placeholder }) => {
   return (
     <ReactQuill
       theme="snow"
       modules={modules}
-      placeholder="Digite seu texto aqui..."
+      placeholder={placeholder}
       value={value}
       onChange={onChange}
     />

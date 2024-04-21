@@ -74,7 +74,10 @@ const Post = () => {
               >
                 {category}
               </span>
-              <h1>{title}</h1>
+              <div className="title-post">
+                <h1>{title}</h1>
+              </div>
+              
               <div className="profile">
                 {userImg && (
                   <img

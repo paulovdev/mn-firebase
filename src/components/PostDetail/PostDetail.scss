@@ -1,73 +1,129 @@
 @import "../../index.scss";
+
 #post-detail {
   position: relative;
-  width: 250px;
-  height: 350px;
+  width: 100%;
+  height: 250px;
+
+  display: flex;
+  align-items: start;
+  justify-content: start;
+
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
 
-  &:hover {
-    img {
-      transform: scale(0.95);
-    }
-  }
-  a {
-    position: relative;
+  .wrapper {
     display: flex;
-    flex-direction: column;
-    gap: 1rem;
+    align-items: start;
+    justify-content: start;
 
-    img {
-      width: 100%;
-      height: 200px;
-      border-radius: 1rem;
-      border: 3px solid var(--border);
-      background: var(--p);
-      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    .left-content {
+      img {
+        width: 300px;
+        height: 200px;
+        border-radius: 1rem;
+        border: 1px solid $border;
+        background: var(--p);
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      }
     }
 
-    .title-text {
-      position: relative;
+    .right-content {
       display: flex;
       flex-direction: column;
-      align-items: start;
-      justify-content: start;
       gap: 1rem;
+      margin-left: 2rem;
 
-      span,
-      h1,
-      p {
-        color: var(--p);
-        margin: 0;
-      }
-
-      .category-text {
-        color: #fff;
-        padding: 0.3rem 0.8rem;
-        border-radius: 0.4rem;
-        font-size: 14px;
-
-        font-size: 14px;
-        font-weight: 700;
-        text-transform: uppercase;
-      }
-
-      h1 {
-        font-weight: 700;
-        font-size: 28px;
-        text-align: start;
-        letter-spacing: -1px;
-        min-width: 400px;
-        justify-content: start;
+      .date-category-text {
+        display: flex;
+        align-items: center;
         gap: 1rem;
+
+        .category-text {
+          color: $p-2;
+          padding: 0.4rem 0.8rem;
+          border-radius: 5rem;
+          font-size: 12px;
+          font-weight: 600;
+          text-transform: uppercase;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+
+        .date-text {
+          background-color: $p;
+          padding: 0.4rem 0.8rem;
+          border-radius: 5rem;
+          font-size: 12px;
+          color: $p-2;
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
       }
 
-      p {
-        font-weight: 400;
-        font-size: 14px;
-        min-height: 10px;
-        color: var(--s);
+      .title-text {
+        width: 400px;
+        display: inline-flex;
+        flex-direction: column;
+        gap: 0.6rem;
+        h1,
+        p {
+          color: $p;
+          margin: 0;
+          display: inline-block;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+
+        h1 {
+          font-size: 42px;
+          text-align: start;
+          font-weight: 800;
+          letter-spacing: -1px;
+          color: $p;
+        }
+
+        p {
+          font-weight: 500;
+          font-size: 14px;
+          color: $s;
+        }
+      }
+
+      .read-more {
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        color: $p;
+      }
+
+      .body {
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6,
+        p,
+        a {
+          font-size: 16px;
+          font-weight: 600;
+          letter-spacing: 0;
+          width: 100px;
+          height: 100%;
+          display: inline-block;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
       }
     }
   }
@@ -79,15 +135,24 @@
     width: 100%;
     height: 100%;
 
-    &:hover {
-      img {
-        transform: scale(1);
-      }
-    }
     a {
-      img {
-        width: 100%;
-        height: 300px;
+      .wrapper {
+        flex-direction: column;
+
+        .left-content {
+          img {
+            width: 100%;
+            height: 300px;
+            border-radius: 1rem;
+            border: 3px solid $border;
+            background: var(--p);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+          }
+        }
+
+        .right-content {
+          margin-left: 0;
+        }
       }
     }
   }

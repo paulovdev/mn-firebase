@@ -36,26 +36,26 @@ const Home = () => {
                 {getUserData?.username}
               </h1>
             )}
-            <form onSubmit={handleSubmit}>
-              <div className="search-input">
-                <input
-                  type="text"
-                  placeholder="Busca por blogs"
-                  value={search}
-                  onChange={(e) => setSearch(e.target.value)}
-                />
-                <button type="submit">
-                  <IoIosSearch size={26} />
-                </button>
-              </div>
-            </form>
-            <div className="posts">
-              <Posts />
+          </div>
+          <form onSubmit={handleSubmit}>
+            <div className="search-input">
+              <input
+                type="text"
+                placeholder="Busca por blogs"
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+              />
+              <button type="submit">
+                <IoIosSearch size={26} />
+              </button>
             </div>
+          </form>
+          <div className="posts">
+            <Posts />
           </div>
 
           {currentUser && (
-            <Link to="/post/create" className="btn">
+            <Link to="/post/create" className="btn" title="Criar post">
               <LuPlus size={32} color="#fff" />
             </Link>
           )}

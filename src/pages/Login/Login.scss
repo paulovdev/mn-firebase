@@ -24,7 +24,7 @@
     justify-content: start;
     flex-direction: column;
     h1 {
-      color: var(--p);
+      color:$p;
       font-weight: 700;
       font-size: 36px;
 
@@ -32,7 +32,7 @@
     }
 
     p {
-      color: var(--s);
+      color: $s;
       font-weight: 400;
       font-size: 18px;
       max-width: 80%;
@@ -54,7 +54,7 @@
       width: 100%;
       font-size: 16px;
       font-weight: 400;
-      color: var(--p);
+      color:$p;
     }
 
     input {
@@ -65,10 +65,10 @@
       outline: none;
       background-color: transparent;
       border-radius: 0.4rem;
-      border: 1px solid var(--border);
+      border: 1px solid $border;
 
       font-size: 1rem;
-      color: var(--p);
+      color:$p;
     }
 
     button {
@@ -100,13 +100,13 @@
       margin-bottom: 1rem;
 
       p {
-        color: var(--s);
+        color: $s;
         font-weight: 500;
         font-size: 14px;
       }
 
       a {
-        color: var(--s);
+        color: $s;
         text-decoration: underline;
 
         font-weight: 500;

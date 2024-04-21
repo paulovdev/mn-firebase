@@ -98,17 +98,17 @@ const Dashboard = () => {
                     <div className="actions">
                       <li>
                         <Link to={`/post/${post.id}`}>
-                          <MdOutlineVisibility />
+                          <MdOutlineVisibility size={24} />
                         </Link>
                       </li>
                       <li>
                         <Link to={`/editPost/${post.id}`}>
-                          <MdEdit />
+                          <MdEdit size={24} />
                         </Link>
                       </li>
                       <li>
                         <button onClick={() => handleDelete(post.id)}>
-                          <MdDeleteOutline />
+                          <MdDeleteOutline color="#ffffff" size={24} />
                         </button>
                       </li>
                     </div>

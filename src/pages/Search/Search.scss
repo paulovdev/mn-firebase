@@ -25,7 +25,7 @@
     .back {
       position: relative;
 
-      color: var(--p);
+      color: $p;
       font-weight: 600;
       display: flex;
       align-items: center;
@@ -44,7 +44,7 @@
     }
 
     h1 {
-      color: var(--p);
+      color: $p;
       font-size: 42px;
       margin-bottom: 1rem;
     }
@@ -107,7 +107,7 @@
       .back {
         position: relative;
 
-        color: var(--p);
+        color: $p;
         font-weight: 600;
         display: flex;
         align-items: center;
@@ -126,7 +126,7 @@
       }
 
       h1 {
-        color: var(--p);
+        color: $p;
         font-size: 42px;
         margin-bottom: 1rem;
       }

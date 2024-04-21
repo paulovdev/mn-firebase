@@ -11,14 +11,7 @@ import "./EditPost.scss";
 
 const EditPost = () => {
   const [loading, setLoading] = useState(false);
-  const {
-    userLoading,
-    updateData,
-    title,
-    setTitle,
-    description,
-    setDescription,
-  } = Blog();
+  const { updateData, title, setTitle, description, setDescription } = Blog();
 
   const { pathname } = useLocation();
 
@@ -53,12 +46,6 @@ const EditPost = () => {
 
   return (
     <section id="edit-post">
-      {userLoading && <Loading />}
-      <div className="container">
-        <h1>Editar post</h1>
-        <p>Altere os dados do post conforme desejado</p>
-      </div>
-
       <form onSubmit={handleEdit}>
         <input
           type="text"
@@ -67,9 +54,13 @@ const EditPost = () => {
           onChange={(e) => setTitle(e.target.value)}
         />
 
-        <Editor value={description} onChange={setDescription} />
+        <Editor
+          placeholder="Edite o seu texto..."
+          value={description}
+          onChange={setDescription}
+        />
 
-        <button type="submit" className="btn">
+        <button type="submit" className="btn" title="Salvar">
           <MdEdit
             style={{
               animation: !loading ? "" : "round 1s infinite",

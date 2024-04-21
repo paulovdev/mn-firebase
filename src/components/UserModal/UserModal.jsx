@@ -53,7 +53,7 @@ const UserModal = () => {
                 setOpenModal(!openModal);
               }}
             >
-              <FaRegUser size={16} /> Meu Perfil
+              <FaRegUser size={16} color="#fff" /> Meu Perfil
             </button>
           </NavLink>
 
@@ -63,12 +63,12 @@ const UserModal = () => {
                 setOpenModal(!openModal);
               }}
             >
-              <TbLayoutDashboard size={20} /> Dashboard
+              <TbLayoutDashboard size={20} color="#fff" /> Dashboard
             </button>
           </NavLink>
 
           <button onClick={logout}>
-            <IoMdExit size={20} /> Sair
+            <IoMdExit size={20} color="#fff" /> Sair
           </button>
         </div>
       </div>

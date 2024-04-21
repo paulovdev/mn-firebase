@@ -1,7 +1,6 @@
 import { NavLink } from "react-router-dom";
 import Loading from "../Loading/Loading";
 import { Blog } from "../../context/Context";
-import Theme from "../Theme/Theme";
 import "./Navbar.scss";
 import UserModal from "../UserModal/UserModal";
 const Navbar = () => {
@@ -29,7 +28,7 @@ const Navbar = () => {
             )}
           </nav>
           <div className="user-theme-navbar">
-            <Theme size={22} />
+           
             {currentUser && <UserModal />}
           </div>
         </header>

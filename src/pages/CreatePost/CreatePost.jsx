@@ -83,12 +83,15 @@ const CreatePost = () => {
 
   return (
     <section id="create-post">
-      <div className="container">
-        <h1>Criar post</h1>
-        <p>Escreva sobre o que quiser e compartilhe o seu conhecimento</p>
-      </div>
-
       <form onSubmit={handleSubmit}>
+        <input
+          type="text"
+          placeholder="Titulo do post aqui..."
+          value={preview.title}
+          minLength={6}
+          onChange={(e) => setPreview({ ...preview, title: e.target.value })}
+        />
+
         <input
           onChange={(e) => {
             setImageUrl(URL.createObjectURL(e.target.files[0]));
@@ -106,7 +109,7 @@ const CreatePost = () => {
           </button>
 
           <select
-            value={category.label} 
+            value={category.label}
             onChange={(e) => {
               const selectedCategory = categories.find(
                 (category) => category.label === e.target.value
@@ -122,18 +125,16 @@ const CreatePost = () => {
           </select>
         </div>
 
-        <input
-          type="text"
-          placeholder="Titulo do post aqui..."
-          value={preview.title}
-          minLength={6}
-          onChange={(e) => setPreview({ ...preview, title: e.target.value })}
+        <Editor
+          placeholder="Escreva sobre o que quiser e compartilhe o seu conhecimento..."
+          value={desc}
+          onChange={setDesc}
         />
-        <Editor value={desc} onChange={setDesc} />
 
         <button
           type="submit"
           className="btn"
+          title="Salvar"
           disabled={uploadingImage || !preview.title || !preview.photo || !desc}
         >
           <FaSave

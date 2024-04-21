@@ -25,7 +25,7 @@
     h1 {
       width: 100%;
       max-width: 300px;
-      color: var(--p);
+      color: $p;
       font-size: 42px;
 
       margin-bottom: 1rem;
@@ -67,10 +67,10 @@
       }
 
       a {
-        color: var(--p);
+        color: $p;
         padding: 0.5rem;
 
-        background-color: var(--bg);
+        background-color: $bg;
         border-radius: 0.5rem;
 
         font-size: 14px;
@@ -86,7 +86,7 @@
       height: 250px;
 
       padding: 1rem;
-      border: 3px solid var(--border);
+      border: 3px solid $border;
       border-radius: 0.5rem;
 
       display: flex;
@@ -101,7 +101,7 @@
         left: 0;
         top: 0;
 
-        filter: brightness(50%);
+        filter: brightness(60%);
 
         display: flex;
         align-items: center;
@@ -126,16 +126,19 @@
         flex-direction: column;
         height: 100px;
 
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+
         span {
-          font-size: 14px;
+          font-size: 18px;
           font-weight: 500;
-          letter-spacing: 1px;
-          color: #fff;
+          color: $p-2;
         }
         h1 {
-          font-size: 16px;
+          font-size: 26px;
           font-weight: 800;
-          color: #fff;
+          color: $p-2;
         }
       }
       .actions {
@@ -150,19 +153,11 @@
         li {
           position: relative;
           width: 100%;
-          height: 30px;
-
-          padding: 0.2rem;
+          height: 40px;
 
           border-radius: 0.5rem;
-          background: var(--background);
-          border: 1px solid var(--border);
-
-          text-decoration: none;
-          font-size: 14px;
-          font-weight: 500;
-
-          transition: all 0.3s ease;
+          background: $p-2;
+          border: 1px solid $border;
 
           display: flex;
           align-items: center;
@@ -170,8 +165,11 @@
           cursor: pointer;
 
           svg {
-            color: var(--p);
+            color: $p;
           }
+        }
+        li:last-child{
+          background-color: rgb(250, 62, 62);
         }
       }
     }
@@ -188,17 +186,16 @@
         height: 100%;
 
         .text {
-
           span {
             font-size: 16px;
             font-weight: 500;
             letter-spacing: 1px;
-            color: #fff;
+            color: $p;
           }
           h1 {
             font-size: 24px;
             font-weight: 800;
-            color: #fff;
+            color: $p;
           }
         }
       }
