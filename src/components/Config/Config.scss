@@ -1,0 +1,97 @@
+@import '../../index.scss';
+
+.config {
+    img {
+        width: 40px;
+        height: 40px;
+
+        background-color: #323232;
+        border-radius: 100%;
+
+        cursor: pointer;
+
+    }
+
+    .dropdown {
+        position: absolute;
+        width: 0;
+        height: 0;
+        top: 0;
+        right: -50px;
+
+        background-color: var(--bg);
+
+        border-radius: 0.4rem;
+
+        overflow: hidden;
+        z-index: 999;
+
+        button {
+            width: 100%;
+
+            padding: 1rem;
+
+            color: var(--p);
+
+            outline: none;
+            border: none;
+            background-color: transparent;
+
+            border-bottom: 1px solid var(--border);
+
+            font-size: 14px;
+
+            display: flex;
+            align-items: center;
+            justify-content: start;
+            gap: 1rem;
+
+            &:hover {
+                background-color: var(--s);
+                cursor: pointer;
+            }
+        }
+    }
+
+    .active {
+        width: 150px;
+        height: max-content;
+        top: 60px;
+    }
+}
+
+
+.my-profile {
+    position: fixed;
+    /* Change position to fixed */
+    width: 700px;
+    height: 500px;
+    top: 50%;
+    /* Center vertically */
+    left: 50%;
+    /* Center horizontally */
+    transform: translate(-50%, -50%);
+    background-color: rgba(50, 50, 50, 0.8);
+    /* Add background with opacity */
+    backdrop-filter: blur(10px);
+    /* Apply blur effect */
+    border-radius: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    z-index: 999;
+    padding: 2rem;
+    /* Add some padding */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    display: none;
+
+    p {
+        font-size: 22px;
+        color: var(--p);
+    }
+
+    &.active {
+        display: flex;
+    }
+}

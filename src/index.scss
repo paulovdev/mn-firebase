@@ -1,13 +1,13 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap");
 
-$p: #333333;
-$p-2:#ffffff;
-$s: #616161;
-$background: #ffffff;
+$p: #ffffff;
+$p-2: #333333;
+$s: #ffffffca;
+$background: #222222;
 
-$border: #d1d1d1;
-$bg: #cecece;
-$bg-2: #d8d8d8;
+$border: #262626;
+$bg: #4d4d4d;
+$bg-2: #646464;
 
 $special: #0766e2;
 
@@ -28,7 +28,6 @@ html {
 body {
   background-color: $background;
   color: $p;
-  overflow-x: hidden;
 }
 
 progress {

@@ -62,7 +62,7 @@
 
     .no-result {
       position: relative;
-      width: 100%;
+      max-width: 130px;
 
       display: flex;
       align-items: start;
@@ -71,6 +71,7 @@
       gap: 3rem;
 
       span {
+
         position: relative;
 
         display: flex;

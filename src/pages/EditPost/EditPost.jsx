@@ -66,7 +66,7 @@ const EditPost = () => {
               animation: !loading ? "" : "round 1s infinite",
             }}
             size={26}
-            color="#fff"
+            color="#000"
           />
         </button>
       </form>

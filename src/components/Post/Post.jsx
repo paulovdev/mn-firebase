@@ -74,10 +74,10 @@ const Post = () => {
               >
                 {category}
               </span>
-              <div className="title-post">
+            
                 <h1>{title}</h1>
-              </div>
-              
+             
+
               <div className="profile">
                 {userImg && (
                   <img

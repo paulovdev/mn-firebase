@@ -9,16 +9,14 @@
   padding: 0 400px;
 
   display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
+  align-items: start;
+  justify-content: start;
 
   .container {
     position: relative;
     width: 100%;
 
-    min-height: 30vh;
-
+    flex: 3 0 0;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -40,59 +38,72 @@
     a {
       color: $p;
     }
-  }
 
-  form {
-    position: relative;
-    width: 100%;
-    margin-bottom: 3rem;
-    .search-input {
-      background-color: transparent;
-      border-radius: 0.4rem;
-      border: 1px solid $border;
+    .posts {
+      position: relative;
+      width: 100%;
 
       display: flex;
       align-items: center;
-      justify-content: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 2rem;
+    }
+  }
 
-      button {
-        width: 60px;
+  .container-right {
+    position: sticky;
+    width: 100%;
+    top: 13.5rem;
 
-        outline: none;
-        border: none;
-        background-color: transparent;
-        border-radius: 0.4rem;
+    flex: 1 0 0;
+    display: flex;
+    align-items: start;
+    justify-content: start;
+    flex-wrap: wrap;
 
-        color: $p;
-        cursor: pointer;
-      }
+    form {
+      .search-input {
+        background-color: $bg;
+        border-radius: 5rem;
+        border: 1px solid $border;
 
-      input {
-        width: 100%;
-        height: 50px;
-        padding: 0 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
 
-        outline: none;
-        border: none;
-        background-color: transparent;
-        border-radius: 0.4rem;
+        button {
+          width: 80px;
 
-        font-size: 1rem;
-        color: $p;
+          outline: none;
+          border: none;
+          background-color: transparent;
+          border-radius: 0.4rem;
+
+          color: $p;
+          cursor: pointer;
+        }
+
+        input {
+          width: 100%;
+          height: 50px;
+          padding: 0 1rem;
+
+          outline: none;
+          border: none;
+          background-color: transparent;
+          border-radius: 0.4rem;
+
+          font-size: 1rem;
+          color: $p;
+          &::placeholder{
+            color: $s;
+          }
+        }
       }
     }
   }
 
-  .posts {
-    position: relative;
-    width: 100%;
-
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 2rem;
-  }
   .btn {
     position: fixed;
     right: 60px;

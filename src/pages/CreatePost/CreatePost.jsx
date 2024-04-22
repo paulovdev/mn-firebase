@@ -89,6 +89,7 @@ const CreatePost = () => {
           placeholder="Titulo do post aqui..."
           value={preview.title}
           minLength={6}
+          maxLength={24}
           onChange={(e) => setPreview({ ...preview, title: e.target.value })}
         />
 
@@ -142,7 +143,7 @@ const CreatePost = () => {
               animation: !loading ? "" : "round 1s infinite",
             }}
             size={26}
-            color="#fff"
+            color="#000"
           />
         </button>
       </form>
