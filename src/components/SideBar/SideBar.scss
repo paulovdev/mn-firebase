@@ -1,0 +1,123 @@
+@import '../../index.scss';
+
+.sidebar {
+    position: fixed;
+    width: 100px;
+    height: 100vh;
+    top: 0;
+    background-color: transparent;
+    border: 1px solid $border;
+
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    flex-direction: column;
+    z-index: 999;
+    gap: 3rem;
+
+    .logo {
+        padding: 20px 0;
+        text-align: center;
+
+        a {
+            font-family: "PT Serif Caption", serif;
+            font-size: 16px;
+            color: $p;
+            text-decoration: none;
+            display: block;
+        }
+    }
+
+    ul {
+        position: relative;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        gap: 2rem;
+
+        li {
+            a {
+                svg {
+                    width: 26px;
+                    height: 26px;
+                    color: $p;
+                    opacity: .6;
+                    text-decoration: none;
+                    display: block;
+                }
+
+                &.active {
+                    svg {
+                        opacity: 1;
+
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 992px) {
+    .sidebar {
+        position: fixed;
+        width: 80px;
+        height: 100vh;
+        top: 0;
+        background-color: transparent;
+        border: 1px solid $border;
+
+        display: flex;
+        align-items: center;
+        justify-content: start;
+        flex-direction: column;
+        z-index: 999;
+        gap: 3rem;
+
+        .logo {
+            padding: 20px 0;
+            text-align: center;
+
+            a {
+                font-family: "PT Serif Caption", serif;
+                font-size: 16px;
+                color: $p;
+                text-decoration: none;
+                display: block;
+            }
+        }
+
+        ul {
+            position: relative;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            gap: 2rem;
+
+            li {
+                a {
+                    svg {
+                        width: 26px;
+                        height: 26px;
+                        color: $p;
+                        opacity: .6;
+                        text-decoration: none;
+                        display: block;
+                    }
+
+                    &.active {
+                        svg {
+                            opacity: 1;
+
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

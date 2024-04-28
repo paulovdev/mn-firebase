@@ -1,0 +1,114 @@
+@import "../../index.scss";
+
+.user-modal {
+  display: relative;
+  height: 100%;
+
+  .profile-image {
+    position: relative;
+    width: 50px;
+    display: flex;
+    align-items: start;
+    justify-content: end;
+    gap: 1rem;
+
+    cursor: pointer;
+    user-select: none;
+
+    img {
+      width: 50px;
+      height: 50px;
+
+      background-color: $p;
+      border-radius: 100%;
+
+      cursor: pointer;
+    }
+  }
+
+  .dropdown {
+    position: absolute;
+    width: 250px;
+    height: 250px;
+    top: 80px;
+    right: 100px;
+    border-radius: 0.4rem;
+
+    background-color: $background;
+    overflow: hidden;
+    z-index: 999;
+
+    display: flex;
+    align-items: start;
+    justify-content: start;
+    flex-direction: column;
+    transition: height 0.3s linear;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+
+    .text {
+      width: 100%;
+      padding: 1rem;
+      display: flex;
+      justify-content: end;
+      align-items: end;
+      flex-direction: column;
+      gap: 0.4rem;
+
+
+      p {
+        font-size: 18px;
+        font-weight: 800;
+        color: $p;
+      }
+
+      span {
+        font-size: 16px;
+        font-weight: 400;
+        color: $p;
+        opacity: .7;
+      }
+    }
+
+    .profile-button {
+      width: 100%;
+
+      padding: 1rem;
+
+      color: $p;
+
+      outline: none;
+      border: none;
+
+      background-color: transparent;
+
+      font-size: 16px;
+      font-weight: 400;
+
+      display: flex;
+      align-items: center;
+      justify-content: start;
+      gap: 1rem;
+
+      &:hover {
+        cursor: pointer;
+      }
+
+      &.active {
+        background-color: $p;
+        color: #fff;
+
+        svg {
+          color: #fff;
+        }
+      }
+
+      svg {
+        color: $p;
+      }
+    }
+  }
+
+  .dropdown-active {
+    height: 1px;
+  }
+}

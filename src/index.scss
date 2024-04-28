@@ -1,0 +1,136 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=PT+Serif+Caption:ital@0;1&display=swap');
+
+$p: #131313;
+$p-2: #e6e6e6;
+$s: #808080;
+$background: #f2f2f2;
+
+$border: #dddddd;
+$bg: #3a3a3a;
+$bg-2: #3a3a3a;
+$mt: #262626;
+
+$special: #0766e2;
+
+html {
+  scroll-behavior: smooth;
+}
+
+* {
+  font-family: "Inter", sans-serif;
+  list-style: none;
+  text-decoration: none;
+
+  word-spacing: 1px;
+  padding: 0;
+  margin: 0;
+  font-size: 16px;
+  box-sizing: border-box;
+
+  text-rendering: optimizeSpeed;
+  shape-rendering: geometricPrecision;
+  image-rendering: optimizeSpeed;
+}
+
+body {
+  background-color: $background;
+  color: $p;
+}
+
+button {
+  outline: none;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.btn {
+  position: fixed;
+  right: 0;
+  bottom: 50%;
+  width: 150px;
+  height: 70px;
+  padding: 0.7rem;
+
+  overflow: hidden;
+
+  background-color: $p;
+  border: 1px solid $p-2;
+  border-radius: 3rem 0 0 3rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  p {
+    color: $p-2;
+
+  }
+
+  .icon-content {
+    width: 50px;
+    height: 50px;
+
+    background-color: $p-2;
+
+    border-radius: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.icon-down {
+  position: relative;
+  top: 100px;
+  width: 50px;
+  height: 50px;
+  padding: 0.5rem;
+  border-radius: 100%;
+  background-color: $p;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+img {
+  image-rendering: optimizeSpeed;
+}
+
+.border-post {
+  width: 100%;
+  height: 1px;
+  background-color: $p;
+  opacity: .1;
+}
+
+.error {
+  color: #f00;
+}
+
+::selection {
+  background-color: $p;
+  color: $p-2;
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: $p;
+  border-radius: 1px;
+}
+
+.Toastify__toast-theme--light {
+  color: $p;
+  text-transform: lowercase;
+  font-weight: 600;
+
+  .Toastify__close-button--light {
+    color: $p;
+  }
+}

@@ -1,0 +1,167 @@
+@import "../../index.scss";
+
+#search {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  margin: 2rem 0;
+
+  padding: 0 200px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  .container {
+    position: relative;
+    width: 100%;
+
+    display: flex;
+    align-items: start;
+    justify-content: start;
+    flex-direction: column;
+
+    .back {
+      position: relative;
+
+      color: $p;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+
+      gap: 0.2rem;
+
+      cursor: pointer;
+      svg {
+        transition: all 0.3s;
+      }
+      &:hover {
+        svg {
+          transform: translateX(-5px);
+        }
+      }
+    }
+
+    h1 {
+      color: $p;
+      font-size: 42px;
+      margin-bottom: 1rem;
+    }
+  }
+
+  .posts {
+    position: relative;
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 2rem;
+
+    .no-result {
+      position: relative;
+      max-width: 130px;
+
+      display: flex;
+      align-items: start;
+      justify-content: start;
+      flex-direction: column;
+      gap: 3rem;
+
+      span {
+
+        position: relative;
+
+        display: flex;
+        flex-direction: column;
+        gap: 0.3rem;
+      }
+    }
+  }
+}
+
+@media (max-width: 992px) {
+  #search {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    margin: 2rem 0;
+  
+    padding: 0 20px 0 100px;
+  
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  
+    .container {
+      position: relative;
+      width: 100%;
+  
+      display: flex;
+      align-items: start;
+      justify-content: start;
+      flex-direction: column;
+  
+      .back {
+        position: relative;
+  
+        color: $p;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+  
+        gap: 0.2rem;
+  
+        cursor: pointer;
+        svg {
+          transition: all 0.3s;
+        }
+        &:hover {
+          svg {
+            transform: translateX(-5px);
+          }
+        }
+      }
+  
+      h1 {
+        color: $p;
+        font-size: 42px;
+        margin-bottom: 1rem;
+      }
+    }
+  
+    .posts {
+      position: relative;
+      width: 100%;
+  
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 2rem;
+  
+      .no-result {
+        position: relative;
+        max-width: 130px;
+  
+        display: flex;
+        align-items: start;
+        justify-content: start;
+        flex-direction: column;
+        gap: 3rem;
+  
+        span {
+  
+          position: relative;
+  
+          display: flex;
+          flex-direction: column;
+          gap: 0.3rem;
+        }
+      }
+    }
+  }
+}

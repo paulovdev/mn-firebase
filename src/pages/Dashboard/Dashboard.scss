@@ -1,0 +1,381 @@
+@import "../../index.scss";
+
+#dashboard {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  margin: 2rem 0;
+
+  padding: 0 600px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  .container {
+    position: relative;
+    width: 100%;
+    margin-bottom: 1rem;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    h1 {
+      width: 100%;
+      color: $p;
+      font-size: 64px;
+      font-weight: 800;
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+
+    p {
+      color: var(--s);
+      font-weight: 400;
+      font-size: 18px;
+    }
+  }
+
+  .posts {
+    position: relative;
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 5rem;
+
+    .no-result {
+      position: relative;
+      width: 100%;
+
+      display: flex;
+      align-items: start;
+      justify-content: start;
+      flex-direction: column;
+      gap: 3rem;
+
+      span {
+        position: relative;
+
+        display: flex;
+        flex-direction: column;
+        gap: 0.3rem;
+      }
+
+      a {
+        color: $p;
+        padding: 0.5rem;
+
+        background-color: $bg;
+        border-radius: 0.5rem;
+
+        font-size: 14px;
+        font-weight: 500;
+
+        transition: all 0.3s ease;
+        cursor: pointer;
+      }
+    }
+
+    .post-dashboard {
+      position: relative;
+      width: 100%;
+      height: 100%;
+
+      padding: 1rem;
+      border: 3px solid $border;
+      border-radius: 0.5rem;
+
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+
+      .background {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+
+        left: 0;
+        top: 0;
+
+        filter: brightness(50%);
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        img {
+          position: relative;
+          width: 100%;
+          height: 100%;
+
+          border-radius: 0.5rem;
+        }
+
+        z-index: 0;
+      }
+
+      .text {
+        position: relative;
+        width: 100%;
+        padding: 1rem 0;
+        display: flex;
+        align-items: start;
+        flex-direction: column;
+        height: 200px;
+        gap: 1rem;
+        word-break: break-all;
+
+        span {
+          font-size: 24px;
+
+          font-weight: 800;
+          color: $p-2;
+        }
+
+        h1 {
+          font-size: 24px;
+
+          font-weight: 700;
+          color: $p-2;
+
+          overflow: hidden;
+          text-overflow: ellipsis;
+          -webkit-box-orient: vertical;
+          -webkit-line-clamp: 2;
+          display: -webkit-box;
+        }
+      }
+
+      .actions {
+        position: relative;
+        width: 100%;
+        height: 100%;
+
+        display: flex;
+        align-items: end;
+        justify-content: space-between;
+        gap: 1rem;
+
+        li {
+          position: relative;
+          width: 100%;
+          height: 40px;
+
+          border-radius: 0.5rem;
+          background: $p-2;
+          border: 1px solid $border;
+
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          cursor: pointer;
+
+          svg {
+            color: $p;
+          }
+        }
+
+        li:last-child {
+          background-color: rgb(250, 62, 62);
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 992px) {
+  #dashboard {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    margin: 2rem 0;
+
+    padding: 0 20px 0 100px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    .container {
+      position: relative;
+      width: 100%;
+      margin-bottom: 1rem;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+
+      h1 {
+        width: 100%;
+        color: $p;
+        font-size: 64px;
+        font-weight: 800;
+        text-align: center;
+        margin-bottom: 1rem;
+      }
+
+      p {
+        color: var(--s);
+        font-weight: 400;
+        font-size: 18px;
+      }
+    }
+
+    .posts {
+      position: relative;
+      width: 100%;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 5rem;
+
+      .no-result {
+        position: relative;
+        width: 100%;
+
+        display: flex;
+        align-items: start;
+        justify-content: start;
+        flex-direction: column;
+        gap: 3rem;
+
+        span {
+          position: relative;
+
+          display: flex;
+          flex-direction: column;
+          gap: 0.3rem;
+        }
+
+        a {
+          color: $p;
+          padding: 0.5rem;
+
+          background-color: $bg;
+          border-radius: 0.5rem;
+
+          font-size: 14px;
+          font-weight: 500;
+
+          transition: all 0.3s ease;
+          cursor: pointer;
+        }
+      }
+
+      .post-dashboard {
+        position: relative;
+        width: 100%;
+        height: 100%;
+
+        padding: 1rem;
+        border: 3px solid $border;
+        border-radius: 0.5rem;
+
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+
+        .background {
+          position: absolute;
+          width: 100%;
+          height: 100%;
+
+          left: 0;
+          top: 0;
+
+          filter: brightness(50%);
+
+          display: flex;
+          align-items: center;
+          justify-content: center;
+
+          img {
+            position: relative;
+            width: 100%;
+            height: 100%;
+
+            border-radius: 0.5rem;
+          }
+
+          z-index: 0;
+        }
+
+        .text {
+          position: relative;
+          width: 100%;
+          padding: 1rem 0;
+          display: flex;
+          align-items: start;
+          flex-direction: column;
+          height: 200px;
+          gap: 1rem;
+          word-break: break-all;
+
+          span {
+            font-size: 22px;
+
+            font-weight: 800;
+            color: $p-2;
+          }
+
+          h1 {
+            font-size: 22px;
+
+            font-weight: 700;
+            color: $p-2;
+
+            overflow: hidden;
+            text-overflow: ellipsis;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 2;
+            display: -webkit-box;
+          }
+        }
+
+        .actions {
+          position: relative;
+          width: 100%;
+          height: 100%;
+
+          display: flex;
+          align-items: end;
+          justify-content: space-between;
+          gap: 1rem;
+
+          li {
+            position: relative;
+            width: 100%;
+            height: 40px;
+
+            border-radius: 0.5rem;
+            background: $p-2;
+            border: 1px solid $border;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+
+            svg {
+              color: $p;
+            }
+          }
+
+          li:last-child {
+            background-color: rgb(250, 62, 62);
+          }
+        }
+      }
+    }
+  }
+}
