@@ -16,8 +16,6 @@ const Home = () => {
   const { currentUser, allUsers, userLoading } = Blog();
   const navigate = useNavigate();
 
-  const getUserData = allUsers.find((user) => user.id === currentUser?.uid);
-
   const handleSubmit = (e) => {
     e.preventDefault();
 

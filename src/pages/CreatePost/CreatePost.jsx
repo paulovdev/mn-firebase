@@ -6,7 +6,8 @@ import { db, storage } from "../../firebase/Config";
 import { addDoc, collection } from "firebase/firestore";
 import { Blog } from "../../context/Context";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
-import { MdAddPhotoAlternate } from "react-icons/md";
+import { IoImageOutline } from "react-icons/io5";
+
 import { FaSave } from "react-icons/fa";
 
 import ScrollTop from "../../utils/ScrollTop/ScrollTop";
@@ -26,7 +27,7 @@ const CreatePost = () => {
     photo: "",
   });
 
-  const [selectedColor, setSelectedColor] = useState(null);
+  const [selectedColor, setSelectedColor] = useState("");
   const colors = ["#A6A6A6", "#737373", "#404040", "#262626", "#0D0D0D"];
 
   const handleSubmit = async (e) => {
@@ -82,9 +83,10 @@ const CreatePost = () => {
 
         <div className="image-select">
           <button type="button" className="prf-file" onClick={handleClick}>
-            {!imageUrl && <MdAddPhotoAlternate size={26} />}
-            <p>{imageUrl ? "Imagem carregada..." : "Adicione uma capa"}</p>
+            <IoImageOutline size={26} />
+            <p>{imageUrl ? "Imagem carregada..." : ""}</p>
           </button>
+          {imageUrl && <img width={150} src={imageUrl} alt="Imagem carregada" className="preview-image" />}
 
           <select
             value={selectedColor}

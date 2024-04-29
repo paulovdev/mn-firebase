@@ -3,23 +3,28 @@
 .progress-bar-container {
   position: fixed;
   background-color: #dadada;
-  width: 100%;
-  height: 5px;
+  width: 5px;
+  height: 100vh;
 
   top: 0;
-  left: 0;
+  left: 60px;
 
-  border-radius: 0 0 1rem;
   z-index: 999;
 
-  .progress-bar {
+
+  .progress-bar-mobile {
+    display: none;
+  }
+
+  .progress-bar-desktop {
     position: fixed;
-    height: 5px;
+    width: 5px;
+    height: 100vh;
 
     top: 0;
-    left: 0;
+    left: 60px;
 
-    border-radius: 0 0 1rem;
+
     z-index: 999;
   }
 }
@@ -33,20 +38,24 @@
 
     top: auto;
     left: 0;
-    bottom: 0;
+    bottom: 60px;
 
-    border-radius: 0 0 1rem;
+
     z-index: 999;
 
-    .progress-bar {
+    .progress-bar-desktop {
+      display: none;
+    }
+
+    .progress-bar-mobile {
       position: fixed;
       height: 5px;
 
       top: auto;
       left: 0;
-      bottom: 0;
+      bottom: 60px;
 
-      border-radius: 0 0 1rem;
+      display: block;
       z-index: 999;
     }
   }

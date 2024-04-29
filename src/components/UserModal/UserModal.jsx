@@ -1,14 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { LuUser } from "react-icons/lu";
 import { motion } from "framer-motion";
 import { TbLogout2 } from "react-icons/tb";
-
 import { toast } from "react-toastify";
 import { signOut } from "firebase/auth";
 import { auth } from "../../firebase/Config";
 import "./UserModal.scss";
-
 import { Blog } from "../../context/Context";
 
 const UserModal = () => {
@@ -17,11 +15,8 @@ const UserModal = () => {
   const username = getUserData?.username;
   const firstWord = username ? username.split(" ").slice(0, 2).join(" ") : "";
   const navigate = useNavigate();
-
   const [modal, setModal] = useState(false);
-  const close = () => setModal(false);
-  const open = () => setModal(true);
-
+  const dropdownRef = useRef(null);
 
   const logout = async () => {
     try {
@@ -33,47 +28,62 @@ const UserModal = () => {
     }
   };
 
+  const handleClickOutside = (event) => {
+    if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+      setModal(false);
+    }
+  };
+
+  const handleButtonClick = () => {
+    setModal(false);
+  };
+
+  useEffect(() => {
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
   return (
     <>
       <div className="user-modal">
-        <div
-          className="profile-image"
-          onClick={() => (modal ? close() : open())}
-        >
-          <img src={getUserData?.userImg || "/profile.jpg"} />
+        <div className="profile-image" onClick={() => setModal(!modal)}>
+          <img src={getUserData?.userImg || "/profile.jpg"} alt="Profile" />
         </div>
 
         <motion.div
-          className={`dropdown ${modal ? "dropdown-active" : ""}`}
+          ref={dropdownRef}
+          className={`dropdown ${modal ? "" : "dropdown-active"}`}
           initial={{ opacity: modal ? 1 : 0 }}
-          animate={{ opacity: modal ? 0 : 1 }}
+          animate={{ opacity: modal ? 1 : 0 }}
           exit={{ opacity: modal ? 1 : 0 }}
-
         >
           <div className="text">
             <p>{firstWord}</p>
             <span>{getUserData?.email}</span>
           </div>
 
-
-          <NavLink to={`/profile/${getUserData?.userId}`} className="profile-button">
-
+          <NavLink
+            to={`/profile/${getUserData?.userId}`}
+            className="profile-button"
+            onClick={handleButtonClick}
+          >
             <LuUser />
             Perfil
-
           </NavLink>
 
-          <div className="border-top" style={{ width: "100%", height: "1px", background: "#ffffff22" }}></div>
+          <div
+            className="border-top"
+            style={{ width: "100%", height: "1px", background: "#ffffff22" }}
+          ></div>
 
-
-          <button onClick={logout} className="profile-button">
+          <button onClick={() => { logout(); handleButtonClick(); }} className="profile-button">
             <TbLogout2 />
             Sair
           </button>
-
-
         </motion.div>
-      </div >
+      </div>
     </>
   );
 };

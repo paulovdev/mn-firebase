@@ -25,11 +25,10 @@
     flex-direction: column;
 
     h1 {
+      font-family: "PT Serif Caption", serif;
       color: $p;
       font-weight: 700;
       font-size: 54px;
-
-      letter-spacing: -1px;
     }
 
     p {

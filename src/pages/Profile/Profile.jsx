@@ -118,7 +118,6 @@ const Profile = () => {
                     </motion.button>
                   </div>
                 </div>
-
               </div>
 
 

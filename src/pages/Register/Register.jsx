@@ -87,8 +87,8 @@ const Register = ({ setModal }) => {
           type="text"
           required
           placeholder="Nome"
-          minLength={1}
-          maxLength={16}
+          minLength={6}
+          maxLength={24}
           inputMode="text"
           value={form.username}
           onChange={(e) => setForm({ ...form, username: e.target.value })}

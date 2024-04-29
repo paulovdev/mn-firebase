@@ -23,7 +23,7 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    gap: 3rem;
+    gap: 1rem;
 
     input {
       width: 100%;
@@ -33,15 +33,19 @@
       background-color: transparent;
       border: none;
 
-      font-size: 54px;
       font-weight: 700;
-      letter-spacing: -1px;
+      letter-spacing: 0;
+      font-size: 42px;
       color: $p;
 
+      font-family: "PT Serif Caption", serif;
+
       &::placeholder {
-        font-size: 54px;
+        font-weight: 700;
+        letter-spacing: 0;
+        font-size: 42px;
         color: $p;
-        opacity: .6;
+        opacity: .4;
       }
     }
 
@@ -49,6 +53,8 @@
     .image-select {
       position: relative;
       width: 100%;
+
+      margin-bottom: 1rem;
 
       display: flex;
       align-items: center;
@@ -60,19 +66,20 @@
         height: 40px;
         padding: 0 1rem;
 
-        outline: none;
-        border: none;
+
+        border: 2px dashed #ddd;
         border-radius: 0.4rem;
-        background-color: transparent;
-        border: 1px solid $border;
+
 
         color: $p;
         font-weight: 500;
-        opacity: .7;
 
         display: flex;
         align-items: center;
-        gap: 0.5rem;
+        justify-content: center;
+        gap: 1rem;
+
+        opacity: .7;
         cursor: pointer;
 
         svg {

@@ -106,7 +106,8 @@ const EditProfile = ({ getUserData, onClick }) => {
         value={form.username}
         type="text"
         placeholder="Seu nome"
-        maxLength={16}
+        minLength={6}
+        maxLength={24}
         inputMode="text"
       />
 

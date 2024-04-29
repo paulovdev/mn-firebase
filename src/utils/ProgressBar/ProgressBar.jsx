@@ -31,8 +31,13 @@ export const ProgressBar = ({ backgroundColor }) => {
   return (
     <div className="progress-bar-container">
       <motion.div
-        className="progress-bar"
+        className="progress-bar-desktop"
+        style={{ height: `${scrollProgress}%`, backgroundColor: backgroundColor }}
+      />
+      <motion.div
+        className="progress-bar-mobile"
         style={{ width: `${scrollProgress}%`, backgroundColor: backgroundColor }}
-      /></div>
+      />
+    </div>
   );
 };
