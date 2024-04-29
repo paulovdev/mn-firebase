@@ -29,7 +29,7 @@
   .dropdown {
     position: absolute;
     width: 250px;
-    height: 250px;
+    height: 200px;
     top: 80px;
     right: 100px;
     border-radius: 0.4rem;
@@ -110,5 +110,23 @@
 
   .dropdown-active {
     height: 1px;
+  }
+}
+
+
+
+@media (max-width:809px) {
+  .user-modal {
+    .dropdown {
+      position: absolute;
+      width: 250px;
+      height: 200px;
+      top: 80px;
+      right: 20px;
+    }
+
+    .dropdown-active {
+      height: 1px;
+    }
   }
 }

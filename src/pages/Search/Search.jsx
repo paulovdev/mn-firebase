@@ -5,7 +5,7 @@ import { IoIosArrowRoundBack } from "react-icons/io";
 
 import Posts from "../../components/Posts/Posts";
 import "./Search.scss";
-import Transition from "../../utils/Transition/Transition";
+import { Transition } from "../../utils/Transition/Transition";
 
 const Search = () => {
   const { postData } = Blog();
@@ -23,7 +23,6 @@ const Search = () => {
   return (
     <section id="search">
       <div className="container">
-
         <Link to="/" className="back">
           <IoIosArrowRoundBack size={32} />
           <p> Voltar</p>
@@ -39,18 +38,17 @@ const Search = () => {
             </span>
           </div>
         ) : (
-          <p>
-            Encontramos {posts.length} resultados para "{search}":
-          </p>
+          <>
+            <p>
+              Encontramos {posts.length} resultado{posts.length === 1 ? "" : "s"} para "{search}":
+            </p>
+            <div className="posts">
+              {posts.map((post) => (
+                <Posts key={post.id} post={post} />
+              ))}
+            </div>
+          </>
         )}
-      </div>
-
-      <div className="posts">
-        <>
-          {posts.map((post) => (
-            <Posts key={post.id} post={post} />
-          ))}
-        </>
       </div>
     </section>
   );

@@ -6,6 +6,7 @@
   height: 100%;
   padding: 5rem 300px;
 
+
   display: flex;
   align-items: start;
   justify-content: start;
@@ -17,7 +18,7 @@
     width: 100%;
     height: 100%;
     background-color: $mt;
-    border-radius: 2rem;
+    border-radius: 1rem;
 
     display: flex;
     align-items: center;
@@ -56,11 +57,23 @@
       flex-direction: column;
       gap: 0;
 
-      .color-background {
-        width: 20px;
-        height: 10px;
+      .featured-post {
         margin: 1rem 0;
-        border-radius: 0.2rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        color: #fe0;
+
+
+        svg {
+          width: 30px;
+          height: 30px;
+        }
+
+        span {
+          font-weight: 600;
+          font-size: 16px;
+        }
       }
 
       .title-text {
@@ -132,13 +145,13 @@
   }
 }
 
-@media (max-width: 992px) {
+@media (max-width: 809px) {
   #first-post {
     position: relative;
     width: 100%;
     height: 100%;
-    padding: 0 20px 0 100px;
-
+    padding: 0 20px;
+    margin: 3rem 0;
     display: flex;
     align-items: start;
     justify-content: start;
@@ -165,7 +178,7 @@
       .left-content {
         position: relative;
         width: 100%;
-        height: 400px;
+        height: 300px;
         display: flex;
         flex: 1 0 0;
 
@@ -200,15 +213,13 @@
         .title-text {
           position: relative;
           width: 100%;
-          height: 100%;
-
+          height: fit-content;
 
           display: flex;
           align-items: start;
           justify-content: center;
           flex-direction: column;
           gap: 0.5rem;
-          margin-bottom: 1rem;
 
           h1 {
             color: $p-2;
@@ -223,11 +234,11 @@
           }
         }
 
-
         .text-wrapper {
           position: relative;
           width: 100%;
           height: 100%;
+          margin: 2rem 0;
           display: flex;
           align-items: center;
           justify-content: start;
@@ -254,6 +265,7 @@
 
           }
         }
+
 
         a {
           font-weight: 400;

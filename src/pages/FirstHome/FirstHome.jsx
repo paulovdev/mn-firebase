@@ -19,7 +19,7 @@ const FirstHome = () => {
         <div className="left-content">
           {!currentUser
             ? <>
-              <h1 className="logo">Escreva!</h1>
+              <h1 className="logo">publish</h1>
               <p>Suas palavras têm poder na internet. Use-as para inspirar e se conectar com outros ao redor do mundo. Seja consciente do impacto que você pode causar.</p>
 
             </>

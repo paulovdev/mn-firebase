@@ -378,3 +378,17 @@
     display: inline;
   }
 }
+
+@media (max-width:809px) {
+  .body-posts {
+    width: 100%;
+
+    color: $p;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    display: -webkit-box;
+  }
+}

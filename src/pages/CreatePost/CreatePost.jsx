@@ -11,7 +11,7 @@ import { FaSave } from "react-icons/fa";
 
 import ScrollTop from "../../utils/ScrollTop/ScrollTop";
 import "./CreatePost.scss";
-import Transition from "../../utils/Transition/Transition";
+import { Transition } from "../../utils/Transition/Transition";
 
 const CreatePost = () => {
   const imageRef = useRef(null);
@@ -61,7 +61,7 @@ const CreatePost = () => {
         postImg: url,
         created: new Date().toISOString(),
       });
-
+      setLoading(false);
       toast.success("Post publicado com sucesso!");
       navigate(`/`);
     } catch (error) {
@@ -69,8 +69,6 @@ const CreatePost = () => {
       toast.error(
         "ocorreu um erro ao publicar o post. Por favor, tente novamente mais tarde."
       );
-    } finally {
-      setLoading(false);
     }
   };
 
@@ -85,13 +83,13 @@ const CreatePost = () => {
         <div className="image-select">
           <button type="button" className="prf-file" onClick={handleClick}>
             {!imageUrl && <MdAddPhotoAlternate size={26} />}
-            <p>{imageUrl ? "imagem carregada..." : "adicione uma capa"}</p>
+            <p>{imageUrl ? "Imagem carregada..." : "Adicione uma capa"}</p>
           </button>
 
           <select
             value={selectedColor}
             onChange={(e) => setSelectedColor(e.target.value)}
-            title="escolher cor"
+            title="Escolher cor"
             style={{ background: selectedColor }}
           >
             {colors.map((color, index) => (
@@ -104,7 +102,7 @@ const CreatePost = () => {
 
         <input
           type="text"
-          placeholder="titulo do post aqui..."
+          placeholder="Titulo do post aqui..."
           value={preview.title}
           minLength={6}
           onChange={(e) => setPreview({ ...preview, title: e.target.value })}
@@ -121,7 +119,7 @@ const CreatePost = () => {
         />
 
         <Editor
-          placeholder="escreva sobre o que quiser e compartilhe o seu conhecimento..."
+          placeholder="Escreva sobre o que quiser e compartilhe o seu conhecimento..."
           value={desc}
           onChange={setDesc}
         />
@@ -142,7 +140,7 @@ const CreatePost = () => {
               color="#000"
             />
           </div>
-          <p>{!loading ? "salvar" : "salvando..."}</p>
+          <p>{!loading ? "Salvar" : "Salvando..."}</p>
         </button>
       </form>
       <ScrollTop />

@@ -7,7 +7,7 @@ import Loading from "../../components/Loading/Loading";
 import "./Home.scss";
 import Posts from "../../components/Posts/Posts";
 import { LuPlus } from "react-icons/lu";
-import Transition from "../../utils/Transition/Transition";
+import { Transition } from "../../utils/Transition/Transition";
 import FirstPost from "../../components/FirstPost/FirstPost";
 
 

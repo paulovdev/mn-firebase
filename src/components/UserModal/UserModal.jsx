@@ -45,9 +45,9 @@ const UserModal = () => {
 
         <motion.div
           className={`dropdown ${modal ? "dropdown-active" : ""}`}
-          initial={{ opacity: modal ? 0 : 1 }}
+          initial={{ opacity: modal ? 1 : 0 }}
           animate={{ opacity: modal ? 0 : 1 }}
-          exit={{ opacity: modal ? 0 : 1 }}
+          exit={{ opacity: modal ? 1 : 0 }}
 
         >
           <div className="text">

@@ -9,7 +9,7 @@ import { MdEdit, MdAddPhotoAlternate } from "react-icons/md";
 import { Blog } from "../../context/Context";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import "./EditPost.scss";
-import Transition from '../../utils/Transition/Transition'
+import { Transition } from '../../utils/Transition/Transition'
 
 const EditPost = () => {
   const [loading, setLoading] = useState(false);

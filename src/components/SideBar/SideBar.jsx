@@ -9,9 +9,6 @@ import './SideBar.scss';
 const SideBar = () => {
     return (
         <aside className="sidebar">
-            <div className="logo">
-                <NavLink to={'/'}>publish</NavLink >
-            </div>
             <ul >
                 <li>
                     <NavLink to={'/'}>

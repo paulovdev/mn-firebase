@@ -100,12 +100,12 @@
     }
 }
 
-@media (max-width: 992px) {
+@media (max-width: 809px) {
     #first-home {
         position: relative;
         width: 100%;
-
-        padding: 0 20px 0 100px;
+        height: calc(90vh - 70px);
+        padding: 0 20px;
 
         display: flex;
         align-items: center;
@@ -144,8 +144,8 @@
             .logo {
                 font-family: "PT Serif Caption", serif;
                 color: $p;
-                letter-spacing: -2px;
-                font-size: 62px;
+                letter-spacing: -1px;
+                font-size: 74px;
                 margin-bottom: 2rem;
             }
 

@@ -18,7 +18,7 @@ import { MdDeleteOutline } from "react-icons/md";
 import { MdEdit } from "react-icons/md";
 import Loading from "../../components/Loading/Loading";
 import "./Dashboard.scss";
-import Transition from '../../utils/Transition/Transition'
+import { Transition } from '../../utils/Transition/Transition'
 
 const Dashboard = () => {
   const { currentUser, userLoading } = Blog();
@@ -66,7 +66,7 @@ const Dashboard = () => {
 
   return (
     <>
-      {userLoading ? (
+      {userLoading && loading ? (
         <Loading />
       ) : (
         <section id="dashboard">

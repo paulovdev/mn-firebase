@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { getFirestore, collection, getDocs, query, orderBy, limit } from "firebase/firestore";
 import { Link } from "react-router-dom";
+import { PiMedal } from "react-icons/pi";
 import FormatDate from "../../utils/FormatDate";
 import { toast } from "react-toastify";
 import { readTime } from "../../utils/ReadTime";
@@ -44,11 +45,10 @@ const FirstPost = () => {
           </div>
 
           <div className="right-content">
-            <div
-              className="color-background"
-              style={{ backgroundColor: post.color }}
-            >
 
+            <div className="featured-post">
+              <PiMedal />
+              <span>Postagem em destaque </span>
             </div>
 
             <div className="title-text">
@@ -72,11 +72,11 @@ const FirstPost = () => {
             </div>
           </div>
         </div>
-    
-  ) : (
-    <p>No post found</p>
-  )
-}
+
+      ) : (
+        <p>Sem post disponivel</p>
+      )
+      }
     </section >
   );
 };

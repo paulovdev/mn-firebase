@@ -16,7 +16,7 @@ import {
 } from "firebase/firestore";
 import { db } from "../../firebase/Config";
 import { toast } from "react-toastify";
-import Transition from "../../utils/Transition/Transition";
+import { Transition } from "../../utils/Transition/Transition";
 
 const Profile = () => {
   const { currentUser, allUsers } = Blog();

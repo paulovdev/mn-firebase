@@ -6,13 +6,12 @@ import { readTime } from "../../utils/ReadTime";
 import { toast } from "react-toastify";
 import ScrollTop from "../../utils/ScrollTop/ScrollTop";
 import Loading from "../Loading/Loading";
-import { IoIosArrowRoundBack } from "react-icons/io";
 import { GoArrowDown } from "react-icons/go";
 import { MdEdit } from "react-icons/md";
 import { ProgressBar } from "../../utils/ProgressBar/ProgressBar";
 import "./Post.scss";
 import { Blog } from "../../context/Context";
-import Transition from "../../utils/Transition/Transition";
+import { Transition } from "../../utils/Transition/Transition";
 
 const Post = () => {
   const { currentUser } = Blog();
@@ -40,10 +39,9 @@ const Post = () => {
             setUser({ ...userData, id: postData.userId });
           }
         }
+        setLoading(false);
       } catch (error) {
         toast.error(error.message);
-      } finally {
-        setLoading(false);
       }
     };
 
@@ -52,6 +50,7 @@ const Post = () => {
 
   const { title, desc, postImg, color, created } = post;
   const { username, userImg, userId } = user;
+  console.log("asdasd2222", user)
 
   const isAuthor = currentUser && currentUser.uid === userId;
 
@@ -103,7 +102,7 @@ const Post = () => {
       )}
       {isAuthor && (
         <>
-          <Link to={`/editPost/${postId}`} className="btn" title="criar post">
+          <Link to={`/editPost/${postId}`} className="btn" title="Editar post">
             <div className="icon-content">
               <MdEdit
                 size={26}
