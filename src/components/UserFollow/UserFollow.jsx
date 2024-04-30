@@ -1,61 +1,75 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import { SlUserFollow, SlUserUnfollow } from "react-icons/sl";
-import { deleteDoc, doc, setDoc } from "firebase/firestore";
+import { deleteDoc, doc, setDoc, getDocs, collection, query } from "firebase/firestore";
 import { Blog } from "../../context/Context";
 import { db } from "../../firebase/Config";
 import { toast } from "react-toastify";
-import useSingleFetch from "../../hooks/useSingleFetch";
 
 const UserFollow = ({ postId }) => {
-  const { currentUser } = useContext(Blog) || {}; // Manejar caso donde Blog no está definido
   const [followersCount, setFollowersCount] = useState(0);
   const [isFollowed, setIsFollowed] = useState(false);
+  const [isProcessing, setIsProcessing] = useState(false); // Estado para controlar se uma operação está em andamento
+  const { currentUser } = Blog();
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchFollowers = async () => {
       try {
-        if (!currentUser) return; // Manejar el caso de currentUser es undefined
-        const { data } = await useSingleFetch("posts", postId, "follow");
-        const followed =
-          data && data.some((item) => item.userId === currentUser.uid);
-        setIsFollowed(followed);
-        setFollowersCount(data.length);
+        const followersQuery = query(
+          collection(db, "posts", postId, "follow")
+        );
+        const querySnapshot = await getDocs(followersQuery);
+        const followers = querySnapshot.docs.map(doc => doc.data());
+
+        setFollowersCount(followers.length);
+        if (currentUser) {
+          setIsFollowed(followers.some(follower => follower.userId === currentUser.uid));
+        }
       } catch (error) {
         toast.error(error.message);
       }
     };
 
-    fetchData();
+    fetchFollowers();
   }, [postId, currentUser]);
 
   const handleFollowToggle = async () => {
+    if (!currentUser) {
+      toast.error("Você precisa estar conectado para seguir este perfil.");
+      return;
+    }
+
+    // Verificar se uma operação está em andamento
+    if (isProcessing) {
+      return;
+    }
+
+    setIsProcessing(true); // Bloquear novas operações
+
     try {
-      if (!currentUser) {
-        // Aquí deberías manejar la autenticación de acuerdo a tu lógica de aplicación
-        // Puedes redirigir al usuario a la página de inicio de sesión, mostrar un modal, etc.
-        console.log(
-          "El usuario no está autenticado. Manejar la autenticación aquí."
-        );
-        return;
-      }
-      const likeRef = doc(db, "posts", postId, "follow", currentUser.uid);
+      const followRef = doc(db, "posts", postId, "follow", currentUser.uid);
       if (isFollowed) {
-        await deleteDoc(likeRef);
-        setFollowersCount((prevCount) => prevCount - 1);
+        await deleteDoc(followRef);
+        setFollowersCount(prevCount => prevCount - 1);
       } else {
-        await setDoc(likeRef, { userId: currentUser.uid });
-        setFollowersCount((prevCount) => prevCount + 1);
+        await setDoc(followRef, { userId: currentUser.uid });
+        setFollowersCount(prevCount => prevCount + 1);
       }
       setIsFollowed(!isFollowed);
     } catch (error) {
       toast.error(error.message);
+    } finally {
+      setIsProcessing(false); // Liberar operações após a conclusão
     }
   };
 
   return (
     <div onClick={handleFollowToggle}>
       <p>Seguidores: {followersCount}</p>
-      {isFollowed ? <SlUserUnfollow size={32} /> : <SlUserFollow size={32} />}
+      {isFollowed || !currentUser ? (
+        <SlUserUnfollow size={32} />
+      ) : (
+        <SlUserFollow size={32} />
+      )}
     </div>
   );
 };

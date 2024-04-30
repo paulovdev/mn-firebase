@@ -14,8 +14,6 @@ const Context = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [userLoading, setUserLoading] = useState(true);
   const [allUsers, setAllUsers] = useState([]);
-  const [showComment, setShowComment] = useState(false);
-  const [commentLength, setCommentLength] = useState(0);
   const [authModel, setAuthModel] = useState(false);
 
   const [updateData, setUpdateData] = useState({});
@@ -24,6 +22,10 @@ const Context = ({ children }) => {
   const [color, setColor] = useState("#f3f175");
   const [img, setImg] = useState("#f3f175");
   const [publish, setPublish] = useState(false);
+  const [comments, setComments] = useState([]);
+  const addComment = (newComment) => {
+    setComments([...comments, newComment]);
+  };
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -61,16 +63,13 @@ const Context = ({ children }) => {
   return (
     <BlogContext.Provider
       value={{
+
         currentUser,
         setCurrentUser,
         allUsers,
         userLoading,
         publish,
         setPublish,
-        showComment,
-        setShowComment,
-        commentLength,
-        setCommentLength,
         updateData,
         setUpdateData,
         title,
@@ -86,6 +85,9 @@ const Context = ({ children }) => {
         getData,
         authModel,
         setAuthModel,
+
+        comments,
+        addComment,
       }}
     >
       {loading ? <Loading /> : children}

@@ -14,7 +14,7 @@ import Profile from "./pages/Profile/Profile";
 /* import Footer from "./components/Footer/Footer"; */
 import CreatePost from "./pages/CreatePost/CreatePost";
 import EditPost from "./pages/EditPost/EditPost";
-import Post from "./components/Post/Post";
+import Post from "./pages/Post/Post";
 import Dashboard from "./pages/Dashboard/Dashboard";
 
 /* 
