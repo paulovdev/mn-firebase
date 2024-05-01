@@ -20,7 +20,7 @@ const Posts = () => {
       setLoading(true);
       try {
         const postsCollection = collection(db, "posts");
-        const postsSnapshot = await getDocs(query(postsCollection, orderBy("created", "desc"))); // Usando 'query' e 'orderBy'
+        const postsSnapshot = await getDocs(query(postsCollection, orderBy("created", "desc")));
         const fetchedPosts = [];
         const fetchedUsers = {};
 
@@ -69,6 +69,7 @@ const Posts = () => {
                       <img src={post.postImg} alt="postImg" />
                     </div>
                     <div className="right-content">
+                      <div className="topic">{post.topic}</div>
                       <div className="profile-content">
                         {user && (
                           <>
@@ -97,7 +98,6 @@ const Posts = () => {
                         <span className="predefinition">•</span>
                         <p>{readTime({ __html: post.desc })} min de leitura</p>
                       </div>
-
                     </div>
                   </Link>
                 );

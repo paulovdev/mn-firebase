@@ -1,11 +1,11 @@
-import { FaArrowCircleUp } from "react-icons/fa";
+
 import { useState, useEffect } from "react";
 import { GoArrowUp } from 'react-icons/go'
 import "./ScrollTop.scss";
 
 const ScrollTop = () => {
   const [isVisible, setIsVisible] = useState(false);
-  const threshold = 300; // 
+  const threshold = 150;
 
   useEffect(() => {
     const toggleVisibility = () => {
@@ -19,7 +19,7 @@ const ScrollTop = () => {
     window.addEventListener("scroll", toggleVisibility);
 
     return () => window.removeEventListener("scroll", toggleVisibility);
-  }, [threshold]); // Dependency array ensures recalculation when threshold changes
+  }, [threshold]);
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -27,10 +27,10 @@ const ScrollTop = () => {
 
   return (
 
-    <div className={`icon-down not ${isVisible ? "show" : ""}`}
-      onClick={scrollToTop} >  <GoArrowUp size={32} color="#fff" /></div>
-
-
+    <div className={`scroll-top not ${isVisible ? "show" : ""}`}
+      onClick={scrollToTop} >
+      <GoArrowUp size={32} color="#fff" />
+    </div>
   );
 };
 

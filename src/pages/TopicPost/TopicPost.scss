@@ -1,0 +1,16 @@
+@import "../../index.scss";
+
+#topic-post {
+    position: relative;
+    width: 100%;
+
+    margin: 5rem 0;
+    padding: 0 600px;
+
+    display: flex;
+    align-items: start;
+    justify-content: start;
+    flex-direction: column;
+    gap: 5rem;
+
+}

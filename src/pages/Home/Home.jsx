@@ -9,6 +9,7 @@ import Posts from "../../components/Posts/Posts";
 import { LuPlus } from "react-icons/lu";
 import { Transition } from "../../utils/Transition/Transition";
 import FirstPost from "../../components/FirstPost/FirstPost";
+import TopicSelection from "../../components/TopicSelection/TopicSelection";
 
 
 const Home = () => {
@@ -32,6 +33,7 @@ const Home = () => {
         <>
           <FirstHome />
           <FirstPost />
+          <TopicSelection />
           <section id="home">
             <div className="trending" >
               <span>publicações.</span>

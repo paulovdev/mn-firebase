@@ -17,6 +17,7 @@ import "./Post.scss";
 import { Blog } from "../../context/Context";
 import { Transition } from "../../utils/Transition/Transition";
 import UserComments from '../../components/UserComments/UserComments'
+import ScrollDown from "../../utils/ScrollDown/ScrollDown";
 
 const Post = () => {
   const { currentUser } = Blog();
@@ -24,7 +25,7 @@ const Post = () => {
   const [loading, setLoading] = useState(false);
   const [post, setPost] = useState({});
   const [user, setUser] = useState({});
-  const [comments, setComments] = useState([]); // Estado para armazenar os comentários
+  const [comments, setComments] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -78,23 +79,27 @@ const Post = () => {
     navigate(`/profile/${userId}`);
   };
 
-  // Função para compartilhar o post
   const sharePost = () => {
     const postUrl = window.location.href;
     if (navigator.share) {
-      navigator.share({
-        title: title,
-        text: desc,
-        url: postUrl,
-      }).then(() => {
-        console.log('Post compartilhado com sucesso!');
-      }).catch((error) => {
+      try {
+        navigator.share({
+          title: title,
+          text: desc,
+          url: postUrl,
+        }).then(() => {
+          console.log('Post compartilhado com sucesso!');
+        }).catch((error) => {
+          console.error('Erro ao compartilhar o post:', error);
+        });
+      } catch (error) {
         console.error('Erro ao compartilhar o post:', error);
-      });
+      }
     } else {
       console.log('Este navegador não suporta a API de Web Share.');
     }
   };
+
 
   return (
     <>
@@ -131,9 +136,7 @@ const Post = () => {
               <div className="action-icons">
 
                 <div className="action-icon">
-                  <a href="#post">
-                    <GoArrowDown size={28} color="#fff" />
-                  </a>
+                  <ScrollDown />
                 </div>
 
                 <div className="action-icon">
@@ -161,9 +164,10 @@ const Post = () => {
               <p>{created}</p>
             </div>
             <ProgressBar backgroundColor={color} />
-            <ScrollTop />
+
           </div>
           <UserComments postId={postId} comments={comments} />
+          <ScrollTop />
         </section>
       )}
       {isAuthor && (
@@ -180,6 +184,7 @@ const Post = () => {
           </Link>
         </>
       )}
+
     </>
   );
 };

@@ -25,6 +25,7 @@ import CreatePost from "./pages/CreatePost/CreatePost";
 */
 
 import Search from "./pages/Search/Search";
+import TopicPost from "./pages/TopicPost/TopicPost";
 
 const App = () => {
   const { currentUser } = Blog();
@@ -45,6 +46,7 @@ const App = () => {
           <Route path="/post/create" element={!currentUser ? <Login /> : <CreatePost />} />
           <Route path="/post/:postId" element={<Post />} />
           <Route path="/editPost/:uid" element={<EditPost />} />
+          <Route path="/topic/:postId" element={<TopicPost />} />
           <Route path="/search" element={<Search />} />
           <Route
             path="*"

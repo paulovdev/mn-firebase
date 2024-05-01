@@ -7,12 +7,13 @@ import { addDoc, collection } from "firebase/firestore";
 import { Blog } from "../../context/Context";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { IoImageOutline } from "react-icons/io5";
-
 import { FaSave } from "react-icons/fa";
 
 import ScrollTop from "../../utils/ScrollTop/ScrollTop";
 import "./CreatePost.scss";
 import { Transition } from "../../utils/Transition/Transition";
+import TopicInput from './../../components/TopicInput/TopicInput';
+import topicsData from './../../components/TopicInput/TopicsData';
 
 const CreatePost = () => {
   const imageRef = useRef(null);
@@ -29,6 +30,10 @@ const CreatePost = () => {
 
   const [selectedColor, setSelectedColor] = useState("");
   const colors = ["#A6A6A6", "#737373", "#404040", "#262626", "#0D0D0D"];
+
+  const topics = topicsData.categories.reduce((acc, curr) => acc.concat(curr.topics), []);
+  const [selectedTopic, setSelectedTopic] = useState(null);
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -61,6 +66,7 @@ const CreatePost = () => {
         desc,
         postImg: url,
         created: new Date().toISOString(),
+        topic: selectedTopic,
       });
       setLoading(false);
       toast.success("Post publicado com sucesso!");
@@ -80,6 +86,7 @@ const CreatePost = () => {
   return (
     <section id="create-post">
       <form onSubmit={handleSubmit}>
+        <TopicInput topics={topics} onSelectTopic={setSelectedTopic} />
 
         <div className="image-select">
           <button type="button" className="prf-file" onClick={handleClick}>
@@ -109,6 +116,8 @@ const CreatePost = () => {
           minLength={6}
           onChange={(e) => setPreview({ ...preview, title: e.target.value })}
         />
+
+
 
         <input
           onChange={(e) => {

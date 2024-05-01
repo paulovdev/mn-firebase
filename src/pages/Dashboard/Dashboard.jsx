@@ -24,18 +24,14 @@ const Dashboard = () => {
   const { currentUser, userLoading } = Blog();
   const [loading, setLoading] = useState(false);
   const [userPosts, setUserPosts] = useState([]);
-  const docCollection = "posts";
 
   useEffect(() => {
     const fetchUserPosts = async () => {
       setLoading(true);
       try {
-        const collectionRef = collection(db, docCollection);
-        const q = query(
-          collectionRef,
-          where("userId", "==", currentUser.uid),
-          orderBy("created", "desc")
-        );
+
+        const q = query(collection(db, "posts"), where("userId", "==", currentUser.uid),
+          orderBy("created", "desc"));
 
         const unsubscribe = onSnapshot(q, (querySnapshot) => {
           const posts = querySnapshot.docs.map((doc) => ({
@@ -56,7 +52,7 @@ const Dashboard = () => {
 
   const handleDelete = async (postId) => {
     try {
-      await deleteDoc(doc(db, docCollection, postId));
+      await deleteDoc(doc(db, "posts", postId));
       toast.success("Postagem excluída com sucesso");
     } catch (error) {
       console.error("Erro ao excluir postagem:", error);
