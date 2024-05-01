@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import "./Profile.scss";
 import Loading from "../../components/Loading/Loading";
 import EditProfile from "./EditProfile";
 import UserFollow from "../../components/UserFollow/UserFollow";
@@ -10,6 +9,8 @@ import { Blog } from "../../context/Context";
 import { db } from "../../firebase/Config";
 import { toast } from "react-toastify";
 import { Transition } from "../../utils/Transition/Transition";
+
+import "./Profile.scss";
 
 const Profile = () => {
   const { currentUser, allUsers } = Blog();
@@ -51,15 +52,16 @@ const Profile = () => {
 
   const { username, userImg, bio } = user;
 
-  // Função para buscar o número de seguidores
   const fetchFollowersCount = async () => {
+    setLoading(true);
     try {
       const followersQuery = query(
-        collection(db, "posts", userId, "follow")
+        collection(db, "users", userId, "followers")
       );
       const querySnapshot = await getDocs(followersQuery);
       const followers = querySnapshot.docs.map(doc => doc.data());
       setFollowersCount(followers.length);
+      setLoading(false);
     } catch (error) {
       toast.error(error.message);
     }
@@ -100,17 +102,18 @@ const Profile = () => {
                   />
                 </motion.div>
               )}
-              <UserFollow postId={userId} followersCount={followersCount} />
+              <UserFollow userId={userId} followersCount={followersCount} />
             </section>
           ) : (
             <section id="my-profile">
               <div className="container">
                 <div className="profile-photo">
-                  <img src={userImg} alt="" />
-                  <h1>{username}</h1>
-                  <p>{bio}</p>
-                  {/* Renderize o componente UserFollow aqui, passando o número de seguidores */}
-                  <UserFollow postId={userId} followersCount={followersCount} />
+                  <div className="wrapper-text">
+                    <img src={userImg} alt="" />
+                    <h1>{username}</h1>
+                    <p>{bio}</p>
+                  </div>
+                  <UserFollow userId={userId} followersCount={followersCount} />
                 </div>
               </div>
             </section>

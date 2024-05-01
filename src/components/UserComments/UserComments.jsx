@@ -4,6 +4,8 @@ import { IoIosSend } from "react-icons/io";
 import { toast } from "react-toastify";
 import { Blog } from "../../context/Context";
 import { db } from "../../firebase/Config";
+import { useNavigate } from "react-router-dom";
+
 import './UserComments.scss'
 
 const UserComments = ({ postId, comments }) => {
@@ -13,6 +15,8 @@ const UserComments = ({ postId, comments }) => {
     const [replyText, setReplyText] = useState("");
     const [replyingTo, setReplyingTo] = useState(null);
     const commentFormRef = useRef(null);
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchUserInfo = async () => {
@@ -42,6 +46,7 @@ const UserComments = ({ postId, comments }) => {
         }
 
         try {
+
             const newComment = {
                 postId: postId,
                 userId: currentUser.uid,
@@ -50,7 +55,7 @@ const UserComments = ({ postId, comments }) => {
             };
             await addDoc(collection(db, "comments"), newComment);
             setCommentText("");
-            commentFormRef.current.scrollIntoView({ behavior: "smooth" });
+
         } catch (error) {
             toast.error("Erro ao adicionar comentário.");
             console.error(error);
@@ -69,6 +74,7 @@ const UserComments = ({ postId, comments }) => {
         }
 
         try {
+
             const commenterName = replyingTo ? usersInfo[replyingTo]?.username || "Usuário" : "Usuário";
             const newReply = {
                 postId: postId,
@@ -80,7 +86,7 @@ const UserComments = ({ postId, comments }) => {
             await addDoc(collection(db, "comments"), newReply);
             setReplyText("");
             setReplyingTo(null);
-            commentFormRef.current.scrollIntoView({ behavior: "smooth" });
+
         } catch (error) {
             toast.error("Erro ao adicionar resposta.");
             console.error(error);
@@ -97,66 +103,78 @@ const UserComments = ({ postId, comments }) => {
         }
     };
 
-    return (
-        <div id="user-comments">
-            <h1>Comentários</h1>
-            <div className="comment-form" ref={commentFormRef}>
-                <form onSubmit={handleCommentSubmit}>
-                    <div className="send-input">
-                        <textarea
-                            value={commentText}
-                            onChange={(e) => setCommentText(e.target.value)}
-                            placeholder="Digite seu comentário..."
-                        />
-                        <button type="submit">
-                            <IoIosSend size={26} />
-                        </button>
-                    </div>
-                </form>
-            </div>
+    const goToProfile = (userId) => {
+        navigate(`/profile/${userId}`);
+    };
 
-            {comments.slice().reverse().map((comment, index) => (
-                <div key={index} className="comment-container">
-                    <div className="profile-content">
-                        {usersInfo[comment.userId] && (
-                            <>
-                                <img src={usersInfo[comment.userId].userImg} width={100} alt="" />
-                                <p>{usersInfo[comment.userId].username}</p>
-                                {comment.timestamp && (
-                                    <p>{comment.timestamp.toDate().toLocaleString()}</p>
-                                )}
-                            </>
-                        )}
-                        {currentUser && currentUser.uid === comment.userId && (
-                            <div>
-                                <button onClick={() => handleDeleteComment(comment.id)}>Excluir</button>
-                                {/* Adicione um botão para editar, se desejar */}
+    return (
+        <>
+
+            <div id="user-comments">
+                <h1>Comentários</h1>
+                <div className="comment-form" ref={commentFormRef}>
+                    <form onSubmit={handleCommentSubmit}>
+                        <div className="send-input">
+                            <textarea
+                                value={commentText}
+                                onChange={(e) => setCommentText(e.target.value)}
+                                placeholder="Digite seu comentário..."
+                            />
+                            <button type="submit">
+                                <IoIosSend size={26} />
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                {comments.slice().reverse().map((comment, index) => (
+                    <div key={index} className="comment-container">
+                        <div className="profile-content">
+                            {usersInfo[comment.userId] && (
+                                <>
+                                    <img
+                                        src={usersInfo[comment.userId].userImg}
+                                        onClick={() => goToProfile(comment.userId)}
+
+                                        alt=""
+                                    />
+                                    <p>{usersInfo[comment.userId].username}</p>
+                                    {comment.timestamp && (
+                                        <p>{comment.timestamp.toDate().toLocaleString()}</p>
+                                    )}
+                                </>
+                            )}
+                            {currentUser && currentUser.uid === comment.userId && (
+                                <div>
+                                    <button onClick={() => handleDeleteComment(comment.id)}>Excluir</button>
+                                </div>
+                            )}
+                        </div>
+
+                        <p>{comment.text}</p>
+                        <button onClick={() => setReplyingTo(comment.userId)}>Responder</button>
+
+                        {replyingTo === comment.userId && (
+                            <div className="reply-form">
+                                <form onSubmit={handleReplySubmit}>
+                                    <div className="send-input">
+                                        <textarea
+                                            value={replyText}
+                                            onChange={(e) => setReplyText(e.target.value)}
+                                            placeholder={`@${usersInfo[comment.userId]?.username || 'Usuário'} `}
+                                        />
+                                        <button type="submit">
+                                            <IoIosSend size={26} />
+                                        </button>
+                                    </div>
+                                </form>
                             </div>
                         )}
                     </div>
+                ))}
+            </div>
 
-                    <p>{comment.text}</p>
-                    <button onClick={() => setReplyingTo(comment.userId)}>Responder</button>
-
-                    {replyingTo === comment.userId && (
-                        <div className="reply-form">
-                            <form onSubmit={handleReplySubmit}>
-                                <div className="send-input">
-                                    <textarea
-                                        value={replyText}
-                                        onChange={(e) => setReplyText(e.target.value)}
-                                        placeholder={`@${usersInfo[comment.userId]?.username || 'Usuário'} `}
-                                    />
-                                    <button type="submit">
-                                        <IoIosSend size={26} />
-                                    </button>
-                                </div>
-                            </form>
-                        </div>
-                    )}
-                </div>
-            ))}
-        </div>
+        </>
     );
 };
 

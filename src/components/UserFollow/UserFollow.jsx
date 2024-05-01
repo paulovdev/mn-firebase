@@ -1,21 +1,24 @@
 import React, { useState, useEffect } from "react";
-import { SlUserFollow, SlUserUnfollow } from "react-icons/sl";
 import { deleteDoc, doc, setDoc, getDocs, collection, query } from "firebase/firestore";
 import { Blog } from "../../context/Context";
 import { db } from "../../firebase/Config";
 import { toast } from "react-toastify";
+import './UserFollow.scss'
+import Loading from './../Loading/Loading';
 
-const UserFollow = ({ postId }) => {
+const UserFollow = ({ userId }) => {
   const [followersCount, setFollowersCount] = useState(0);
+  const [loading, setLoading] = useState(false);
   const [isFollowed, setIsFollowed] = useState(false);
-  const [isProcessing, setIsProcessing] = useState(false); // Estado para controlar se uma operação está em andamento
+  const [isProcessing, setIsProcessing] = useState(false);
   const { currentUser } = Blog();
 
   useEffect(() => {
     const fetchFollowers = async () => {
+      setLoading(true);
       try {
         const followersQuery = query(
-          collection(db, "posts", postId, "follow")
+          collection(db, "users", userId, "followers")
         );
         const querySnapshot = await getDocs(followersQuery);
         const followers = querySnapshot.docs.map(doc => doc.data());
@@ -24,15 +27,17 @@ const UserFollow = ({ postId }) => {
         if (currentUser) {
           setIsFollowed(followers.some(follower => follower.userId === currentUser.uid));
         }
+        setLoading(false);
       } catch (error) {
         toast.error(error.message);
       }
     };
 
     fetchFollowers();
-  }, [postId, currentUser]);
+  }, [userId, currentUser]);
 
   const handleFollowToggle = async () => {
+
     if (!currentUser) {
       toast.error("Você precisa estar conectado para seguir este perfil.");
       return;
@@ -43,10 +48,11 @@ const UserFollow = ({ postId }) => {
       return;
     }
 
-    setIsProcessing(true); // Bloquear novas operações
-
+    setIsProcessing(true); // bloquear novas operações
+    setLoading(true);
     try {
-      const followRef = doc(db, "posts", postId, "follow", currentUser.uid);
+
+      const followRef = doc(db, "users", userId, "followers", currentUser.uid);
       if (isFollowed) {
         await deleteDoc(followRef);
         setFollowersCount(prevCount => prevCount - 1);
@@ -58,17 +64,24 @@ const UserFollow = ({ postId }) => {
     } catch (error) {
       toast.error(error.message);
     } finally {
-      setIsProcessing(false); // Liberar operações após a conclusão
+      setLoading(false);
+      setIsProcessing(false); // liberar operações após a conclusão
     }
   };
 
   return (
-    <div onClick={handleFollowToggle}>
-      <p>Seguidores: {followersCount}</p>
-      {isFollowed || !currentUser ? (
-        <SlUserUnfollow size={32} />
+    <div id="user-follow" onClick={handleFollowToggle}>
+      {loading ? (<Loading />) :
+        <p>Seguidores: {followersCount}</p>
+      }
+      {currentUser && isFollowed ? (
+        <span>
+          Deixar de seguir
+        </span>
       ) : (
-        <SlUserFollow size={32} />
+        <span>
+          {currentUser ? "Seguir" : "Você precisa estar conectado para seguir"}
+        </span>
       )}
     </div>
   );
