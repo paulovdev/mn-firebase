@@ -231,6 +231,9 @@
 }
 
 .body-post {
+  width: 100%;
+  word-wrap: break-word;
+  word-break: break-all;
 
   p {
     font-size: 18px;
@@ -353,6 +356,9 @@
   width: 50%;
 
   color: $p;
+
+  word-wrap: break-word;
+  word-break: break-all;
 
   overflow: hidden;
   text-overflow: ellipsis;

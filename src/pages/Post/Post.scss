@@ -45,6 +45,8 @@
       flex-direction: column;
       gap: 2rem;
 
+
+
       .profile {
         display: flex;
         align-items: center;
@@ -57,6 +59,7 @@
           border-radius: 100%;
           border: none;
           background: var(--bg);
+          cursor: pointer;
         }
 
         span {
@@ -66,6 +69,7 @@
           text-transform: none;
           letter-spacing: 0;
         }
+
 
         .text {
           width: 100%;
@@ -129,6 +133,28 @@
         }
       }
 
+      .action-icons {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 1rem;
+
+        .action-icon {
+          position: relative;
+
+          width: 40px;
+          height: 40px;
+          padding: 0.5rem;
+          border-radius: 100%;
+          background-color: $p;
+
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          cursor: pointer;
+        }
+      }
 
       h1 {
         max-width: 80%;

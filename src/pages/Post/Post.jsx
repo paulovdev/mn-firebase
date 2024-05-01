@@ -9,6 +9,10 @@ import Loading from "../../components/Loading/Loading";
 import { GoArrowDown } from "react-icons/go";
 import { MdEdit } from "react-icons/md";
 import { ProgressBar } from "../../utils/ProgressBar/ProgressBar";
+import { FaRegComments } from "react-icons/fa6";
+import { FiShare2 } from "react-icons/fi";
+
+
 import "./Post.scss";
 import { Blog } from "../../context/Context";
 import { Transition } from "../../utils/Transition/Transition";
@@ -74,6 +78,24 @@ const Post = () => {
     navigate(`/profile/${userId}`);
   };
 
+  // Função para compartilhar o post
+  const sharePost = () => {
+    const postUrl = window.location.href;
+    if (navigator.share) {
+      navigator.share({
+        title: title,
+        text: desc,
+        url: postUrl,
+      }).then(() => {
+        console.log('Post compartilhado com sucesso!');
+      }).catch((error) => {
+        console.error('Erro ao compartilhar o post:', error);
+      });
+    } else {
+      console.log('Este navegador não suporta a API de Web Share.');
+    }
+  };
+
   return (
     <>
       {loading ? (
@@ -106,22 +128,36 @@ const Post = () => {
                 </div>
               </div>
 
+              <div className="action-icons">
 
-              <div className="icon-down">
+                <div className="action-icon">
+                  <a href="#post">
+                    <GoArrowDown size={28} color="#fff" />
+                  </a>
+                </div>
 
-                <a href="#post">
+                <div className="action-icon">
+                  <a href="#user-comments">
+                    < FaRegComments size={22} color="#fff" />
+                  </a>
+                </div>
 
-                  <GoArrowDown size={32} color="#fff" />
-                </a>
+                <div className="action-icon" onClick={sharePost}>
+                  <FiShare2 size={22} color="#fff" />
+                </div>
+
               </div>
             </div>
 
 
             <div className="post">
               <img src={postImg} id="post" alt={`${username}'s post`} />
-              <div className="body-post">
-                <div dangerouslySetInnerHTML={{ __html: desc }} />
-              </div>
+              <div
+                className="body-post"
+                dangerouslySetInnerHTML={{
+                  __html: post.desc
+                }}
+              ></div>
               <p>{created}</p>
             </div>
             <ProgressBar backgroundColor={color} />
