@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import "./ProgressBar.scss";
 export const ProgressBar = ({ backgroundColor }) => {
-  const [scrollProgress, setScrollProgress] = useState(0);
+  const [scrollProgress, setScrollProgress] = useState(1);
 
   useEffect(() => {
     const handleScroll = () => {

@@ -3,6 +3,7 @@ import { NavLink } from "react-router-dom";
 import { GrHomeRounded } from "react-icons/gr";
 import { RxDashboard } from "react-icons/rx";
 import { IoCreateOutline } from "react-icons/io5";
+import { MdOutlineTopic } from "react-icons/md";
 
 import './SideBar.scss';
 
@@ -23,6 +24,11 @@ const SideBar = () => {
                 <li>
                     <NavLink to={'/post/create'}>
                         <IoCreateOutline />
+                    </NavLink>
+                </li>
+                <li>
+                    <NavLink to={'/allTopics'}>
+                        <MdOutlineTopic />
                     </NavLink>
                 </li>
             </ul>

@@ -135,10 +135,9 @@ const EditPost = () => {
                 animation: !loading ? "" : "round 1s infinite",
               }}
               size={26}
-              color="#000"
+              color="#fff"
             />
           </div>
-          <p>{!loading ? "Editar" : "Editando..."}</p>
         </button>
       </form>
     </section>

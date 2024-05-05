@@ -10,10 +10,11 @@ import { IoImageOutline } from "react-icons/io5";
 import { FaSave } from "react-icons/fa";
 
 import ScrollTop from "../../utils/ScrollTop/ScrollTop";
-import "./CreatePost.scss";
-import { Transition } from "../../utils/Transition/Transition";
 import TopicInput from './../../components/TopicInput/TopicInput';
 import topicsData from './../../components/TopicInput/TopicsData';
+import { Transition } from "../../utils/Transition/Transition";
+
+import "./CreatePost.scss";
 
 const CreatePost = () => {
   const imageRef = useRef(null);
@@ -148,10 +149,9 @@ const CreatePost = () => {
                 animation: !loading ? "" : "round 1s infinite",
               }}
               size={26}
-              color="#000"
+              color="#fff"
             />
           </div>
-          <p>{!loading ? "Salvar" : "Salvando..."}</p>
         </button>
       </form>
       <ScrollTop />

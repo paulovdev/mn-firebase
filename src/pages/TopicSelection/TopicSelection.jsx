@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
-import topicsData from '../TopicInput/TopicsData';
+import topicsData from '../../components/TopicInput/TopicsData';
 
 import './TopicSelection.scss'
 
@@ -9,15 +9,14 @@ const TopicSelection = () => {
     return (
         <div id='topic-selection'>
 
-            <div className="topic-head">
-                <span>TOPICOS.</span>
-                <div className="border-trending"></div>
+            <div className="topics-text">
+                <h1>Topicos</h1>
             </div>
 
             <ul className='topic-container'>
                 {topicsData.categories.map((category, index) => (
                     <div key={index} className='topic'>
-                        <h3>{category.name}</h3>
+                        <h1>{category.name}</h1>
                         <ul>
                             {category.topics.map((topic, idx) => (
                                 <li key={idx}>

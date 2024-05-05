@@ -95,7 +95,7 @@
                         width: 26px;
                         height: 26px;
                         color: $p;
-                        opacity: .6;
+                        opacity: .5;
                         text-decoration: none;
                         display: block;
                     }
@@ -106,18 +106,6 @@
 
                         }
                     }
-                }
-
-                &:nth-child(1) {
-                    order: 2;
-                }
-
-                &:nth-child(2) {
-                    order: 1;
-                }
-
-                &:nth-child(3) {
-                    order: 3;
                 }
             }
         }

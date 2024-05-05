@@ -3,7 +3,8 @@
 #first-home {
     position: relative;
     width: 100%;
-    height: calc(100vh - 70px);
+    height: 90vh;
+
 
     padding: 0 300px;
 
@@ -12,17 +13,18 @@
     justify-content: center;
     flex-direction: column;
 
-    .left-content {
-        position: relative;
-        width: 100%;
+    position: relative;
+    width: 100%;
 
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-direction: column;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    .user-text {
+
 
         span {
-            font-family: "PT Serif Caption", serif;
             letter-spacing: 1px;
             font-weight: 700;
             font-size: 22px;
@@ -30,76 +32,68 @@
         }
 
         h1 {
+
+            font-size: 72px;
+            font-style: normal;
+            font-weight: 700;
+            letter-spacing: -0.04em;
+            line-height: 80px;
             color: $p;
-            font-weight: 800;
-            letter-spacing: 1px;
-            font-size: 54px;
-            margin-bottom: 2rem;
-
-            &:nth-child(1) {
-                font-weight: 700;
-            }
-        }
-
-        .logo {
-            font-family: "PT Serif Caption", serif;
-            color: $p;
-            letter-spacing: -2px;
-            font-size: 64px;
-            margin-bottom: 2rem;
-        }
-
-        p {
-            max-width: 50%;
-            color: $p;
-            opacity: .8;
-            line-height: 1.4;
-            font-weight: 400;
-            letter-spacing: -1px;
-            font-size: 22px;
-            text-align: center;
-            margin-bottom: 1rem;
-        }
-
-
-        button {
-            width: 250px;
-            background-color: $p;
-            height: 50px;
-            border-radius: 2rem;
-
-            color: $p-2;
-            font-size: 18px;
-
-            font-weight: 600;
-            transition: opacity 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-
-            &:hover {
-                opacity: .9;
-            }
         }
     }
 
+    .logo {
+        max-width: 80%;
+        text-align: center;
+        font-size: 72px;
+        font-style: normal;
+        font-weight: 700;
+        letter-spacing: -0.04em;
+        line-height: 80px;
+        color: $p;
+        margin-bottom: 1rem;
+    }
 
-    .arrow-down {
-        position: absolute;
+    p {
+        max-width: 50%;
+        text-align: center;
+        margin-bottom: 2rem;
 
-        bottom: 20px;
+        font-size: 18px;
+        font-style: normal;
+        font-weight: 400;
+        letter-spacing: 0.01em;
+        line-height: 28px;
+        color: $p;
+    }
+
+
+    button {
+        appearance: none;
+        width: 100%;
+        height: 100%;
+        outline: none;
+        border: none;
         cursor: pointer;
+        padding: 1.1rem 1.8rem;
+        border-radius: 80px;
+        font-size: 20px;
+        font-style: normal;
+        font-weight: 600;
+        letter-spacing: 0em;
+        line-height: 30px;
+        text-align: center;
+        background: rgb(0, 0, 0);
+        color: rgb(255, 255, 255);
+        z-index: 1;
+        box-shadow: none;
 
-
-        svg {
-            position: relative;
-
-            height: 50px;
-            width: 50px;
-
-            padding: 1rem;
-            border-radius: 100%;
-            background-color: $p;
+        &:hover {
+            opacity: .9;
         }
     }
 }
+
 
 @media (max-width: 809px) {
     #first-home {

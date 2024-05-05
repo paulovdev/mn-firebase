@@ -64,41 +64,47 @@ const Posts = () => {
               posts.map((post, i) => {
                 const user = users[post.userId];
                 return (
-                  <Link to={`/post/${post.id}`} className="wrapper" key={i}>
-                    <div className="left-content">
+                  <Link to={`/post/${post.id}`} className="post-container" key={i}>
+
+                    <div className="post-left-content">
                       <img src={post.postImg} alt="postImg" />
                     </div>
-                    <div className="right-content">
-                      <div className="topic">{post.topic}</div>
-                      <div className="profile-content">
+
+                    <div className="post-right-content">
+                      <div className="topic"><span>{post.topic}</span></div>
+                      <h1>{post.title}</h1>
+                      <div
+                        className="body-posts"
+                        dangerouslySetInnerHTML={{
+                          __html: post.desc.slice(0, 250),
+                        }}
+                      ></div>
+                      <div className="topic-profile-container">
+
                         {user && (
-                          <>
+                          <div className="profile-content">
                             <img src={user.userImg} alt="" />
-                            <p>
-                              {user.username}
-                            </p>
-                          </>
+
+
+                            <div className="profile-text-wrapper">
+                              <p>
+                                {user.username}
+                              </p>
+                              
+                              <div className="profile-date-text-wrapper">
+                                <span>
+                                  <FormatDate date={post.created} />
+                                </span>
+                                <span>{readTime({ __html: post.desc })} min de leitura</span>
+                              </div>
+                            </div>
+
+
+                          </div>
                         )}
                       </div>
-
-                      <div className="title-text">
-                        <h1>{post.title}</h1>
-                        <div
-                          className="body-posts"
-                          dangerouslySetInnerHTML={{
-                            __html: post.desc.slice(0, 150),
-                          }}
-                        ></div>
-                      </div>
-                      <div className="text-wrapper">
-                        <p>Criado em</p>
-                        <span>
-                          <FormatDate date={post.created} />
-                        </span>
-                        <span className="predefinition">•</span>
-                        <p>{readTime({ __html: post.desc })} min de leitura</p>
-                      </div>
                     </div>
+
                   </Link>
                 );
               })
@@ -107,7 +113,8 @@ const Posts = () => {
             )}
           </div>
         </>
-      )}
+      )
+      }
     </>
   );
 };

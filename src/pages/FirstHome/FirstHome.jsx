@@ -17,25 +17,20 @@ const FirstHome = () => {
   return (
     <>
       <section id="first-home">
-        <div className="left-content">
-          {!currentUser
-            ? <>
-              <h1 className="logo">publish</h1>
+        {currentUser &&
+          <div className="user-text">
+            <span>olá {getUserData?.username}</span>
+          </div>
+        }
+        <h1 className="logo">Conheça os especialistas conversando</h1>
 
-            </>
-            : <>
-              <span>olá</span>
-              <h1>{getUserData?.username}</h1>
-            </>}
-          <p>Suas palavras têm poder na internet. Use-as para inspirar e se conectar com outros ao redor do mundo. Seja consciente do impacto que você pode causar.</p>
+        <p>Suas palavras têm poder na internet. Use-as para inspirar e se conectar com outros ao redor do mundo. Seja consciente do impacto que você pode causar.</p>
 
-          <Link to={!currentUser ? "/register" : "post/create"}>
-            <motion.button
-              whileHover={{ scale: 1.01 }}
-              whileTap={{ scale: 0.99 }}>começar a publicar</motion.button>
-          </Link>
-        </div>
-
+        <Link to={!currentUser ? "/register" : "post/create"}>
+          <motion.button
+            whileHover={{ scale: 1.01 }}
+            whileTap={{ scale: 0.99 }}>começar a publicar</motion.button>
+        </Link>
         <ScrollDown />
       </section>
     </>

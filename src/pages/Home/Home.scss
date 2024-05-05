@@ -4,8 +4,7 @@
   position: relative;
   width: 100%;
   height: 100%;
-  margin: 2rem 0;
-
+  margin: 5rem 0;
   padding: 0 300px;
 
   display: flex;
@@ -13,36 +12,70 @@
   justify-content: start;
   flex-direction: column;
 
+  .field-container {
+    position: relative;
+    width: 100%;
+    display: flex;
+    align-items: start;
+    justify-content: space-between;
+    gap: 1rem;
 
-  .trending {
+    .left-content {
+      position: relative;
+      width: 100%;
+
+      flex: 4 0 0;
+      display: flex;
+
+    }
+
+    .right-content {
+      position: sticky;
+      width: 100%;
+      top: 5rem;
+
+      flex: 1 0 0;
+      display: flex;
+    }
+  }
+
+  .recent-text {
     width: 100%;
     margin: 5rem 0;
     display: flex;
     align-items: center;
-    justify-content: start;
+    justify-content: space-between;
     gap: 1rem;
 
-    span {
-      font-family: "PT Serif Caption", serif;
-      letter-spacing: 1px;
+    h1 {
+      font-size: 56px;
+      font-style: normal;
       font-weight: 700;
-      font-size: 22px;
-      text-transform: uppercase;
+      letter-spacing: -0.02em;
+      line-height: 64px;
+      color: $p;
     }
 
-    .border-trending {
-      width: 100%;
-      height: 1px;
-      background-color: $p;
-      opacity: .3;
+    a {
+      font-size: 20px;
+      font-style: normal;
+      font-weight: 600;
+      letter-spacing: 0em;
+      line-height: 30px;
+      color: $p;
+      border-bottom: 1px solid $border;
+
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
     }
   }
 }
 
 form {
   .search-input {
-    background-color: $p;
-    border-radius: 2rem;
+    background-color: $background;
+    border-radius: 0.4rem;
     border: 1px solid $border;
 
     display: flex;
@@ -57,7 +90,7 @@ form {
       background-color: transparent;
       border-radius: 2rem;
 
-      color: $p-2;
+      color: $p;
       cursor: pointer;
     }
 
@@ -72,7 +105,7 @@ form {
       border-radius: 0.4rem;
 
       font-size: 1rem;
-      color: $p-2;
+      color: $p;
 
       &::placeholder {
         color: $s;

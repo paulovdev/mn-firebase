@@ -3,10 +3,10 @@ import { useParams, Link, useNavigate } from "react-router-dom";
 import { doc, getDoc, collection, query, where, onSnapshot } from "firebase/firestore";
 import { db } from "../../firebase/Config";
 import { readTime } from "../../utils/ReadTime";
+import FormatDate from '../../utils/FormatDate'
 import { toast } from "react-toastify";
 import ScrollTop from "../../utils/ScrollTop/ScrollTop";
 import Loading from "../../components/Loading/Loading";
-import { GoArrowDown } from "react-icons/go";
 import { MdEdit } from "react-icons/md";
 import { ProgressBar } from "../../utils/ProgressBar/ProgressBar";
 import { FaRegComments } from "react-icons/fa6";
@@ -70,7 +70,7 @@ const Post = () => {
     fetchComments();
   }, [postId]);
 
-  const { title, desc, postImg, color, created } = post;
+  const { title, desc, postImg, color, created, topic } = post;
   const { username, userImg, userId } = user;
 
   const isAuthor = currentUser && currentUser.uid === userId;
@@ -109,15 +109,13 @@ const Post = () => {
         <section id="post-solo">
 
           <div className="container">
-            <div
-              className="color-background"
-              style={{ backgroundColor: color }}
-            ></div>
+            <span className="topic">{topic}</span>
 
-
-            <p>{readTime({ __html: desc })} min de leitura</p>
             <div className="title-text">
               <h1>{title}</h1>
+              <p> {created}</p>
+              <p>{readTime({ __html: desc })} min de leitura</p>
+
               <div className="profile">
                 {userImg && (
                   <img
@@ -126,12 +124,15 @@ const Post = () => {
                     alt={`${username}'s profile`}
                   />
                 )}
+
                 <div className="text">
                   <div className="post-by">
                     <p>Postado por: </p> <span> {username}</span>
                   </div>
                 </div>
+
               </div>
+
 
               <div className="action-icons">
 
@@ -151,18 +152,17 @@ const Post = () => {
 
               </div>
             </div>
+            <img src={postImg} id="post" alt={`${username}'s post`} />
+          </div>
 
+          <div className="post">
 
-            <div className="post">
-              <img src={postImg} id="post" alt={`${username}'s post`} />
-              <div
-                className="body-post"
-                dangerouslySetInnerHTML={{
-                  __html: post.desc
-                }}
-              ></div>
-              <p>{created}</p>
-            </div>
+            <div
+              className="body-post"
+              dangerouslySetInnerHTML={{
+                __html: post.desc
+              }}
+            ></div>
             <ProgressBar backgroundColor={color} />
 
           </div>
@@ -170,6 +170,7 @@ const Post = () => {
           <ScrollTop />
         </section>
       )}
+
       {isAuthor && (
         <>
           <Link
@@ -178,9 +179,8 @@ const Post = () => {
             title="Editar post"
           >
             <div className="icon-content">
-              <MdEdit size={26} color="#000" />
+              <MdEdit size={26} color="#fff" />
             </div>
-            <p>editar post</p>
           </Link>
         </>
       )}

@@ -26,7 +26,7 @@ import CreatePost from "./pages/CreatePost/CreatePost";
 
 import Search from "./pages/Search/Search";
 import TopicPost from "./pages/TopicPost/TopicPost";
-
+import TopicSelection from "./pages/TopicSelection/TopicSelection";
 const App = () => {
   const { currentUser } = Blog();
   const location = useLocation();
@@ -47,6 +47,7 @@ const App = () => {
           <Route path="/post/:postId" element={<Post />} />
           <Route path="/editPost/:uid" element={<EditPost />} />
           <Route path="/topic/:postId" element={<TopicPost />} />
+          <Route path="/allTopics" element={<TopicSelection />} />
           <Route path="/search" element={<Search />} />
           <Route
             path="*"

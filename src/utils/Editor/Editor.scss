@@ -52,7 +52,6 @@
       font-weight: 400;
       letter-spacing: -0.2px;
       line-height: 2em;
-      font-family: "PT Serif Caption", serif;
 
       color: $p;
       text-decoration: none;
@@ -68,7 +67,7 @@
 
     ul,
     ol {
-      font-family: "PT Serif Caption", serif;
+
 
       &::before {
         list-style: none;
@@ -90,13 +89,12 @@
     }
 
     strong {
-      font-family: "PT Serif Caption", serif;
 
-      font-size: 28px;
-      font-style: normal;
-      font-weight: 700;
-      letter-spacing: -1.2px;
-      line-height: 1.4em;
+      font-size: 18px;
+      font-weight: 800;
+      letter-spacing: -0.2px;
+      line-height: 2em;
+
       color: $p;
       text-decoration: none;
     }
@@ -107,7 +105,6 @@
     h4,
     h5,
     h6 {
-      font-family: "PT Serif Caption", serif;
       font-weight: bold;
 
       margin-bottom: 1rem;
@@ -120,7 +117,7 @@
       letter-spacing: -.03em;
       margin-top: 0;
       margin-bottom: 0;
-      font-size: 48px;
+      font-size: 28px;
       font-weight: 500;
       line-height: 1.1;
 
@@ -182,7 +179,7 @@
     font-size: 21px;
     line-height: 1.58;
     letter-spacing: -.003em;
-    font-family: "PT Serif Caption", serif;
+
     color: $p;
     opacity: .6;
     left: 0;
@@ -233,7 +230,6 @@
 .body-post {
   width: 100%;
   word-wrap: break-word;
-  word-break: break-all;
 
   p {
     font-size: 18px;
@@ -259,7 +255,7 @@
       margin-left: 50px;
       font-size: 18px;
       list-style: disc;
-      font-weight: 300;
+      font-weight: 400;
       letter-spacing: -0.2px;
       line-height: 2em;
       color: $p;
@@ -296,7 +292,7 @@
     letter-spacing: -.03em;
     margin-top: 0;
     margin-bottom: 0;
-    font-size: 32px;
+    font-size: 28px;
     font-weight: 700;
     line-height: 1.1;
 
@@ -353,12 +349,11 @@
 }
 
 .body-posts {
-  width: 50%;
+  width: 100%;
 
   color: $p;
 
   word-wrap: break-word;
-  word-break: break-all;
 
   overflow: hidden;
   text-overflow: ellipsis;
