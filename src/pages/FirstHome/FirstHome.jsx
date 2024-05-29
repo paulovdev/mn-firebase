@@ -1,10 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
-
 import { Blog } from "../../context/Context";
-import './FirstHome.scss'
 import ScrollDown from "../../utils/ScrollDown/ScrollDown";
+import { Transition } from "../../utils/Transition/Transition";
 
+import './FirstHome.scss'
 const FirstHome = () => {
   const { currentUser, allUsers } = Blog();
 
@@ -24,4 +24,4 @@ const FirstHome = () => {
   )
 }
 
-export default FirstHome;
+export default Transition(FirstHome);

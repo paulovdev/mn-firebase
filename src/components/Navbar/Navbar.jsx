@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { Blog } from "../../context/Context";
 import "./Navbar.scss";
 import UserModal from "../UserModal/UserModal";
@@ -14,7 +14,11 @@ const Navbar = () => {
             <SearchInput />
           }
           {!currentUser &&
-            <img src="/logo-publish.png" alt="" />}
+            <Link to="/">
+              <img src="/logo-publish.png" alt="" />
+            </Link>
+          }
+
           <nav>
             {!currentUser && (<>
               <li>
