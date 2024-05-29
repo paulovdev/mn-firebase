@@ -3,8 +3,9 @@ import { deleteDoc, doc, setDoc, getDocs, collection, query } from "firebase/fir
 import { Blog } from "../../context/Context";
 import { db } from "../../firebase/Config";
 import { toast } from "react-toastify";
+import Skeleton from 'react-loading-skeleton';
+
 import './UserFollow.scss'
-import Loading from './../Loading/Loading';
 
 const UserFollow = ({ userId }) => {
   const [followersCount, setFollowersCount] = useState(0);
@@ -27,9 +28,10 @@ const UserFollow = ({ userId }) => {
         if (currentUser) {
           setIsFollowed(followers.some(follower => follower.userId === currentUser.uid));
         }
-        setLoading(false);
       } catch (error) {
         toast.error(error.message);
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -37,21 +39,17 @@ const UserFollow = ({ userId }) => {
   }, [userId, currentUser]);
 
   const handleFollowToggle = async () => {
-
     if (!currentUser) {
       toast.error("Você precisa estar conectado para seguir este perfil.");
       return;
     }
 
-    // Verificar se uma operação está em andamento
     if (isProcessing) {
       return;
     }
 
-    setIsProcessing(true); // bloquear novas operações
-    setLoading(true);
+    setIsProcessing(true);
     try {
-
       const followRef = doc(db, "users", userId, "followers", currentUser.uid);
       if (isFollowed) {
         await deleteDoc(followRef);
@@ -64,24 +62,30 @@ const UserFollow = ({ userId }) => {
     } catch (error) {
       toast.error(error.message);
     } finally {
-      setLoading(false);
-      setIsProcessing(false); // liberar operações após a conclusão
+      setIsProcessing(false);
     }
   };
 
   return (
     <div id="user-follow" onClick={handleFollowToggle}>
-      {loading ? (<Loading />) :
-        <p>{followersCount} Seguidores</p>
-      }
-      {currentUser && isFollowed ? (
-        <button>
-          Deixar de seguir
-        </button>
+      {loading ? (
+        <>
+          <Skeleton width={200} height={10} />
+          <Skeleton width={200} height={30} />
+        </>
       ) : (
-        <button>
-          {currentUser ? "Seguir" : "Você precisa estar conectado para seguir"}
-        </button>
+        <>
+          <p>{followersCount} Seguidores</p>
+          {currentUser && isFollowed ? (
+            <button>
+              Deixar de seguir
+            </button>
+          ) : (
+            <button>
+              {currentUser ? "Seguir" : "Você precisa estar conectado para seguir"}
+            </button>
+          )}
+        </>
       )}
     </div>
   );

@@ -3,21 +3,21 @@ import { useParams, Link, useNavigate } from "react-router-dom";
 import { doc, getDoc, collection, query, where, onSnapshot } from "firebase/firestore";
 import { db } from "../../firebase/Config";
 import { readTime } from "../../utils/ReadTime";
-import FormatDate from '../../utils/FormatDate'
+
 import { toast } from "react-toastify";
 import ScrollTop from "../../utils/ScrollTop/ScrollTop";
-import Loading from "../../components/Loading/Loading";
 import { MdEdit } from "react-icons/md";
 import { ProgressBar } from "../../utils/ProgressBar/ProgressBar";
 import { FaRegComments } from "react-icons/fa6";
 import { FiShare2 } from "react-icons/fi";
+import Skeleton from 'react-loading-skeleton';
 
-
-import "./Post.scss";
 import { Blog } from "../../context/Context";
 import { Transition } from "../../utils/Transition/Transition";
 import UserComments from '../../components/UserComments/UserComments'
 import ScrollDown from "../../utils/ScrollDown/ScrollDown";
+
+import "./Post.scss";
 
 const Post = () => {
   const { currentUser } = Blog();
@@ -44,7 +44,9 @@ const Post = () => {
             setUser({ ...userData, id: postData.userId });
           }
         }
-        setLoading(false);
+        setTimeout(() => {
+          setLoading(false);
+        }, 1000);
       } catch (error) {
         toast.error(error.message);
       }
@@ -104,7 +106,55 @@ const Post = () => {
   return (
     <>
       {loading ? (
-        <Loading />
+        <section id="post-solo">
+          <div className="container">
+            <div className="image-background">
+              <Skeleton width={900} height={500} />
+            </div>
+            <div className="topic-container">
+              <Skeleton width={120} height={20} />
+            </div>
+            <div className="title-text">
+              <Skeleton width={1265} height={30} />
+              <Skeleton width={250} height={15} />
+              <Skeleton width={250} height={15} />
+              <Skeleton width={250} height={15} />
+              <div className="profile">
+                <div className="profile-image">
+                  <Skeleton circle={true} height={50} width={50} />
+                </div>
+                <div className="profile-info">
+                  <Skeleton width={180} height={10} />
+                </div>
+              </div>
+              <div className="action-icons">
+                <div className="action-icon">
+                  <Skeleton width={`40%`} height={20} />
+                </div>
+                <div className="action-icon">
+                  <a href="#user-comments">
+                    <Skeleton width={`40%`} height={20} />
+                  </a>
+                </div>
+                <div className="action-icon" onClick={sharePost}>
+                  <Skeleton width={`40%`} height={20} />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="post">
+            <div className="body-post">
+              <Skeleton width={`100%`} count={2} />
+              <br />
+              <Skeleton width={`100%`} count={4} />
+              <br />
+              <Skeleton width={`100%`} count={6} />
+            </div>
+            <ProgressBar backgroundColor={color} />
+          </div>
+          <UserComments postId={postId} comments={comments} />
+          <ScrollTop />
+        </section>
       ) : (
         <section id="post-solo">
 
@@ -112,7 +162,7 @@ const Post = () => {
             <div className="image-background">
               <img src={postImg} id="post" alt={`${username}'s post`} />
             </div>
-            
+
             <span className="topic">{topic}</span>
 
             <div className="title-text">

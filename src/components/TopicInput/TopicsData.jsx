@@ -1,7 +1,18 @@
-const topicsData = {
+
+import { FaStarOfLife } from "react-icons/fa";
+import { MdOutlineHomeWork } from "react-icons/md";
+import { MdOutlineSelfImprovement } from "react-icons/md";
+import { GrTechnology } from "react-icons/gr";
+import { GrMultimedia } from "react-icons/gr";
+import { IoShareSocial } from "react-icons/io5";
+import { MdAgriculture } from "react-icons/md";
+import { TbWorld } from "react-icons/tb";
+
+export const topicsData = {
     "categories": [
         {
             "name": "Vida",
+            "icon": FaStarOfLife,
             "topics": [
                 "Vida",
                 "Família",
@@ -26,6 +37,7 @@ const topicsData = {
         },
         {
             "name": "Autoaperfeiçoamento",
+            "icon": MdOutlineSelfImprovement,
             "topics": [
                 "Autoaperfeiçoamento",
                 "Saúde Mental",
@@ -50,6 +62,7 @@ const topicsData = {
         },
         {
             "name": "Trabalho",
+            "icon": MdOutlineHomeWork,
             "topics": [
                 "Trabalho",
                 "Negócios",
@@ -74,6 +87,7 @@ const topicsData = {
         },
         {
             "name": "Tecnologia",
+            "icon": GrTechnology,
             "topics": [
                 "Tecnologia",
                 "Inteligência Artificial",
@@ -117,6 +131,7 @@ const topicsData = {
         },
         {
             "name": "Mídia",
+            "icon": GrMultimedia,
             "topics": [
                 "Mídia",
                 "Escrita",
@@ -141,6 +156,7 @@ const topicsData = {
         },
         {
             "name": "Sociedade",
+            "icon": IoShareSocial,
             "topics": [
                 "Sociedade",
                 "Economia",
@@ -165,6 +181,7 @@ const topicsData = {
         },
         {
             "name": "Cultura",
+            "icon": MdAgriculture,
             "topics": [
                 "Cultura",
                 "Filosofia",
@@ -189,6 +206,7 @@ const topicsData = {
         },
         {
             "name": "Mundo",
+            "icon": TbWorld,
             "topics": [
                 "Mundo",
                 "Cidades",

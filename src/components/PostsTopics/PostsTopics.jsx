@@ -5,12 +5,11 @@ import { readTime } from "../../utils/ReadTime";
 import { db } from "../../firebase/Config";
 import { Blog } from "../../context/Context";
 
-import Loading from "../Loading/Loading";
+import Skeleton from 'react-loading-skeleton';
 import "./PostsTopics.scss";
 
 const PostsTopics = ({ topic }) => {
-  const { postLoading } = Blog();
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true); // Começa com true para exibir os esqueletos
   const [postTopic, setPostTopic] = useState([]);
 
   useEffect(() => {
@@ -40,7 +39,9 @@ const PostsTopics = ({ topic }) => {
       );
 
       setPostTopic(fetchedPostTopic);
-      setLoading(false);
+      setTimeout(() => {
+        setLoading(false);
+      }, 1000);
     } catch (error) {
       console.error("Erro ao buscar tópicos de posts:", error);
       setLoading(false);
@@ -49,8 +50,14 @@ const PostsTopics = ({ topic }) => {
 
   return (
     <>
-      {postLoading || loading ? (
-        <Loading />
+      {loading ? (
+        <div id="posts-topics">
+          {[1, 2].map((index) => (
+            <div className="post-container" key={index}>
+              <Skeleton height={300} width={`100%`} />
+            </div>
+          ))}
+        </div>
       ) : (
         <div id="posts-topics">
           {postTopic && postTopic.length > 0 ? (
@@ -66,7 +73,6 @@ const PostsTopics = ({ topic }) => {
                       <p>{readTime({ __html: post.desc })} min de leitura</p>
                     </div>
                     <h1>{post.title}</h1>
-
                   </div>
                 </div>
               </Link>

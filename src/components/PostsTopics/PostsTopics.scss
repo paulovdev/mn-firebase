@@ -31,7 +31,7 @@
 
     .post {
       width: 100%;
-      height: 400px;
+      height: 300px;
 
       .img-post {
         img {
@@ -39,9 +39,8 @@
           width: 100%;
           height: 100%;
           border-radius: 0.6rem;
-          background: var(--p);
+          background-color: $bg-2;
           transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-          object-fit: cover;
           z-index: 0;
           filter: brightness(60%);
         }

@@ -1,6 +1,10 @@
 import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 import { Blog } from "./context/Context";
 import { ToastContainer } from "react-toastify";
+import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
+
+import 'react-loading-skeleton/dist/skeleton.css';
+
 import { toast } from "react-toastify";
 import { AnimatePresence } from "framer-motion";
 
@@ -34,30 +38,34 @@ const App = () => {
 
   return (
     <>
-      <Navbar />
-      {currentUser && < SideBar />}
-      <ToastContainer />
-      <AnimatePresence mode="wait">
-        <Routes location={location} key={location.pathname}>
-          <Route index path="/" element={!currentUser ? <FirstHome /> : < Home />} />
-          <Route path="/dashboard" element={!currentUser ? <Login /> : <Dashboard />} />
-          <Route path="/home" element={!currentUser ? <FirstHome /> : <Home />} />
-          <Route path="/profile/:userId" element={<Profile />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/dashboard" element={!currentUser ? <Login /> : <Dashboard />} />
-          <Route path="/post/create" element={!currentUser ? <Login /> : <CreatePost />} />
-          <Route path="/post/:postId" element={<Post />} />
-          <Route path="/editPost/:uid" element={<EditPost />} />
-          <Route path="/topic/:postId" element={<TopicPost />} />
-          <Route path="/allTopics" element={<TopicSelection />} />
-          <Route path="/search" element={<Search />} />
-          <Route
-            path="*"
-            element={<Navigate to={!currentUser ? "/login" : "/home"} />}
-          />
-        </Routes>
-      </AnimatePresence>
+      <SkeletonTheme baseColor="#3a3a3a" highlightColor="#828282">
+
+        <Navbar />
+        {currentUser && < SideBar />}
+        <ToastContainer />
+        <AnimatePresence mode="wait">
+          <Routes location={location} key={location.pathname}>
+            <Route index path="/" element={!currentUser ? <FirstHome /> : < Home />} />
+            <Route path="/dashboard" element={!currentUser ? <Login /> : <Dashboard />} />
+            <Route path="/home" element={!currentUser ? <FirstHome /> : <Home />} />
+            <Route path="/profile/:userId" element={<Profile />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/dashboard" element={!currentUser ? <Login /> : <Dashboard />} />
+            <Route path="/post/create" element={!currentUser ? <Login /> : <CreatePost />} />
+            <Route path="/post/:postId" element={<Post />} />
+            <Route path="/editPost/:uid" element={<EditPost />} />
+            <Route path="/topic/:postId" element={<TopicPost />} />
+            <Route path="/allTopics" element={<TopicSelection />} />
+            <Route path="/search" element={<Search />} />
+            <Route
+              path="*"
+              element={<Navigate to={!currentUser ? "/login" : "/home"} />}
+            />
+          </Routes>
+        </AnimatePresence>
+
+      </SkeletonTheme>
       {/*  <Footer /> */}
     </>
   );

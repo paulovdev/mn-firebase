@@ -4,8 +4,8 @@ import { doc, getDoc, collection, getDocs, query, orderBy } from "firebase/fires
 import { db } from "../../firebase/Config";
 import { toast } from "react-toastify";
 import { Blog } from "../../context/Context";
-
-import Loading from "../Loading/Loading";
+import Skeleton from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css';
 import "./PostsEmphasis.scss";
 
 const PostsEmphasis = () => {
@@ -26,23 +26,30 @@ const PostsEmphasis = () => {
         const fetchedPostEmphasis = [];
         const fetchedUsers = {};
 
-        postsEmphasisSnapshot.forEach(async (postDoc) => {
+        const userFetchPromises = [];
+
+        postsEmphasisSnapshot.forEach((postDoc) => {
           const postData = postDoc.data();
           const postId = postDoc.id;
 
           if (desiredPostIds.includes(postId)) {
             fetchedPostEmphasis.push({ ...postData, id: postId });
 
-            const userRef = doc(db, "users", postData.userId);
-            const userDoc = await getDoc(userRef);
-            const userData = userDoc.data();
-            fetchedUsers[postData.userId] = { ...userData, id: postData.userId };
+            const userFetchPromise = getDoc(doc(db, "users", postData.userId)).then((userDoc) => {
+              const userData = userDoc.data();
+              fetchedUsers[postData.userId] = { ...userData, id: postData.userId };
+            });
+            userFetchPromises.push(userFetchPromise);
           }
         });
 
+        await Promise.all(userFetchPromises);
+
         setPostEmphasis(fetchedPostEmphasis);
         setUsers(fetchedUsers);
-        setLoading(false);
+        setTimeout(() => {
+          setLoading(false);
+        }, 1000);
       } catch (error) {
         toast.error(error.message);
         setLoading(false);
@@ -55,7 +62,14 @@ const PostsEmphasis = () => {
   return (
     <>
       {postLoading || loading ? (
-        <Loading />
+        <div id="posts-emphasis">
+          <div className="post-container large-post">
+            <Skeleton height={200} />
+          </div>
+          <div className="post-container small-post">
+            <Skeleton height={200} />
+          </div>
+        </div>
       ) : (
         <div id="posts-emphasis">
           {postEmphasis.length > 0 ? (

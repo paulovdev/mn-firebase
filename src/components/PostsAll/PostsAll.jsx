@@ -99,7 +99,7 @@ const PostsAll = () => {
                         {user && (
                           <div className="profile-content">
                             <img src={user.userImg} alt="" />
-                            
+
                             <div className="profile-text-wrapper">
 
                               <p>{user.username}</p>

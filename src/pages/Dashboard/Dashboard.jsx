@@ -14,11 +14,12 @@ import { db } from "../../firebase/Config";
 import { toast } from "react-toastify";
 import { MdOutlineVisibility } from "react-icons/md";
 import { MdDeleteOutline } from "react-icons/md";
-
 import { MdEdit } from "react-icons/md";
 import Loading from "../../components/Loading/Loading";
+import Skeleton from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css';
 import "./Dashboard.scss";
-import { Transition } from '../../utils/Transition/Transition'
+import { Transition } from '../../utils/Transition/Transition';
 
 const Dashboard = () => {
   const { currentUser, userLoading } = Blog();
@@ -29,9 +30,11 @@ const Dashboard = () => {
     const fetchUserPosts = async () => {
       setLoading(true);
       try {
-
-        const q = query(collection(db, "posts"), where("userId", "==", currentUser.uid),
-          orderBy("created", "desc"));
+        const q = query(
+          collection(db, "posts"),
+          where("userId", "==", currentUser.uid),
+          orderBy("created", "desc")
+        );
 
         const unsubscribe = onSnapshot(q, (querySnapshot) => {
           const posts = querySnapshot.docs.map((doc) => ({
@@ -39,11 +42,14 @@ const Dashboard = () => {
             ...doc.data(),
           }));
           setUserPosts(posts);
+          setTimeout(() => {
+            setLoading(false);
+          }, 1000);
         });
-        setLoading(false);
         return () => unsubscribe();
       } catch (error) {
         console.log("Erro ao buscar postagens de usuários:", error);
+        setLoading(false);
       }
     };
 
@@ -72,44 +78,54 @@ const Dashboard = () => {
           </div>
 
           <div className="posts">
-            {userPosts.length === 0 ? (
-              <>
-                <div className="no-result">
-                  <p>nenhum post encontrado.</p>
-                  <Link to="/post/create">criar primeiro post</Link>
+            {loading ? (
+              Array(3).fill().map((_, index) => (
+                <div className="post-dashboard" key={index}>
+                  <div className="background">
+                    <Skeleton height={150} />
+                  </div>
+                  <div className="text">
+                    <Skeleton width={250} height={10} />
+                  </div>
+                  <div className="actions">
+                    <Skeleton width={40} height={30} />
+                    <Skeleton width={40} height={30} />
+                    <Skeleton width={40} height={30} />
+                  </div>
                 </div>
-              </>
+              ))
+            ) : userPosts.length === 0 ? (
+              <div className="no-result">
+                <p>nenhum post encontrado.</p>
+                <Link to="/post/create">criar primeiro post</Link>
+              </div>
             ) : (
               userPosts.map((post) => (
-                <>
-                  <div className="post-dashboard" key={post.id}>
-                    <div className="background">
-                      <img src={post.postImg} alt="" />
-                    </div>
-
-                    <div className="text">
-                      <h1>{post.title}</h1>
-                    </div>
-
-                    <div className="actions">
-                      <li>
-                        <Link to={`/post/${post.id}`}>
-                          <MdOutlineVisibility size={18} />
-                        </Link>
-                      </li>
-                      <li>
-                        <Link to={`/editPost/${post.id}`}>
-                          <MdEdit size={18} />
-                        </Link>
-                      </li>
-                      <li>
-                        <button onClick={() => handleDelete(post.id)}>
-                          <MdDeleteOutline size={18} />
-                        </button>
-                      </li>
-                    </div>
+                <div className="post-dashboard" key={post.id}>
+                  <div className="background">
+                    <img src={post.postImg} alt="" />
                   </div>
-                </>
+                  <div className="text">
+                    <h1>{post.title}</h1>
+                  </div>
+                  <div className="actions">
+                    <li>
+                      <Link to={`/post/${post.id}`}>
+                        <MdOutlineVisibility size={18} />
+                      </Link>
+                    </li>
+                    <li>
+                      <Link to={`/editPost/${post.id}`}>
+                        <MdEdit size={18} />
+                      </Link>
+                    </li>
+                    <li>
+                      <button onClick={() => handleDelete(post.id)}>
+                        <MdDeleteOutline size={18} />
+                      </button>
+                    </li>
+                  </div>
+                </div>
               ))
             )}
           </div>

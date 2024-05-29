@@ -19,7 +19,6 @@
       height: 150px;
 
       border-radius: 0.5rem;
-      background-color: $mt;
       border: 1px solid $s;
 
       display: flex;
@@ -27,6 +26,7 @@
       justify-content: center;
 
       transition: all 0.3s cubic-bezier(0.455, 0.03, 0.515, 0.955);
+      z-index: 1;
 
       &:hover {
         border: 1px solid $p;
@@ -35,9 +35,29 @@
       }
 
       h1 {
-        font-size: 24px;
-        font-weight: 500;
+        font-size: 26px;
+        font-weight: 900;
+        letter-spacing: -1px;
+        margin: 3rem 0;
         color: $p;
+      }
+
+      .icon-background {
+        position: absolute;
+
+        width: 100%;
+        height: fit-content;
+
+        left: 15px;
+        top: 5px;
+
+        filter: blur(8px) brightness(30%);
+        z-index: -1;
+
+        svg {
+          color: $p;
+          font-size: 6vw;
+        }
       }
     }
 
