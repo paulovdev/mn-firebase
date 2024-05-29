@@ -1,31 +1,22 @@
-import React, { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import React from "react";
 import { Blog } from "../../context/Context";
-import { IoIosSearch } from "react-icons/io";
 
-import FirstHome from '../FirstHome/FirstHome'
-import { GoArrowRight } from "react-icons/go";
+import { RiMedalFill } from "react-icons/ri";
 
 import Loading from "../../components/Loading/Loading";
 
 import Posts from "../../components/Posts/Posts";
-import { LuPlus } from "react-icons/lu";
+import PostsEmphasis from "../../components/PostsEmphasis/PostsEmphasis";
+
 import { Transition } from "../../utils/Transition/Transition";
 
 import "./Home.scss";
+import { PostsTopicsAI, PostsTopicsProgramming } from "../../components/PostsTopics/PostsTopicsSelect";
+import PostsAll from "../../components/PostsAll/PostsAll";
+import PostsTopicsSelection from "../../components/PostsTopicsSelection/PostsTopicsSelection";
 
 const Home = () => {
-  const [search, setSearch] = useState("");
-  const { currentUser, allUsers, userLoading } = Blog();
-  const navigate = useNavigate();
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    if (search) {
-      return navigate(`/search?q=${search}`);
-    }
-  };
+  const { userLoading } = Blog();
 
   return (
     <>
@@ -33,35 +24,37 @@ const Home = () => {
         <Loading />
       ) : (
         <>
-          <FirstHome />
-
           <section id="home">
-            <div className="recent-text">
-              <h1>Mais recente</h1>
-              <Link to={`allTopics`}>Topicos <GoArrowRight />
-              </Link>
+            <h1>Novos posts</h1>
+            <Posts />
+            <div className="emphasis-text">
+              <h1>Em destaque</h1>  <RiMedalFill size={24} />
             </div>
-            <div className="field-container">
-              <div className="left-content">
-                <Posts />
-              </div>
-              <div className="right-content">
-                <form onSubmit={handleSubmit}>
-                  <div className="search-input">
-                    <input
-                      type="text"
-                      placeholder="Busca por blogs"
-                      value={search}
-                      onChange={(e) => setSearch(e.target.value)}
-                    />
-                    <button type="submit">
-                      <IoIosSearch size={26} />
-                    </button>
-                  </div>
-                </form>
-              </div>
+            {/*  <p>Posts selecionados a dedo e que faz grande diferenca na vidas das pessoas</p> */}
+            <PostsEmphasis />
 
+            <div className="emphasis-text">
+              <h1>Programação </h1>
             </div>
+            <PostsTopicsProgramming />
+
+            <div className="emphasis-text">
+              <h1>Inteligência Artificial</h1>
+            </div>
+            <PostsTopicsAI />
+            <div className="emphasis-text">
+              <h1>Navegar</h1>
+            </div>
+
+            <PostsTopicsSelection />
+            <div className="emphasis-text">
+              <h1>Todos os posts</h1>
+            </div>
+            <PostsAll />
+
+            {/*             
+            <Link to={`allTopics`}>Topicos <GoArrowRight />
+            </Link> */}
           </section>
         </>
       )}

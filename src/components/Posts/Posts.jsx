@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
-import { doc, getDoc, collection, getDocs, query, orderBy } from "firebase/firestore"; // Adicionando 'query' e 'orderBy'
+import { Link } from "react-router-dom";
+import { doc, getDoc, collection, getDocs, query, orderBy, limit } from "firebase/firestore";
 import { db } from "../../firebase/Config";
 import { toast } from "react-toastify";
 import { Blog } from "../../context/Context";
-import { readTime } from "../../utils/ReadTime";
-import FormatDate from "../../utils/FormatDate";
 import Loading from "../Loading/Loading";
 import "./Posts.scss";
 
@@ -20,7 +18,7 @@ const Posts = () => {
       setLoading(true);
       try {
         const postsCollection = collection(db, "posts");
-        const postsSnapshot = await getDocs(query(postsCollection, orderBy("created", "desc")));
+        const postsSnapshot = await getDocs(query(postsCollection, orderBy("created", "desc"), limit(4)));
         const fetchedPosts = [];
         const fetchedUsers = {};
 
@@ -58,63 +56,43 @@ const Posts = () => {
       {postLoading && loading ? (
         <Loading />
       ) : (
-        <>
-          <div id="posts">
-            {posts.length > 0 ? (
-              posts.map((post, i) => {
-                const user = users[post.userId];
-                return (
-                  <Link to={`/post/${post.id}`} className="post-container" key={i}>
-
-                    <div className="post-left-content">
+        <div id="posts">
+          {posts.length > 0 ? (
+            <>
+              {posts.slice(0, 1).map((post, i) => (
+                <Link to={`/post/${post.id}`} className="post-container large-post" key={i}>
+                  <div className="post">
+                    <div className="img-post">
                       <img src={post.postImg} alt="postImg" />
                     </div>
-
-                    <div className="post-right-content">
+                    <div className="post-content">
                       <div className="topic"><span>{post.topic}</span></div>
                       <h1>{post.title}</h1>
-                      <div
-                        className="body-posts"
-                        dangerouslySetInnerHTML={{
-                          __html: post.desc.slice(0, 250),
-                        }}
-                      ></div>
-                      <div className="topic-profile-container">
-
-                        {user && (
-                          <div className="profile-content">
-                            <img src={user.userImg} alt="" />
-
-
-                            <div className="profile-text-wrapper">
-                              <p>
-                                {user.username}
-                              </p>
-                              
-                              <div className="profile-date-text-wrapper">
-                                <span>
-                                  <FormatDate date={post.created} />
-                                </span>
-                                <span>{readTime({ __html: post.desc })} min de leitura</span>
-                              </div>
-                            </div>
-
-
-                          </div>
-                        )}
+                    </div>
+                  </div>
+                </Link>
+              ))}
+              <div className="grid-container">
+                {posts.slice(1).map((post, i) => (
+                  <Link to={`/post/${post.id}`} className="post-container small-post" key={i}>
+                    <div className="post">
+                      <div className="img-post">
+                        <img src={post.postImg} alt="postImg" />
+                      </div>
+                      <div className="post-content">
+                        <div className="topic"><span>{post.topic}</span></div>
+                        <h1>{post.title}</h1>
                       </div>
                     </div>
-
                   </Link>
-                );
-              })
-            ) : (
-              <p>Sem posts disponíveis</p>
-            )}
-          </div>
-        </>
-      )
-      }
+                ))}
+              </div>
+            </>
+          ) : (
+            <p>Sem posts disponíveis</p>
+          )}
+        </div>
+      )}
     </>
   );
 };

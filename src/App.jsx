@@ -27,6 +27,7 @@ import CreatePost from "./pages/CreatePost/CreatePost";
 import Search from "./pages/Search/Search";
 import TopicPost from "./pages/TopicPost/TopicPost";
 import TopicSelection from "./pages/TopicSelection/TopicSelection";
+import FirstHome from "./pages/FirstHome/FirstHome";
 const App = () => {
   const { currentUser } = Blog();
   const location = useLocation();
@@ -34,11 +35,13 @@ const App = () => {
   return (
     <>
       <Navbar />
-      <SideBar />
+      {currentUser && < SideBar />}
       <ToastContainer />
       <AnimatePresence mode="wait">
         <Routes location={location} key={location.pathname}>
-          <Route index path="/" element={<Home />} />
+          <Route index path="/" element={!currentUser ? <FirstHome /> : < Home />} />
+          <Route path="/dashboard" element={!currentUser ? <Login /> : <Dashboard />} />
+          <Route path="/home" element={!currentUser ? <FirstHome /> : <Home />} />
           <Route path="/profile/:userId" element={<Profile />} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
@@ -51,7 +54,7 @@ const App = () => {
           <Route path="/search" element={<Search />} />
           <Route
             path="*"
-            element={<Navigate to={!currentUser ? "/login" : "/"} />}
+            element={<Navigate to={!currentUser ? "/login" : "/home"} />}
           />
         </Routes>
       </AnimatePresence>

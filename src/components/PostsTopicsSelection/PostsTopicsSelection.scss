@@ -1,0 +1,58 @@
+@import "../../index.scss";
+
+#post-topic-selection {
+  position: relative;
+  width: 100%;
+  height: 100%;
+
+  transition: all 0.3s cubic-bezier(0.455, 0.03, 0.515, 0.955);
+
+  .post-topic-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 3rem;
+
+    .post-topic {
+      position: relative;
+      width: 100%;
+      height: 150px;
+
+      border-radius: 0.5rem;
+      background-color: $mt;
+      border: 1px solid $s;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      transition: all 0.3s cubic-bezier(0.455, 0.03, 0.515, 0.955);
+
+      &:hover {
+        border: 1px solid $p;
+        transform: scale(1.03);
+        cursor: default;
+      }
+
+      h1 {
+        font-size: 24px;
+        font-weight: 500;
+        color: $p;
+      }
+    }
+
+    /*     .img-post {
+      img {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        border-radius: 0.6rem;
+        background: var(--p);
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        object-fit: cover;
+        z-index: 0;
+        filter: brightness(60%);
+      }
+    } */
+  }
+}

@@ -72,16 +72,16 @@ const UserFollow = ({ userId }) => {
   return (
     <div id="user-follow" onClick={handleFollowToggle}>
       {loading ? (<Loading />) :
-        <p>Seguidores: {followersCount}</p>
+        <p>{followersCount} Seguidores</p>
       }
       {currentUser && isFollowed ? (
-        <span>
+        <button>
           Deixar de seguir
-        </span>
+        </button>
       ) : (
-        <span>
+        <button>
           {currentUser ? "Seguir" : "Você precisa estar conectado para seguir"}
-        </span>
+        </button>
       )}
     </div>
   );

@@ -2,12 +2,12 @@
 
 .progress-bar-container {
   position: fixed;
-  background-color: #dadada;
+  background-color: $s;
   width: 5px;
   height: 100vh;
 
   top: 0;
-  left: 60px;
+  left: 300px;
 
   z-index: 999;
 
@@ -22,7 +22,7 @@
     height: 100vh;
 
     top: 0;
-    left: 60px;
+    left: 300px;
 
 
     z-index: 999;

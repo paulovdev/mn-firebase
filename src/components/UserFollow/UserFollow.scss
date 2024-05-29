@@ -9,19 +9,34 @@
     gap: 1rem;
 
     p {
-        font-size: 22px;
+        color: $p;
+        font-weight: 400;
+        font-size: 16px;
     }
 
-    span {
-        padding: 0.5rem 1rem;
+    button {
+        width: fit-content;
+        height: 100%;
 
-        font-size: 18px;
-        font-weight: 600;
+        outline: none;
+        border: none;
 
         background-color: $mt;
+        color: $p;
+
+        padding: 0.6rem 2rem;
         border-radius: 0.4rem;
 
-        color: $p-2;
+        font-size: 14px;
+        font-weight: 500;
+
+        display: flex;
+        justify-content: center;
         cursor: pointer;
+        transition: all 0.3s cubic-bezier(0.455, 0.03, 0.515, 0.955);
+
+        &:hover {
+            background-color: $bg-2;
+        }
     }
 }

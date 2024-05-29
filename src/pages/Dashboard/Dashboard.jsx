@@ -67,8 +67,8 @@ const Dashboard = () => {
       ) : (
         <section id="dashboard">
           <div className="container">
-            <h1>dashboard</h1>
-            <p>gerencie seus posts</p>
+            <h1>Dashboard</h1>
+            <p>Gerencie seus posts</p>
           </div>
 
           <div className="posts">
@@ -88,24 +88,23 @@ const Dashboard = () => {
                     </div>
 
                     <div className="text">
-                      <span>título:</span>
                       <h1>{post.title}</h1>
                     </div>
 
                     <div className="actions">
                       <li>
                         <Link to={`/post/${post.id}`}>
-                          <MdOutlineVisibility size={24} />
+                          <MdOutlineVisibility size={18} />
                         </Link>
                       </li>
                       <li>
                         <Link to={`/editPost/${post.id}`}>
-                          <MdEdit size={24} />
+                          <MdEdit size={18} />
                         </Link>
                       </li>
                       <li>
                         <button onClick={() => handleDelete(post.id)}>
-                          <MdDeleteOutline color="#ffffff" size={24} />
+                          <MdDeleteOutline size={18} />
                         </button>
                       </li>
                     </div>

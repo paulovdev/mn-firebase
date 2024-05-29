@@ -1,15 +1,20 @@
-import { NavLink, Link } from "react-router-dom";
-import Loading from "../Loading/Loading";
+import { NavLink } from "react-router-dom";
 import { Blog } from "../../context/Context";
 import "./Navbar.scss";
 import UserModal from "../UserModal/UserModal";
+import SearchInput from "../SearchInput/SearchInput";
 const Navbar = () => {
-  const { currentUser, userLoading } = Blog();
+  const { currentUser } = Blog();
 
   return (
     <>
       {
         <header>
+          {currentUser &&
+            <SearchInput />
+          }
+          {!currentUser &&
+            <img src="/logo-publish.png" alt="" />}
           <nav>
             {!currentUser && (<>
               <li>

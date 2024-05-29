@@ -36,21 +36,19 @@ const EditProfile = ({ getUserData, onClick }) => {
     setLoading(true);
 
     try {
-      let imageUrl = form.userImg; // Initialize imageUrl with existing URL or empty string
-
-      // Upload the image to Firebase Storage if a new image is selected
+      let imageUrl = form.userImg;
       if (form.userImg instanceof File) {
         const storageRef = ref(storage, `image/${form.userImg.name}`);
         await uploadBytes(storageRef, form.userImg);
         imageUrl = await getDownloadURL(storageRef);
       }
 
-      // Update the Firestore document with the image URL
+
       const docRef = doc(db, "users", getUserData?.userId);
       await updateDoc(docRef, {
         bio: form.bio,
         username: form.username,
-        userImg: imageUrl, // Update userImg with the image URL
+        userImg: imageUrl,
       });
 
       toast.success("Perfil atualizado com sucesso!");
@@ -121,17 +119,12 @@ const EditProfile = ({ getUserData, onClick }) => {
         inputMode="text"
       />
 
-      <input type="text" disabled readOnly value={getUserData?.email} />
-      <p>
-        Este endereço de e-mail está associado à sua conta M-blog. Atualizar seu
-        e-mail de cobrança, vá para Configurações do espaço de trabalho →
-        Planos.
-      </p>
+      <input type="text" id="disabled-input" disabled readOnly value={getUserData?.email} />
 
       {!loading ? (
-        <button type="submit">Salvar</button>
+        <button id="save-button" type="submit">Salvar</button>
       ) : (
-        <button disabled type="submit">
+        <button id="save-button" disabled type="submit">
           Salvando...
         </button>
       )}

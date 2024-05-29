@@ -3,93 +3,65 @@
 #first-home {
     position: relative;
     width: 100%;
-    height: 90vh;
+    height: 80vh;
 
+    max-width: 1200px;
+    margin: 0 auto;
 
-    padding: 0 300px;
+    padding: 20px;
 
     display: flex;
-    align-items: center;
+    align-items: start;
     justify-content: center;
     flex-direction: column;
 
-    position: relative;
-    width: 100%;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-
-    .user-text {
-
+    .logo {
+        font-size: 36px;
+        font-weight: 900;
+        letter-spacing: -1px;
+        color: $p;
 
         span {
-            letter-spacing: 1px;
-            font-weight: 700;
-            font-size: 22px;
-            text-transform: uppercase;
-        }
-
-        h1 {
-
-            font-size: 72px;
-            font-style: normal;
-            font-weight: 700;
-            letter-spacing: -0.04em;
-            line-height: 80px;
+            font-size: 10vw;
+            font-weight: 900;
+            letter-spacing: -2px;
             color: $p;
         }
     }
 
-    .logo {
-        max-width: 80%;
-        text-align: center;
-        font-size: 72px;
-        font-style: normal;
-        font-weight: 700;
-        letter-spacing: -0.04em;
-        line-height: 80px;
-        color: $p;
-        margin-bottom: 1rem;
-    }
-
     p {
-        max-width: 50%;
-        text-align: center;
-        margin-bottom: 2rem;
+        max-width: 60%;
+        margin-bottom: 3rem;
 
         font-size: 18px;
-        font-style: normal;
-        font-weight: 400;
-        letter-spacing: 0.01em;
-        line-height: 28px;
+        font-weight: 500;
         color: $p;
     }
 
 
     button {
-        appearance: none;
         width: 100%;
-        height: 100%;
+        height: 40px;
+
         outline: none;
         border: none;
-        cursor: pointer;
-        padding: 1.1rem 1.8rem;
-        border-radius: 80px;
-        font-size: 20px;
-        font-style: normal;
+
+        background-color: $mt;
+        color: $p;
+
+        padding: 0.6rem 2rem;
+        border-radius: 0.5rem;
+
+        font-size: 16px;
         font-weight: 600;
-        letter-spacing: 0em;
-        line-height: 30px;
+
         text-align: center;
-        background: rgb(0, 0, 0);
-        color: rgb(255, 255, 255);
         z-index: 1;
-        box-shadow: none;
+        cursor: pointer;
+        transition: all 0.3s cubic-bezier(0.455, 0.03, 0.515, 0.955);
 
         &:hover {
-            opacity: .9;
+            background-color: $bg-2;
         }
     }
 }

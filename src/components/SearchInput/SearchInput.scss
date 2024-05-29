@@ -1,0 +1,51 @@
+@import '../../index.scss';
+
+form {
+    .search-input {
+        background-color: $mt;
+        border-radius: 0.5rem;
+   /*      border: 1px solid $border; */
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        button {
+            width: 35px;
+            height: 35px;
+
+            outline: none;
+            border: none;
+
+            background-color: transparent;
+
+
+            color: $p;
+            cursor: pointer;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+        }
+
+        input {
+            width: 150px;
+            height: 35px;
+            padding: 0 0 0 1rem;
+
+            outline: none;
+            border: none;
+            background-color: transparent;
+            border-radius: 0.5rem;
+
+            font-size: 14px;
+            font-weight: 400;
+            color: $p;
+
+            &::placeholder {
+                color: $s;
+            }
+        }
+    }
+}

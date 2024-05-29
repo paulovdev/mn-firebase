@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
 import { getDoc, doc, addDoc, collection, deleteDoc } from "firebase/firestore";
 import { IoIosSend } from "react-icons/io";
+import { FaTrashAlt } from "react-icons/fa";
+
 import { toast } from "react-toastify";
 import { Blog } from "../../context/Context";
 import { db } from "../../firebase/Config";
@@ -145,8 +147,8 @@ const UserComments = ({ postId, comments }) => {
                                 </>
                             )}
                             {currentUser && currentUser.uid === comment.userId && (
-                                <div>
-                                    <button onClick={() => handleDeleteComment(comment.id)}>Excluir</button>
+                                <div className="delete">
+                                    <button onClick={() => handleDeleteComment(comment.id)}><FaTrashAlt /> </button>
                                 </div>
                             )}
                         </div>

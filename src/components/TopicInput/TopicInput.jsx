@@ -5,14 +5,15 @@ const TopicInput = ({ topics, onSelectTopic }) => {
     const [value, setValue] = useState("");
     const [suggestions, setSuggestions] = useState([]);
 
-    // Função para lidar com a mudança de valor no campo de entrada
+
     const onChange = (event, { newValue }) => {
         setValue(newValue);
-        // Chama a função para atualizar o tópico selecionado no componente pai
-        onSelectTopic(newValue);
+        const selectedTopic = suggestions.find(topic => topic === newValue);
+        if (selectedTopic) {
+            onSelectTopic(selectedTopic);
+        }
     };
 
-    // Função para definir as sugestões de acordo com o valor digitado
     const onSuggestionsFetchRequested = ({ value }) => {
         const inputValue = value.trim().toLowerCase();
         const inputLength = inputValue.length;
@@ -22,12 +23,10 @@ const TopicInput = ({ topics, onSelectTopic }) => {
         setSuggestions(filteredTopics);
     };
 
-    // Função para limpar as sugestões
     const onSuggestionsClearRequested = () => {
         setSuggestions([]);
     };
 
-    // Opções para o campo de entrada
     const inputProps = {
         placeholder: "Digite o tópico...",
         value,

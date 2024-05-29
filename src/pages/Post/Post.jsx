@@ -109,6 +109,10 @@ const Post = () => {
         <section id="post-solo">
 
           <div className="container">
+            <div className="image-background">
+              <img src={postImg} id="post" alt={`${username}'s post`} />
+            </div>
+            
             <span className="topic">{topic}</span>
 
             <div className="title-text">
@@ -142,7 +146,7 @@ const Post = () => {
 
                 <div className="action-icon">
                   <a href="#user-comments">
-                    < FaRegComments size={22} color="#fff" />
+                    <FaRegComments size={22} color="#fff" />
                   </a>
                 </div>
 
@@ -152,7 +156,7 @@ const Post = () => {
 
               </div>
             </div>
-            <img src={postImg} id="post" alt={`${username}'s post`} />
+
           </div>
 
           <div className="post">

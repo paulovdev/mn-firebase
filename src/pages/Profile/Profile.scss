@@ -3,32 +3,31 @@
 #my-profile {
   position: relative;
   width: 100%;
-  height: 100%;
-  min-height: calc(100vh - 70px);
+  height: 60vh;
 
-  padding: 0 600px;
-  margin: 1rem 0;
+  padding: 0 250px 0 400px;
+  margin: 10rem 0;
 
   display: flex;
   align-items: start;
-  justify-content: center;
+  justify-content: start;
   flex-direction: column;
   gap: 1rem;
 
   .container {
     position: relative;
     width: 100%;
-
+    height: 100%;
     display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 2rem;
+    align-items: start;
+    justify-content: start;
     flex-direction: column;
+    gap: 2rem;
 
     .profile-photo {
       display: flex;
       align-items: start;
-      flex-direction: column;
+      justify-content: start;
       gap: 3rem;
 
       img {
@@ -39,6 +38,8 @@
       }
 
       .wrapper-text {
+        position: relative;
+        width: 100%;
         display: flex;
         align-items: start;
         flex-direction: column;
@@ -48,37 +49,41 @@
 
         h1 {
           width: 100%;
-
-          color: $p;
-          font-weight: 700;
+          font-size: 28px;
+          font-weight: 900;
           letter-spacing: -1px;
-          font-size: 52px;
         }
 
         p {
           color: $p;
           opacity: .9;
-          font-weight: 300;
-          letter-spacing: -1px;
-          font-size: 24px;
+          font-weight: 400;
+          font-size: 16px;
         }
 
         button {
-          position: relative;
           width: 100%;
-          height: 50px;
-          margin-bottom: 1rem;
+          height: 100%;
 
           outline: none;
           border: none;
 
-          border-radius: 2rem;
-          background-color: $p;
-          font-weight: 500;
-          font-size: 18px;
-          color: $p-2;
+          background-color: $mt;
+          color: $p;
 
+          padding: 0.6rem 2rem;
+          border-radius: 0.5rem;
+
+          font-size: 14px;
+          font-weight: 500;
+
+          text-align: center;
           cursor: pointer;
+          transition: all 0.3s cubic-bezier(0.455, 0.03, 0.515, 0.955);
+
+          &:hover {
+            background-color: $bg-2;
+          }
         }
       }
     }
@@ -90,7 +95,7 @@
     height: 600px;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(0%, -25%);
 
     padding: 1rem;
     border: 1px solid $border;
@@ -164,7 +169,7 @@
 
       outline: none;
       background-color: transparent;
-      border-radius: 0.4rem;
+      border-radius: 0.5rem;
       border: 1px solid $border;
 
       font-size: 18px;
@@ -177,6 +182,7 @@
     }
 
     textarea {
+      height: 1200px;
       resize: none;
     }
 
@@ -186,22 +192,35 @@
       margin: 1rem 0;
     }
 
-    button {
-      position: relative;
+    #disabled-input {
+      color: $p;
+      background-color: $bg;
+    }
+
+    #save-button {
       width: 100%;
-      margin-bottom: 1rem;
-      padding: 0.6rem 1rem;
+      height: 50px;
 
       outline: none;
       border: none;
 
-      background-color: $p;
-      border-radius: 0.5rem;
-      border: 1px solid $border;
+      background-color: $mt;
+      color: $p;
 
-      font-size: 18px;
-      color: $p-2;
+      padding: 0.6rem 2rem;
+      border-radius: 0.5rem;
+
+      font-size: 16px;
+      font-weight: 600;
+
+      text-align: center;
+      z-index: 1;
       cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.455, 0.03, 0.515, 0.955);
+
+      &:hover {
+        background-color: $bg-2;
+      }
     }
   }
 }
@@ -309,7 +328,7 @@
 
         outline: none;
         background-color: transparent;
-        border-radius: 0.4rem;
+        border-radius: 0.5rem;
         border: 1px solid $border;
 
         font-size: 18px;

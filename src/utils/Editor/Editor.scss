@@ -2,17 +2,27 @@
 
 .quill {
   width: 100%;
-  height: 100%;
+  height: max-content;
+  margin-bottom: 1rem;
 
-  color: $p;
+  border-radius: 0.4rem;
+  border: 1px solid $border;
+
+  padding: 1rem;
 
   .ql-toolbar {
-    background-color: $p;
-    border-radius: 2rem;
+    background-color: $mt;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+    border-radius: 0.8rem;
+
     display: flex;
     align-items: start;
     justify-content: start;
-    border: 0;
+
+    font-weight: 300;
+    font-size: 16px;
+
+    color: $p;
 
     button {
       height: 30px;
@@ -34,32 +44,34 @@
     width: 100%;
     height: 100%;
     outline: none;
-
-    color: $p;
-    font-size: 18px;
+    font-weight: 400;
+    font-size: 16px;
     border: 0;
     border-radius: 0 0 0.4rem 0.4rem;
+    z-index: 999;
   }
 
   .ql-editor {
     padding: 0;
-    margin: 0;
     overflow-x: hidden;
+    margin-bottom: 3rem;
 
     p {
-      font-size: 18px;
+      font-size: 16px;
       font-style: normal;
-      font-weight: 400;
+      font-weight: 300;
       letter-spacing: -0.2px;
       line-height: 2em;
 
       color: $p;
       text-decoration: none;
+      margin-bottom: 1rem;
+
     }
 
     blockquote {
       border-left: 5px solid #e2e2e2;
-      margin-bottom: 10px;
+      margin-bottom: 8px;
       padding: 10px 20px;
       font-size: 22px;
       line-height: 22px;
@@ -67,16 +79,14 @@
 
     ul,
     ol {
-
-
       &::before {
         list-style: none;
         list-style-type: none;
       }
 
       li {
-        margin-left: 50px;
-        font-size: 18px;
+        margin-left: 40px;
+        font-size: 16px;
 
         font-weight: 300;
         letter-spacing: -0.2px;
@@ -90,10 +100,10 @@
 
     strong {
 
-      font-size: 18px;
+      font-size: 16px;
       font-weight: 800;
       letter-spacing: -0.2px;
-      line-height: 2em;
+      line-height: 8px;
 
       color: $p;
       text-decoration: none;
@@ -134,10 +144,10 @@
 
     h3 {
       margin-top: 0;
-      margin-bottom: 24px;
+      margin-bottom: 8px;
       font-size: 20px;
       font-weight: 500;
-      line-height: 1.3;
+      line-height: 1;
     }
 
     h4 {
@@ -173,11 +183,10 @@
   }
 
   .ql-editor.ql-blank::before {
-    font-weight: 400;
     padding: 0;
     font-style: normal;
-    font-size: 21px;
-    line-height: 1.58;
+    font-weight: 300;
+    font-size: 16px;
     letter-spacing: -.003em;
 
     color: $p;
@@ -229,10 +238,11 @@
 
 .body-post {
   width: 100%;
+  padding: 0 250px;
   word-wrap: break-word;
 
   p {
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 400;
     letter-spacing: -0.2px;
     line-height: 2em;
@@ -253,7 +263,7 @@
   ol {
     li {
       margin-left: 50px;
-      font-size: 18px;
+      font-size: 16px;
       list-style: disc;
       font-weight: 400;
       letter-spacing: -0.2px;
@@ -265,7 +275,7 @@
   }
 
   strong {
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 800;
     letter-spacing: -0.2px;
     line-height: 2em;
@@ -338,8 +348,8 @@
   }
 
   a {
-    text-decoration: none;
-
+    text-decoration: underline;
+    color: $p;
 
     &:visited {
       text-decoration: line-through;
@@ -378,8 +388,8 @@
     font-weight: 400;
 
     text-decoration: none;
-    color: $s;
-    opacity: 1;
+    color: $p;
+    opacity: .7;
 
     overflow: hidden;
     text-overflow: ellipsis;

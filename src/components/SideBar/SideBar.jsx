@@ -1,34 +1,43 @@
 import React from 'react';
+import { Blog } from '../../context/Context';
 import { NavLink } from "react-router-dom";
-import { GrHomeRounded } from "react-icons/gr";
-import { RxDashboard } from "react-icons/rx";
-import { IoCreateOutline } from "react-icons/io5";
-import { MdOutlineTopic } from "react-icons/md";
+import { GoHomeFill } from "react-icons/go";
+import { MdSpaceDashboard } from "react-icons/md";
+import { IoCreate } from "react-icons/io5";
+import { MdCategory } from "react-icons/md";
 
 import './SideBar.scss';
 
 const SideBar = () => {
+    const { currentUser } = Blog();
+
     return (
         <aside className="sidebar">
             <ul >
                 <li>
                     <NavLink to={'/'}>
-                        <GrHomeRounded />
+                        <GoHomeFill size={22} />
+                        Inicio
                     </NavLink>
                 </li>
+
                 <li>
                     <NavLink to={`/dashboard`}>
-                        < RxDashboard />
+                        <MdSpaceDashboard size={22} />
+                        Dashboard
                     </NavLink>
                 </li>
                 <li>
                     <NavLink to={'/post/create'}>
-                        <IoCreateOutline />
+                        <IoCreate size={22} />
+                        Publicar
                     </NavLink>
                 </li>
+
                 <li>
                     <NavLink to={'/allTopics'}>
-                        <MdOutlineTopic />
+                        <MdCategory size={22} />
+                        Topicos
                     </NavLink>
                 </li>
             </ul>

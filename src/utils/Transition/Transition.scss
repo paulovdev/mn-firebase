@@ -6,8 +6,8 @@
     left: 0;
 
     width: 100%;
-    height: 100vh;
-    background-color: $p;
+    height: 800vh;
+    background-color: $mt;
     transform-origin: bottom;
     transform: perspective(1500);
     z-index: 999;
@@ -19,8 +19,8 @@
     left: 0;
 
     width: 100%;
-    height: 100vh;
-    background-color: $p;
+    height: 800vh;
+    background-color: $mt;
     transform-origin: top;
     transform: perspective(1500);
     z-index: 999;

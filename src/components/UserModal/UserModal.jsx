@@ -1,11 +1,10 @@
 import React, { useState, useRef, useEffect } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
-import { LuUser } from "react-icons/lu";
 import { motion } from "framer-motion";
-import { TbLogout2 } from "react-icons/tb";
 import { toast } from "react-toastify";
 import { signOut } from "firebase/auth";
 import { auth } from "../../firebase/Config";
+
 import "./UserModal.scss";
 import { Blog } from "../../context/Context";
 
@@ -69,17 +68,10 @@ const UserModal = () => {
             className="profile-button"
             onClick={handleButtonClick}
           >
-            <LuUser />
             Perfil
           </NavLink>
 
-          <div
-            className="border-top"
-            style={{ width: "100%", height: "1px", background: "#ffffff22" }}
-          ></div>
-
           <button onClick={() => { logout(); handleButtonClick(); }} className="profile-button">
-            <TbLogout2 />
             Sair
           </button>
         </motion.div>
