@@ -40,6 +40,7 @@
         height: 500px;
         border-radius: 0.5rem;
         border: 1px solid $border;
+        background-color: $bg-2;
         margin-bottom: 2rem;
       }
     }
@@ -49,7 +50,7 @@
       padding: 0.3rem 0.8rem;
       border-radius: 0.5rem;
       background-color: $mt;
-      margin: 0;
+
 
       font-size: 12px;
       font-weight: 600;

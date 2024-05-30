@@ -259,7 +259,40 @@
     line-height: 22px;
   }
 
-  ul,
+  pre {
+    display: inline-flex;
+
+    max-width: 100%;
+    min-width: 100px;
+
+    white-space: pre;
+    -webkit-overflow-scrolling: touch;
+    overflow-x: scroll;
+
+    padding: 0.5rem;
+
+    border: 1px solid $s;
+    border-radius: 0.4rem;
+    background-color: $mt;
+  }
+
+  code {
+    font-family: monospace;
+    background-color: none;
+  }
+
+  p>code,
+  li>code,
+  dd>code,
+  td>code {
+    word-wrap: break-word;
+    box-decoration-break: clone;
+    border-radius: .4rem;
+
+    background: rgb(31, 96, 161);
+    background-color: rgb(31, 96, 161);
+  }
+
   ol {
     li {
       margin-left: 50px;

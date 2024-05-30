@@ -24,10 +24,12 @@ import { Transition } from '../../utils/Transition/Transition';
 const Dashboard = () => {
   const { currentUser, userLoading } = Blog();
   const [loading, setLoading] = useState(false);
+  const [skeleton, setSkeleton] = useState(false);
   const [userPosts, setUserPosts] = useState([]);
 
   useEffect(() => {
     const fetchUserPosts = async () => {
+      setSkeleton(true);
       setLoading(true);
       try {
         const q = query(
@@ -42,9 +44,12 @@ const Dashboard = () => {
             ...doc.data(),
           }));
           setUserPosts(posts);
+
+          setLoading(false);
           setTimeout(() => {
-            setLoading(false);
-          }, 1000);
+            setSkeleton(false);
+          }, 800);
+
         });
         return () => unsubscribe();
       } catch (error) {
@@ -68,69 +73,65 @@ const Dashboard = () => {
 
   return (
     <>
-      {userLoading && loading ? (
-        <Loading />
-      ) : (
-        <section id="dashboard">
-          <div className="container">
-            <h1>Dashboard</h1>
-            <p>Gerencie seus posts</p>
-          </div>
+      <section id="dashboard">
+        <div className="container">
+          <h1>Dashboard</h1>
+          <p>Gerencie seus posts</p>
+        </div>
 
-          <div className="posts">
-            {loading ? (
-              Array(3).fill().map((_, index) => (
-                <div className="post-dashboard" key={index}>
-                  <div className="background">
-                    <Skeleton height={150} />
-                  </div>
-                  <div className="text">
-                    <Skeleton width={250} height={10} />
-                  </div>
-                  <div className="actions">
-                    <Skeleton width={40} height={30} />
-                    <Skeleton width={40} height={30} />
-                    <Skeleton width={40} height={30} />
-                  </div>
+        <div className="posts">
+          {skeleton ? (
+            Array(3).fill().map((_, index) => (
+              <div className="post-dashboard" key={index}>
+                <div className="background">
+                  <Skeleton height={350} />
                 </div>
-              ))
-            ) : userPosts.length === 0 ? (
-              <div className="no-result">
-                <p>nenhum post encontrado.</p>
-                <Link to="/post/create">criar primeiro post</Link>
+                <div className="text">
+                  <Skeleton width={250} height={10} />
+                </div>
+                <div className="actions">
+                  <Skeleton width={40} height={30} />
+                  <Skeleton width={40} height={30} />
+                  <Skeleton width={40} height={30} />
+                </div>
               </div>
-            ) : (
-              userPosts.map((post) => (
-                <div className="post-dashboard" key={post.id}>
-                  <div className="background">
-                    <img src={post.postImg} alt="" />
-                  </div>
-                  <div className="text">
-                    <h1>{post.title}</h1>
-                  </div>
-                  <div className="actions">
-                    <li>
-                      <Link to={`/post/${post.id}`}>
-                        <MdOutlineVisibility size={18} />
-                      </Link>
-                    </li>
-                    <li>
-                      <Link to={`/editPost/${post.id}`}>
-                        <MdEdit size={18} />
-                      </Link>
-                    </li>
-                    <li>
-                      <button onClick={() => handleDelete(post.id)}>
-                        <MdDeleteOutline size={18} />
-                      </button>
-                    </li>
-                  </div>
+            ))
+          ) : userPosts.length === 0 ? (
+            <div className="no-result">
+              <p>nenhum post encontrado.</p>
+              <Link to="/post/create">criar primeiro post</Link>
+            </div>
+          ) : (
+            userPosts.map((post) => (
+              <div className="post-dashboard" key={post.id}>
+                <div className="background">
+                  <img src={post.postImg} alt="" />
                 </div>
-              ))
-            )}
-          </div>
-        </section>
-      )}
+                <div className="text">
+                  <h1>{post.title}</h1>
+                </div>
+                <div className="actions">
+                  <li>
+                    <Link to={`/post/${post.id}`}>
+                      <MdOutlineVisibility size={18} />
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to={`/editPost/${post.id}`}>
+                      <MdEdit size={18} />
+                    </Link>
+                  </li>
+                  <li>
+                    <button onClick={() => handleDelete(post.id)}>
+                      <MdDeleteOutline size={18} />
+                    </button>
+                  </li>
+                </div>
+              </div>
+            ))
+          )}
+        </div>
+      </section>
     </>
   );
 };

@@ -1,28 +1,30 @@
 import React, { useEffect, useState } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
+import { Blog } from "../../context/Context";
 import { doc, getDoc, collection, query, where, onSnapshot } from "firebase/firestore";
 import { db } from "../../firebase/Config";
-import { readTime } from "../../utils/ReadTime";
 
 import { toast } from "react-toastify";
-import ScrollTop from "../../utils/ScrollTop/ScrollTop";
+
 import { MdEdit } from "react-icons/md";
 import { ProgressBar } from "../../utils/ProgressBar/ProgressBar";
 import { FaRegComments } from "react-icons/fa6";
 import { FiShare2 } from "react-icons/fi";
 import Skeleton from 'react-loading-skeleton';
 
-import { Blog } from "../../context/Context";
-import { Transition } from "../../utils/Transition/Transition";
-import UserComments from '../../components/UserComments/UserComments'
-import ScrollDown from "../../utils/ScrollDown/ScrollDown";
+import UserComments from './Actions/UserComments/UserComments'
 
+import ScrollTop from "../../utils/ScrollTop/ScrollTop";
+import { readTime } from "../../utils/ReadTime";
+import ScrollDown from "../../utils/ScrollDown/ScrollDown";
+import { Transition } from "../../utils/Transition/Transition";
 import "./Post.scss";
 
 const Post = () => {
   const { currentUser } = Blog();
   const { postId } = useParams();
   const [loading, setLoading] = useState(false);
+  const [skeleton, setSkeleton] = useState(false);
   const [post, setPost] = useState({});
   const [user, setUser] = useState({});
   const [comments, setComments] = useState([]);
@@ -30,6 +32,7 @@ const Post = () => {
 
   useEffect(() => {
     const fetchPost = async () => {
+      setSkeleton(true);
       setLoading(true);
       try {
         const postRef = doc(db, "posts", postId);
@@ -44,9 +47,12 @@ const Post = () => {
             setUser({ ...userData, id: postData.userId });
           }
         }
+
+        setLoading(false);
         setTimeout(() => {
-          setLoading(false);
-        }, 1000);
+          setSkeleton(false);
+        }, 800);
+
       } catch (error) {
         toast.error(error.message);
       }
@@ -105,15 +111,15 @@ const Post = () => {
 
   return (
     <>
-      {loading ? (
+      {skeleton ? (
         <section id="post-solo">
           <div className="container">
             <div className="image-background">
-              <Skeleton width={900} height={500} />
+              <Skeleton width={948} height={498} />
             </div>
-            <div className="topic-container">
-              <Skeleton width={120} height={20} />
-            </div>
+
+            <Skeleton width={120} height={20} />
+            <br />
             <div className="title-text">
               <Skeleton width={1265} height={30} />
               <Skeleton width={250} height={15} />
@@ -152,8 +158,6 @@ const Post = () => {
             </div>
             <ProgressBar backgroundColor={color} />
           </div>
-          <UserComments postId={postId} comments={comments} />
-          <ScrollTop />
         </section>
       ) : (
         <section id="post-solo">

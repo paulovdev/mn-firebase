@@ -5,7 +5,6 @@ import Context from "./context/Context.jsx";
 import { BrowserRouter } from "react-router-dom";
 import "./index.scss";
 import "react-toastify/dist/ReactToastify.css";
-import "react-tagsinput/react-tagsinput.css";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>

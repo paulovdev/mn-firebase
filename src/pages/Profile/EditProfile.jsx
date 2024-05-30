@@ -2,25 +2,20 @@ import React, { useEffect, useRef, useState } from "react";
 import { toast } from "react-toastify";
 import { FaCamera } from "react-icons/fa";
 import { MdOutlineClose } from "react-icons/md";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { db, storage } from "../../firebase/Config";
 import { doc, updateDoc } from "firebase/firestore";
 import "./Profile.scss";
 
-const EditProfile = ({ getUserData, onClick }) => {
+const EditProfile = ({ getUserData, onClick, onProfileUpdate }) => {
   const imgRef = useRef(null);
-
   const [loading, setLoading] = useState(false);
   const [form, setForm] = useState({
     username: "",
     userImg: "",
     bio: "",
   });
-
-  const openFile = () => {
-    imgRef.current.click();
-  };
 
   useEffect(() => {
     if (getUserData) {
@@ -30,8 +25,27 @@ const EditProfile = ({ getUserData, onClick }) => {
     }
   }, [getUserData]);
 
+  const openFile = () => {
+    imgRef.current.click();
+  };
+
+  const handleImageChange = (e) => {
+    if (e.target.files && e.target.files.length > 0) {
+      setForm({ ...form, userImg: e.target.files[0] });
+    }
+  };
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setForm({ ...form, [name]: value });
+  };
+
   const saveForm = async (e) => {
     e.preventDefault();
+    if (!form.username) {
+      toast.error("Por favor, coloque seu nome.");
+      return;
+    }
 
     setLoading(true);
 
@@ -43,7 +57,6 @@ const EditProfile = ({ getUserData, onClick }) => {
         imageUrl = await getDownloadURL(storageRef);
       }
 
-
       const docRef = doc(db, "users", getUserData?.userId);
       await updateDoc(docRef, {
         bio: form.bio,
@@ -52,55 +65,49 @@ const EditProfile = ({ getUserData, onClick }) => {
       });
 
       toast.success("Perfil atualizado com sucesso!");
+
+      // Notify the parent component about the profile update
+      onProfileUpdate({
+        ...getUserData,
+        bio: form.bio,
+        username: form.username,
+        userImg: imageUrl,
+      });
+
+      onClick(); // Close the modal
     } catch (error) {
-      toast.error(error.message);
-    }
-    finally {
+      toast.error("Erro ao atualizar perfil: " + error.message);
+    } finally {
       setLoading(false);
     }
   };
 
   return (
-
-    <motion.form onSubmit={saveForm}
-    >
+    <motion.form onSubmit={saveForm} className="edit-profile-form">
       <div className="close-edit">
-        <MdOutlineClose
-          className="close-svg"
-          onClick={onClick}
-          size={32}
-        />
+        <MdOutlineClose className="close-svg" onClick={onClick} size={32} />
       </div>
 
-
-      <div className="image-profile">
+      <div className="image-profile" onClick={openFile} role="button" tabIndex={0}>
         <img
           width={50}
-          src={form.userImg ? form.userImg : "/profile.jpg"}
+          src={form.userImg instanceof File ? URL.createObjectURL(form.userImg) : form.userImg || "/profile.jpg"}
           alt="profile-img"
-          onClick={openFile}
         />
-        <FaCamera onClick={openFile} />
+        <FaCamera />
       </div>
 
-
-
       <input
-        onChange={(e) => {
-          if (e.target.files && e.target.files.length > 0) {
-            setForm({ ...form, userImg: e.target.files[0] });
-          }
-        }}
+        onChange={handleImageChange}
         accept="image/jpg, image/png, image/jpeg"
         ref={imgRef}
         type="file"
         hidden
       />
 
-
-
       <input
-        onChange={(e) => setForm({ ...form, username: e.target.value })}
+        name="username"
+        onChange={handleInputChange}
         value={form.username}
         type="text"
         placeholder="Seu nome"
@@ -110,7 +117,8 @@ const EditProfile = ({ getUserData, onClick }) => {
       />
 
       <textarea
-        onChange={(e) => setForm({ ...form, bio: e.target.value })}
+        name="bio"
+        onChange={handleInputChange}
         value={form.bio}
         type="text"
         placeholder="Biografia"
@@ -119,17 +127,18 @@ const EditProfile = ({ getUserData, onClick }) => {
         inputMode="text"
       />
 
-      <input type="text" id="disabled-input" disabled readOnly value={getUserData?.email} />
+      <input
+        type="text"
+        id="disabled-input"
+        disabled
+        readOnly
+        value={getUserData?.email}
+      />
 
-      {!loading ? (
-        <button id="save-button" type="submit">Salvar</button>
-      ) : (
-        <button id="save-button" disabled type="submit">
-          Salvando...
-        </button>
-      )}
+      <button id="save-button" type="submit" disabled={loading}>
+        {loading ? "Salvando..." : "Salvar"}
+      </button>
     </motion.form>
-
   );
 };
 

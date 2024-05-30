@@ -10,8 +10,8 @@ import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { IoImageOutline } from "react-icons/io5";
 import { FaSave } from "react-icons/fa";
 import ScrollTop from "../../utils/ScrollTop/ScrollTop";
-import TopicInput from "../../components/TopicInput/TopicInput";
-import topicsData from "../../components/TopicInput/TopicsData";
+import TopicInput from "../../components/TopicsContainer/TopicInput/TopicInput";
+import topicsData from "../../data/TopicsData";
 import StepIndicators from "../../components/StepIndicators/StepIndicators";
 import { Transition } from '../../utils/Transition/Transition';
 
@@ -50,7 +50,6 @@ const CreatePost = () => {
     setLoading(true);
     try {
       if (!isTitleValid || !isPhotoValid || !isDescValid) {
-        toast.error("Preencha os campos obrigatórios!!!");
         setLoading(false);
         return;
       }

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import Loading from "../../components/Loading/Loading";
 import EditProfile from "./EditProfile";
-import UserFollow from "../../components/UserFollow/UserFollow";
+import UserFollow from "../Post/Actions/UserFollow/UserFollow";
 import { motion } from 'framer-motion';
 import { doc, getDoc, collection, query, getDocs } from "firebase/firestore";
 import { Blog } from "../../context/Context";
@@ -13,12 +13,11 @@ import { Transition } from "../../utils/Transition/Transition";
 import "./Profile.scss";
 
 const Profile = () => {
-  const { currentUser, allUsers } = Blog();
+  const { currentUser } = Blog();
   const { userId } = useParams();
   const [user, setUser] = useState({});
   const [loading, setLoading] = useState(false);
   const [modal, setModal] = useState(false);
-  const [userData, setUserData] = useState(null);
   const [followersCount, setFollowersCount] = useState(0);
 
   const isAuthor = currentUser && currentUser.uid === userId;
@@ -33,6 +32,9 @@ const Profile = () => {
           const userData = userSnap.data();
           setUser(userData);
           await fetchFollowersCount();
+        } else {
+          setUser(null);
+          toast.error("User does not exist.");
         }
       } catch (error) {
         toast.error(error.message);
@@ -43,11 +45,6 @@ const Profile = () => {
     fetchUserData();
   }, [userId]);
 
-  useEffect(() => {
-    const foundUser = allUsers.find((user) => user.id === userId);
-    setUserData(foundUser);
-  }, [allUsers, userId]);
-
   const fetchFollowersCount = async () => {
     try {
       const followersQuery = query(collection(db, "users", userId, "followers"));
@@ -56,6 +53,10 @@ const Profile = () => {
     } catch (error) {
       toast.error(error.message);
     }
+  };
+
+  const handleProfileUpdate = (updatedUser) => {
+    setUser(updatedUser);
   };
 
   const { username, userImg, bio } = user;
@@ -85,7 +86,8 @@ const Profile = () => {
                       >
                         <EditProfile
                           onClick={() => setModal(!modal)}
-                          getUserData={userData}
+                          getUserData={user}
+                          onProfileUpdate={handleProfileUpdate}
                         />
                       </motion.div>
                     )}

@@ -6,7 +6,7 @@ import { Transition } from "../../utils/Transition/Transition";
 
 import './FirstHome.scss'
 const FirstHome = () => {
-  const { currentUser, allUsers } = Blog();
+  const { currentUser} = Blog();
 
   return (
     <>

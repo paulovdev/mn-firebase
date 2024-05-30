@@ -63,7 +63,6 @@ const Context = ({ children }) => {
   return (
     <BlogContext.Provider
       value={{
-
         currentUser,
         setCurrentUser,
         allUsers,
@@ -85,7 +84,6 @@ const Context = ({ children }) => {
         getData,
         authModel,
         setAuthModel,
-
         comments,
         addComment,
       }}

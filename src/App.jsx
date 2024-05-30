@@ -1,26 +1,28 @@
+import { useEffect } from "react";
 import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 import { Blog } from "./context/Context";
 import { ToastContainer } from "react-toastify";
-import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
+import { SkeletonTheme } from 'react-loading-skeleton';
 
 import 'react-loading-skeleton/dist/skeleton.css';
 
-import { toast } from "react-toastify";
 import { AnimatePresence } from "framer-motion";
 
-import Navbar from "./components/Navbar/Navbar";
-import Login from "./pages/Login/Login";
-import Register from "./pages/Register/Register";
+import Navbar from "./components/Navigation/Navbar/Navbar";
+import SideBar from './components/Navigation/SideBar/SideBar'
+
+import Login from "./pages/Registration/Login/Login";
+import Register from "./pages/Registration/Register/Register";
 
 import Home from "./pages/Home/Home";
-import SideBar from './components/SideBar/SideBar'
+
 import Profile from "./pages/Profile/Profile";
 /* import Footer from "./components/Footer/Footer"; */
 import CreatePost from "./pages/CreatePost/CreatePost";
 import EditPost from "./pages/EditPost/EditPost";
 import Post from "./pages/Post/Post";
 import Dashboard from "./pages/Dashboard/Dashboard";
-
+import AllTopics from "./components/TopicsContainer/AllTopics/AllTopics"
 /* 
 
 import About from "./pages/About/About";
@@ -30,15 +32,26 @@ import CreatePost from "./pages/CreatePost/CreatePost";
 
 import Search from "./pages/Search/Search";
 import TopicPost from "./pages/TopicPost/TopicPost";
-import TopicSelection from "./pages/TopicSelection/TopicSelection";
 import FirstHome from "./pages/FirstHome/FirstHome";
+
 const App = () => {
   const { currentUser } = Blog();
   const location = useLocation();
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    const overflow = () => {
+      window.document.body.style.overflowY = "hidden"
+      setTimeout(() => {
+        window.document.body.style.overflowY = "auto"
+      }, 1000);
+    }
+    overflow()
+  }, [location.pathname]);
+
   return (
     <>
-      <SkeletonTheme baseColor="#3a3a3a" highlightColor="#828282">
+      <SkeletonTheme baseColor="#3a3a3a" highlightColor="#262626">
 
         <Navbar />
         {currentUser && < SideBar />}
@@ -56,7 +69,7 @@ const App = () => {
             <Route path="/post/:postId" element={<Post />} />
             <Route path="/editPost/:uid" element={<EditPost />} />
             <Route path="/topic/:postId" element={<TopicPost />} />
-            <Route path="/allTopics" element={<TopicSelection />} />
+            <Route path="/allTopics" element={<AllTopics />} />
             <Route path="/search" element={<Search />} />
             <Route
               path="*"
