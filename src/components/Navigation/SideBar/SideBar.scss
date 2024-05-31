@@ -142,7 +142,8 @@ aside:hover~section {
         ul {
             flex-direction: row;
             align-items: center;
-            gap: 1rem;
+            justify-content: center;
+            gap: 3rem;
 
             li {
                 .side-container {
