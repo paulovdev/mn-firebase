@@ -185,9 +185,10 @@
 .loading-container {
   position: relative;
   width: 100%;
-
+  height: 75px;
+  top: 0;
   display: flex;
-  align-items: center;
+  align-items: end;
   justify-content: center;
 
   .loading {
@@ -211,7 +212,7 @@
 
 @media (max-width: 809px) {
   #all-posts {
-    gap: 1.5rem;
+    gap: 3rem;
 
     .post-container {
       flex-direction: column;
@@ -221,7 +222,7 @@
       .post-left-content {
         img {
           width: 100%;
-          height: auto;
+          height: 250px;
         }
       }
 

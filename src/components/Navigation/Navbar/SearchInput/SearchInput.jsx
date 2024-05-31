@@ -5,6 +5,7 @@ import './SearchInput.scss';
 
 const SearchInput = () => {
     const [search, setSearch] = useState("");
+    const [showButton, setShowButton] = useState(true);
     const navigate = useNavigate();
 
     const handleSubmit = (e) => {
@@ -15,12 +16,24 @@ const SearchInput = () => {
         }
     };
 
+    const handleShowButton = () => {
+        setShowButton(!showButton)
+    }
+
     return (
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className={!showButton ? "active" : ""}>
             <div className="search-input">
-                <button type="submit">
+
+                <button onClick={handleShowButton}  className="bt1">
                     <IoIosSearch size={22} />
                 </button>
+
+                {!handleShowButton &&
+                    <button type="submit" className="bt2">
+                        <IoIosSearch size={22} />
+                    </button>
+                }
+
                 <input
                     type="text"
                     placeholder="Pesquisar"
@@ -28,7 +41,7 @@ const SearchInput = () => {
                     onChange={(e) => setSearch(e.target.value)}
                 />
             </div>
-        </form>
+        </form >
     );
 };
 

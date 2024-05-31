@@ -4,12 +4,11 @@ import { GoHomeFill } from "react-icons/go";
 import { IoMdCube, IoMdCloudUpload } from "react-icons/io";
 import { MdCategory } from "react-icons/md";
 import './SideBar.scss';
-import SearchInput from '../../../pages/Search/SearchInput/SearchInput';
 
 const SideBar = () => {
     return (
         <aside id="sidebar">
-            <SearchInput />
+           
             <ul>
                 <li>
                     <NavLink exact to="/" activeClassName="active" className="side-container">

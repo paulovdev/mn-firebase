@@ -7,7 +7,7 @@
 
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 2rem;
 
   .post-container {
     border-radius: 0.5rem;
@@ -173,7 +173,7 @@
   .grid-container {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 1rem;
+    gap: 2rem;
 
     .post-container {
       height: 250px;
