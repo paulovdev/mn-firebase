@@ -19,7 +19,7 @@ const SearchInput = () => {
         <form onSubmit={handleSubmit}>
             <div className="search-input">
                 <button type="submit">
-                    <IoIosSearch size={20} />
+                    <IoIosSearch size={22} />
                 </button>
                 <input
                     type="text"

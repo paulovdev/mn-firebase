@@ -2,46 +2,41 @@
 
 form {
     .search-input {
+        width: 50px;
+
         background-color: $mt;
         border-radius: 0.5rem;
-   /*      border: 1px solid $border; */
-
         display: flex;
         align-items: center;
-        justify-content: center;
+        justify-content: start;
+        transition: width 0.3s cubic-bezier(0.455, 0.03, 0.515, 0.955);
 
         button {
-            width: 35px;
-            height: 35px;
-
+            width: 50px;
+            height: 50px;
             outline: none;
             border: none;
-
             background-color: transparent;
-
-
-            color: $p;
+            color: $p; 
             cursor: pointer;
-
             display: flex;
             align-items: center;
             justify-content: center;
-
         }
 
         input {
-            width: 150px;
-            height: 35px;
-            padding: 0 0 0 1rem;
-
+            width: 0;
+            height: 50px;
             outline: none;
             border: none;
             background-color: transparent;
             border-radius: 0.5rem;
-
             font-size: 14px;
             font-weight: 400;
             color: $p;
+            transition: width 0.3s cubic-bezier(0.455, 0.03, 0.515, 0.955);
+            padding-left: 0;
+            padding-right: 0;
 
             &::placeholder {
                 color: $s;

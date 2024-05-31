@@ -10,9 +10,10 @@ const useSearchPostsAndUser = (search) => {
 
   useEffect(() => {
     const fetchData = async () => {
+      setLoading(true);
+      setSkeleton(true);
       try {
-        setLoading(true);
-        setSkeleton(true);
+
         if (search) {
           const postsCollection = collection(db, "posts");
           const usersCollection = collection(db, "users");

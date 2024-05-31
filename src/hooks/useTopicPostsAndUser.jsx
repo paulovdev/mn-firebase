@@ -7,12 +7,13 @@ const useTopicPostsAndUser = (topicId) => {
   const [posts, setPosts] = useState([]);
   const [users, setUsers] = useState({});
   const [skeleton, setSkeleton] = useState(false);
-  
+
   useEffect(() => {
     const fetchData = async () => {
+      setLoading(true);
+      setSkeleton(true);
       try {
-        setLoading(true);
-        setSkeleton(true);
+
         if (topicId) {
           const postsCollection = collection(db, "posts");
           const usersCollection = collection(db, "users");

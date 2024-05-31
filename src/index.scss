@@ -3,12 +3,12 @@
 $p: #fefefe;
 $p-2: #141414;
 $s: #828282;
-$background: #141414;
+$background: #151515;
 $bg: #868686;
 $border: #262626;
 
-$bg-2: #3a3a3a;
-$mt: #262626;
+$bg-2: #343434;
+$mt: #202020;
 
 $special: #0766e2;
 
@@ -32,6 +32,7 @@ $special: #0766e2;
 body {
   background-color: $background;
   color: $p;
+
 }
 
 button {
@@ -40,7 +41,6 @@ button {
   border: none;
   cursor: pointer;
 }
-
 
 img {
   image-rendering: optimizeSpeed;

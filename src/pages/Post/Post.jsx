@@ -7,7 +7,6 @@ import { db } from "../../firebase/Config";
 import { toast } from "react-toastify";
 
 import { MdEdit } from "react-icons/md";
-import { ProgressBar } from "../../utils/ProgressBar/ProgressBar";
 import { FaRegComments } from "react-icons/fa6";
 import { FiShare2 } from "react-icons/fi";
 import Skeleton from 'react-loading-skeleton';
@@ -156,7 +155,6 @@ const Post = () => {
               <br />
               <Skeleton width={`100%`} count={6} />
             </div>
-            <ProgressBar backgroundColor={color} />
           </div>
         </section>
       ) : (
@@ -221,7 +219,6 @@ const Post = () => {
                 __html: post.desc
               }}
             ></div>
-            <ProgressBar backgroundColor={color} />
 
           </div>
           <UserComments postId={postId} comments={comments} />

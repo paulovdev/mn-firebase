@@ -1,25 +1,49 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import topicsData from '../../../data/TopicsData';
-import { IoIosArrowRoundBack } from "react-icons/io";
+import { IoIosArrowRoundBack, IoIosSearch } from "react-icons/io";
 import { Transition } from '../../../utils/Transition/Transition';
 import './AllTopics.scss'
 
 const AllTopics = () => {
+    const [searchQuery, setSearchQuery] = useState('');
+
+    const handleSearch = (event) => {
+        setSearchQuery(event.target.value);
+    };
+
+    const filteredTopics = topicsData.categories.map(category => ({
+        ...category,
+        topics: category.topics.filter(topic =>
+            topic.toLowerCase().includes(searchQuery.toLowerCase())
+        )
+    })).filter(category => category.topics.length > 0);
+
     return (
-        <div id='all-topics'>
+        <section id='all-topics'>
             <div className="container">
                 <Link to="/" className="back">
                     <IoIosArrowRoundBack size={32} />
                     <p>Voltar</p>
                 </Link>
 
-                <h1>
-                    Topicos
-                </h1>
+                <h1>Topicos</h1>
 
+                <div className="search-input">
+                    <button type="submit">
+                        <IoIosSearch size={20} />
+                    </button>
+                    <input
+                        type="text"
+                        placeholder="Pesquisar tópicos..."
+                        value={searchQuery}
+                        onChange={handleSearch}
+                        className="search-input"
+                    />
+                </div>
+                <br />
                 <ul className='topic-container'>
-                    {topicsData.categories.map((category, index) => (
+                    {filteredTopics.map((category, index) => (
                         <div key={index} className='topic'>
                             <h2>{category.name}</h2>
                             <ul>
@@ -33,7 +57,7 @@ const AllTopics = () => {
                     ))}
                 </ul>
             </div>
-        </div>
+        </section>
     );
 };
 

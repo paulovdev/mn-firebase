@@ -5,6 +5,9 @@ import { readTime } from "../../utils/ReadTime";
 import FormatDate from "../../utils/FormatDate";
 import Skeleton from 'react-loading-skeleton';
 
+import { SiReadme } from "react-icons/si";
+import { FaClock } from "react-icons/fa";
+
 import useSearchPostsAndUser from "../../hooks/useSearchPostsAndUser";
 
 import "./Search.scss";
@@ -70,20 +73,7 @@ const Search = () => {
                   </div>
                   <div className="post-right-content">
                     <span className="topic">{post.topic}</span>
-                    <div className="topic-profile-container">
-                      {user && (
-                        <div className="profile-content">
-                          <img src={user.userImg} alt="" />
-                          <div className="profile-text-wrapper">
-                            <p>{user.username}</p>
-                            <span>|</span>
-                            <p>
-                              <FormatDate date={post.created} />
-                            </p>
-                          </div>
-                        </div>
-                      )}
-                    </div>
+
                     <h1>{post.title}</h1>
                     <div
                       className="body-posts"
@@ -91,7 +81,26 @@ const Search = () => {
                         __html: post.desc.slice(0, 250),
                       }}
                     ></div>
-                    <span>{readTime({ __html: post.desc })} min de leitura</span>
+                    <div className="read-topic">
+
+                      <div className="topic-profile-container">
+                        {user && (
+                          <div className="profile-content">
+                            <img src={user.userImg} alt="" />
+                            <div className="profile-text-wrapper">
+                              <p>{user.username}</p>
+                              <span>•</span>
+                              <p>
+                                <FaClock />
+                                <FormatDate date={post.created} />
+                              </p>
+                            </div>
+                          </div>
+                        )}
+                      </div>
+
+                      <span>< SiReadme /> {readTime({ __html: post.desc })} min de leitura</span>
+                    </div>
                   </div>
                 </Link>
               );

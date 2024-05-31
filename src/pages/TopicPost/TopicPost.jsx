@@ -5,6 +5,8 @@ import useTopicPostsAndUser from "../../hooks/useTopicPostsAndUser";
 import FormatDate from "../../utils/FormatDate";
 import { readTime } from "../../utils/ReadTime";
 
+import { SiReadme } from "react-icons/si";
+import { FaClock } from "react-icons/fa";
 import { IoIosArrowRoundBack } from "react-icons/io";
 
 import Skeleton from 'react-loading-skeleton';
@@ -15,7 +17,7 @@ const TopicPost = () => {
   const { posts, users, loading, skeleton } = useTopicPostsAndUser(postId);
 
   return (
-    <div id="topic-post">
+    <section id="topic-post">
       <div className="container">
         <Link to="/" className="back">
           <IoIosArrowRoundBack size={32} />
@@ -65,20 +67,6 @@ const TopicPost = () => {
                       </div>
                       <div className="post-right-content">
                         <span className="topic">{post.topic}</span>
-                        <div className="topic-profile-container">
-                          {user && (
-                            <div className="profile-content">
-                              <img src={user.userImg} alt="" />
-                              <div className="profile-text-wrapper">
-                                <p>{user.username}</p>
-                                <span>|</span>
-                                <p>
-                                  <FormatDate date={post.created} />
-                                </p>
-                              </div>
-                            </div>
-                          )}
-                        </div>
                         <h1>{post.title}</h1>
                         <div
                           className="body-posts"
@@ -86,7 +74,26 @@ const TopicPost = () => {
                             __html: post.desc.slice(0, 250),
                           }}
                         ></div>
-                        <span>{readTime({ __html: post.desc })} min de leitura</span>
+                        <div className="read-topic">
+
+                          <div className="topic-profile-container">
+                            {user && (
+                              <div className="profile-content">
+                                <img src={user.userImg} alt="" />
+                                <div className="profile-text-wrapper">
+                                  <p>{user.username}</p>
+                                  <span>•</span>
+                                  <p>
+                                    <FaClock />
+                                    <FormatDate date={post.created} />
+                                  </p>
+                                </div>
+                              </div>
+                            )}
+                          </div>
+
+                          <span>< SiReadme /> {readTime({ __html: post.desc })} min de leitura</span>
+                        </div>
                       </div>
                     </Link>
                   );
@@ -96,7 +103,7 @@ const TopicPost = () => {
           </div>
         )}
       </div>
-    </div>
+    </section>
   );
 };
 

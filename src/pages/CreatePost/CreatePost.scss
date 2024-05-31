@@ -4,9 +4,6 @@
   position: relative;
   width: 100%;
   height: 100%;
-  margin: 5rem 0;
-
-  padding: 0 250px 0 400px;
 
   display: flex;
   align-items: center;
@@ -329,6 +326,87 @@
 
       to {
         transform: rotate(360deg);
+      }
+    }
+  }
+}
+
+@media (max-width: 809px) {
+  #create-post {
+    padding: 20px;
+
+    .step-indicator-container {
+      padding: 0;
+      width: 100%;
+      padding: 3rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+    }
+
+    form {
+      padding: 0;
+
+      .step-title,
+      .step-topic,
+      .step-image,
+      .step-color,
+      .step-text {
+        padding: 0;
+
+        h1 {
+          font-size: 22px;
+        }
+
+        p {
+          font-size: 14px;
+          margin-bottom: 1.5rem;
+        }
+
+        input,
+        select {
+          font-size: 16px;
+
+          &::placeholder {
+            font-size: 16px;
+          }
+        }
+      }
+
+      .step-image {
+        .image-select {
+          height: 200px;
+
+          .prf-file,
+          .preview-image {
+            height: 200px;
+          }
+        }
+      }
+
+      .next-prev {
+        gap: 1rem;
+
+        .next,
+        .prev {
+          height: 35px;
+        }
+      }
+
+      .btn {
+        width: 130px;
+        height: 45px;
+        padding: 0.5rem;
+
+        svg {
+          width: 18px;
+          height: 18px;
+        }
+
+        p {
+          font-size: 14px;
+        }
       }
     }
   }

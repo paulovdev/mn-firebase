@@ -1,61 +1,82 @@
 @import '../../../index.scss';
 
-.sidebar {
+#sidebar {
     position: fixed;
-    width: 300px;
+    width: 90px;
     height: 100vh;
-
     top: 0;
     left: 0;
 
-    padding: 3rem 1rem;
+    padding: 2rem 0 0 1rem;
 
-    background-color: transparent;
+    background-color: $background;
     border: 1px solid $border;
+    border-radius: 0 1rem 1rem 0;
 
     display: flex;
-    align-items: flex-start;
-    justify-content: flex-start;
+    align-items: start;
+    justify-content: start;
     flex-direction: column;
+    gap: 2rem;
 
+    transition: all 0.3s cubic-bezier(0.455, 0.03, 0.515, 0.955);
     z-index: 999;
 
     ul {
         list-style: none;
-
         margin: 0;
         padding: 0;
-
         display: flex;
         align-items: flex-start;
+        gap: 0.5rem;
         flex-direction: column;
 
         li {
-            margin-bottom: 1rem;
-            border-radius: 0.5rem;
-
-            a {
-                width: 250px;
-                height: 50px;
-
-                padding: 1rem;
-
-                color: $p;
-                font-size: 14px;
-                text-decoration: none;
-
+            .side-container {
+                width: 50px;
+                margin-bottom: 0.5rem;
                 border-radius: 0.5rem;
-
-                transition: all 0.3s cubic-bezier(0.455, 0.03, 0.515, 0.955);
-
+                overflow: hidden;
                 display: flex;
                 align-items: center;
-                gap: 1rem;
+                justify-content: start;
 
-                svg {
+                transition: width 0.3s cubic-bezier(0.455, 0.03, 0.515, 0.955);
+
+                .side-icon {
+                    width: 50px;
+                    height: 50px;
+                    outline: none;
+                    border: none;
+                    background-color: transparent;
                     color: $p;
-                    opacity: 0.6;
-                    transition: opacity 0.3s;
+
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+
+                    cursor: pointer;
+                }
+
+                .side-text {
+                    width: 0;
+                    height: 50px;
+                    outline: none;
+                    border: none;
+                    background-color: transparent;
+                    border-radius: 0.5rem;
+                    font-size: 14px;
+                    font-weight: 400;
+                    color: $p;
+                    transition: width 0.3s cubic-bezier(0.455, 0.03, 0.515, 0.955);
+                    padding-left: 0;
+                    padding-right: 0;
+                    display: flex;
+                    align-items: center;
+
+                    &::placeholder {
+                        color: $s;
+                    }
                 }
 
                 &:hover {
@@ -64,7 +85,6 @@
                 }
 
                 &.active {
-
                     background-color: $mt;
 
                     svg {
@@ -74,68 +94,112 @@
             }
         }
     }
-}
 
-@media (max-width: 809px) {
-    .sidebar {
-        position: fixed;
-        width: 100%;
-        height: 60px;
+    &:hover {
+        width: 300px;
 
-        top: auto;
-        bottom: 0;
-        background-color: $background;
-        border: 1px solid $border;
+        ul li a {
+            width: 250px;
 
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-direction: row;
-        z-index: 999;
-
-        .logo {
-            padding: 20px 0;
-            text-align: center;
-
-            a {
-                font-family: "PT Serif Caption", serif;
-                font-size: 16px;
-                color: $p;
-                text-decoration: none;
-                display: block;
+            span {
+                text-indent: 0em;
             }
         }
 
+        .search-input {
+            width: 250px;
+
+            input {
+                width: 200px;
+            }
+        }
+
+
+    }
+}
+
+
+
+section {
+    width: calc(100% - 90px) !important;
+    left: 90px !important;
+    padding: 100px 150px !important;
+    transition: all 0.3s cubic-bezier(0.455, 0.03, 0.515, 0.955);
+}
+
+aside:hover~section {
+    width: calc(100% - 300px) !important;
+    left: 300px !important;
+}
+
+@media (max-width: 809px) {
+    #sidebar {
+        width: 100%;
+        height: 60px;
+        top: auto;
+        bottom: 0;
+        left: 0;
+        border-radius: 1rem 1rem 0 0;
+        padding: 0 1rem;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+
         ul {
-            position: relative;
-            list-style: none;
-
-            margin: 0;
-            display: flex;
-            align-items: center;
             flex-direction: row;
-            gap: 5rem;
-
+            align-items: center;
+            gap: 1rem;
 
             li {
-                a {
-                    svg {
-                        width: 26px;
-                        height: 26px;
-                        color: $p;
-                        opacity: .5;
-                        text-decoration: none;
-                        display: block;
+                .side-container {
+                    width: 50px;
+                    height: 50px;
+                    margin-bottom: 0;
+                    margin-right: 0.5rem;
+                    border-radius: 0.5rem;
+
+                    .side-icon {
+                        width: 50px;
+                        height: 50px;
                     }
 
-                    &.active {
-                        svg {
-                            opacity: 1;
-
-                        }
+                    .side-text {
+                        display: none;
                     }
                 }
             }
         }
+
+        &:hover {
+            width: 100%;
+            height: 80px;
+
+            ul li a {
+                width: 50px;
+
+                span {
+                    text-indent: 0em;
+                }
+            }
+
+            .search-input {
+                width: 50px;
+
+                input {
+                    width: 0;
+                }
+            }
+        }
+    }
+
+    section {
+        width: 100% !important;
+        left: 0 !important;
+        padding: 100px 20px !important;
+    }
+
+    aside:hover~section {
+        width: 100% !important;
+        left: 0 !important;
     }
 }
