@@ -117,13 +117,13 @@
 section {
     width: calc(100% - 90px) !important;
     left: 90px !important;
-    padding: 100px 150px !important;
+    padding: 100px 200px !important;
     transition: all 0.3s cubic-bezier(0.455, 0.03, 0.515, 0.955);
 }
 
 aside:hover~section {
-    width: calc(100% - 300px) !important;
-    left: 300px !important;
+    width: calc(100% - 200px) !important;
+    left: 200px !important;
 }
 
 @media (max-width: 809px) {

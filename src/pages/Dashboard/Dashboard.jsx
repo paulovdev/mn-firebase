@@ -24,12 +24,10 @@ import { Transition } from '../../utils/Transition/Transition';
 const Dashboard = () => {
   const { currentUser, userLoading } = Blog();
   const [loading, setLoading] = useState(false);
-  const [skeleton, setSkeleton] = useState(false);
   const [userPosts, setUserPosts] = useState([]);
 
   useEffect(() => {
     const fetchUserPosts = async () => {
-      setSkeleton(true);
       setLoading(true);
       try {
         const q = query(
@@ -44,16 +42,12 @@ const Dashboard = () => {
             ...doc.data(),
           }));
           setUserPosts(posts);
-
-          setLoading(false);
-          setTimeout(() => {
-            setSkeleton(false);
-          }, 800);
-
         });
         return () => unsubscribe();
       } catch (error) {
         console.log("Erro ao buscar postagens de usuários:", error);
+        setLoading(false);
+      } finally {
         setLoading(false);
       }
     };
@@ -64,7 +58,6 @@ const Dashboard = () => {
   const handleDelete = async (postId) => {
     try {
       await deleteDoc(doc(db, "posts", postId));
-      toast.success("Postagem excluída com sucesso");
     } catch (error) {
       console.error("Erro ao excluir postagem:", error);
       toast.error("Ocorreu um erro ao excluir a postagem");
@@ -80,7 +73,7 @@ const Dashboard = () => {
         </div>
 
         <div className="posts">
-          {skeleton ? (
+          {loading ? (
             Array(3).fill().map((_, index) => (
               <div className="post-dashboard" key={index}>
                 <div className="background">

@@ -32,7 +32,6 @@ const Login = () => {
     try {
       await signInWithEmailAndPassword(auth, form.email, form.password);
       navigate("/");
-      toast.success("Logado com sucesso!");
     } catch (error) {
       toast.error(error.message);
     } finally {

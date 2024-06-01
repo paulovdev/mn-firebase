@@ -64,9 +64,6 @@ const EditProfile = ({ getUserData, onClick, onProfileUpdate }) => {
         userImg: imageUrl,
       });
 
-      toast.success("Perfil atualizado com sucesso!");
-
-      // Notify the parent component about the profile update
       onProfileUpdate({
         ...getUserData,
         bio: form.bio,

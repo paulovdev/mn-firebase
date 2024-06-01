@@ -52,7 +52,7 @@ const AllPosts = () => {
                             <div className="profile-content">
                               <img src={user.userImg} alt="" />
                               <div className="profile-text-wrapper">
-                                <p>{user.username}</p>
+                                <p>{user.username.split(" ")[0]}</p>
                                 <span>•</span>
                                 <p>
                                   <FaClock />

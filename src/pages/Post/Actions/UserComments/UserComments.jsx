@@ -98,7 +98,6 @@ const UserComments = ({ postId, comments }) => {
     const handleDeleteComment = async (commentId) => {
         try {
             await deleteDoc(doc(db, "comments", commentId));
-            toast.success("Comentário excluído com sucesso!");
         } catch (error) {
             toast.error("Erro ao excluir o comentário.");
             console.error(error);

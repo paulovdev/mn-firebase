@@ -14,11 +14,11 @@ import useFetchNewPostsAndUser from "../../../hooks/useFetchNewPostsAndUser";
 import "./NewPosts.scss";
 
 const NewPosts = () => {
-  const { posts, users, skeleton } = useFetchNewPostsAndUser();
+  const { posts, users, loading} = useFetchNewPostsAndUser();
 
   return (
     <div id="new-posts">
-      {skeleton ? (
+      {loading ? (
         <>
           <div className="post-container large-post">
             <Skeleton height={300} />
@@ -58,7 +58,7 @@ const NewPosts = () => {
                           <div className="profile-content">
                             <img src={users[post.userId].userImg} alt="" />
                             <div className="profile-text-wrapper">
-                              <p>{users[post.userId].username}</p>
+                              <p>{users[post.userId].username.split(" ")[0]}</p>
                               <span>•</span>
                               <p>
                                 <FaClock />

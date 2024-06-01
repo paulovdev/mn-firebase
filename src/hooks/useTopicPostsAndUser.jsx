@@ -6,12 +6,10 @@ const useTopicPostsAndUser = (topicId) => {
   const [loading, setLoading] = useState(false);
   const [posts, setPosts] = useState([]);
   const [users, setUsers] = useState({});
-  const [skeleton, setSkeleton] = useState(false);
-
+  
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
-      setSkeleton(true);
       try {
 
         if (topicId) {
@@ -41,14 +39,11 @@ const useTopicPostsAndUser = (topicId) => {
           setPosts([]);
           setUsers({});
         }
-
-        setLoading(false);
-        setTimeout(() => {
-          setSkeleton(false);
-        }, 800);
-
       } catch (error) {
         console.error("Error fetching data:", error);
+        setLoading(false);
+
+      } finally {
         setLoading(false);
       }
     };
@@ -56,7 +51,7 @@ const useTopicPostsAndUser = (topicId) => {
     fetchData();
   }, [topicId]);
 
-  return { posts, users, skeleton };
+  return { posts, users, loading };
 };
 
 export default useTopicPostsAndUser;

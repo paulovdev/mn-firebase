@@ -16,7 +16,7 @@ import { Transition } from "../../utils/Transition/Transition";
 const Search = () => {
   const location = useLocation();
   const search = new URLSearchParams(location.search).get("q");
-  const { posts, users, skeleton } = useSearchPostsAndUser(search);
+  const { posts, users, loading } = useSearchPostsAndUser(search);
 
   return (
     <section id="search">
@@ -27,10 +27,10 @@ const Search = () => {
         </Link>
 
         <h1>
-          Encontramos {skeleton ? "..." : posts.length} resultado{posts.length === 1 ? "" : "s"} para "{search}":
+          Encontramos {loading ? "..." : posts.length} resultado{posts.length === 1 ? "" : "s"} para "{search}":
         </h1>
 
-        {skeleton ? (
+        {loading ? (
           <div id="search-posts">
             <Link to="/" className="post-container">
               <div className="post-left-content">
@@ -88,7 +88,7 @@ const Search = () => {
                           <div className="profile-content">
                             <img src={user.userImg} alt="" />
                             <div className="profile-text-wrapper">
-                              <p>{user.username}</p>
+                              <p>{user.username.split(" ")[0]}</p>
                               <span>•</span>
                               <p>
                                 <FaClock />

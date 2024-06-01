@@ -75,11 +75,10 @@ const UserFollow = ({ userId }) => {
     try {
       const notificationRef = doc(db, "users", userId, "notifications", currentUser.uid);
       await setDoc(notificationRef, {
-        timestamp:new Date().getTime(),
+        timestamp: new Date().getTime(),
         userId: currentUser.uid
       });
       setLoading(false);
-      toast.success("Notificação enviada");
     } catch (error) {
       toast.error(error.message);
       setLoading(false);
@@ -91,7 +90,6 @@ const UserFollow = ({ userId }) => {
     try {
       const notificationRef = doc(db, "users", userId, "notifications", currentUser.uid);
       await deleteDoc(notificationRef);
-      toast.success("Notificação excluída");
     } catch (error) {
       toast.error(error.message);
       setLoading(false);

@@ -21,7 +21,6 @@ const UserModal = () => {
     try {
       await signOut(auth);
       navigate("/login");
-      toast.success("O usuário foi desconectado");
     } catch (error) {
       toast.error(error.message);
     }

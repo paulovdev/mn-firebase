@@ -14,7 +14,7 @@ import "./TopicPost.scss";
 
 const TopicPost = () => {
   const { postId } = useParams();
-  const { posts, users, loading, skeleton } = useTopicPostsAndUser(postId);
+  const { posts, users, loading } = useTopicPostsAndUser(postId);
 
   return (
     <section id="topic-post">
@@ -27,7 +27,7 @@ const TopicPost = () => {
         <h1>
           Encontramos {loading ? "..." : posts.length} resultado{posts.length === 1 ? "" : "s"} para "{postId}":
         </h1>
-        {skeleton ? (
+        {loading ? (
           <div id="topic-posts">
             <Link to="/" className="post-container">
               <div className="post-left-content">
@@ -81,7 +81,7 @@ const TopicPost = () => {
                               <div className="profile-content">
                                 <img src={user.userImg} alt="" />
                                 <div className="profile-text-wrapper">
-                                  <p>{user.username}</p>
+                                  <p>{user.username.split(" ")[0]}</p>
                                   <span>•</span>
                                   <p>
                                     <FaClock />

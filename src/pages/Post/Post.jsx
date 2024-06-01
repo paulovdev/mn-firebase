@@ -23,7 +23,6 @@ const Post = () => {
   const { currentUser } = Blog();
   const { postId } = useParams();
   const [loading, setLoading] = useState(false);
-  const [skeleton, setSkeleton] = useState(false);
   const [post, setPost] = useState({});
   const [user, setUser] = useState({});
   const [comments, setComments] = useState([]);
@@ -31,7 +30,6 @@ const Post = () => {
 
   useEffect(() => {
     const fetchPost = async () => {
-      setSkeleton(true);
       setLoading(true);
       try {
         const postRef = doc(db, "posts", postId);
@@ -46,14 +44,10 @@ const Post = () => {
             setUser({ ...userData, id: postData.userId });
           }
         }
-
-        setLoading(false);
-        setTimeout(() => {
-          setSkeleton(false);
-        }, 800);
-
       } catch (error) {
         toast.error(error.message);
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -110,7 +104,7 @@ const Post = () => {
 
   return (
     <>
-      {skeleton ? (
+      {loading ? (
         <section id="post-solo">
 
           <div className="container">
@@ -167,7 +161,7 @@ const Post = () => {
             </div>
 
             <span className="topic">{topic}</span>
-            
+
             <div className="title-text">
               <h1>{title}</h1>
               <p> {created}</p>

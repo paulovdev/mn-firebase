@@ -6,12 +6,10 @@ const useSearchPostsAndUser = (search) => {
   const [loading, setLoading] = useState(false);
   const [posts, setPosts] = useState([]);
   const [users, setUsers] = useState({});
-  const [skeleton, setSkeleton] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
-      setSkeleton(true);
       try {
 
         if (search) {
@@ -22,13 +20,12 @@ const useSearchPostsAndUser = (search) => {
           const fetchedPosts = [];
           const fetchedUsers = {};
 
-    
+
 
           for (const postDoc of postsSnapshot.docs) {
             const postData = postDoc.data();
             const postId = postDoc.id;
 
-            // Verifica se o título do post inclui a pesquisa (case insensitive)
             if (postData.title.toLowerCase().includes(search.toLowerCase())) {
               const userDoc = await getDoc(doc(usersCollection, postData.userId));
               const userData = userDoc.data();
@@ -44,12 +41,11 @@ const useSearchPostsAndUser = (search) => {
           setPosts([]);
           setUsers({});
         }
-        setLoading(false);
-        setTimeout(() => {
-          setSkeleton(false);
-        }, 800);
+
       } catch (error) {
         console.error("Error fetching data:", error);
+        setLoading(false);
+      } finally {
         setLoading(false);
       }
     };
@@ -57,7 +53,7 @@ const useSearchPostsAndUser = (search) => {
     fetchData();
   }, [search]);
 
-  return { posts, users, skeleton };
+  return { posts, users, loading };
 };
 
 export default useSearchPostsAndUser;

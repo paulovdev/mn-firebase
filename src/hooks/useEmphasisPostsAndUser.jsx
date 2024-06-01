@@ -7,13 +7,10 @@ const useEmphasisPostsAndUser = () => {
     const [loading, setLoading] = useState(false);
     const [posts, setPosts] = useState([]);
     const [users, setUsers] = useState({});
-    const [skeleton, setSkeleton] = useState(false);
-
     const desiredPostIds = ["lE72M0ZgG2cnUtzSCXf1", "WujsdcHDIdhxLsqz4145", "GcSOkURm9Bvxc8yMLxLJ", "unbYyrAdCqFy3I3SnFRI"];
 
     useEffect(() => {
         const fetchPostsEmphasis = async () => {
-            setSkeleton(true);
             setLoading(true);
             try {
                 const postsCollection = collection(db, "posts");
@@ -49,16 +46,13 @@ const useEmphasisPostsAndUser = () => {
                 toast.error(error.message);
             } finally {
                 setLoading(false);
-                setTimeout(() => {
-                    setSkeleton(false);
-                }, 800);
             }
         };
 
         fetchPostsEmphasis();
     }, []);
 
-    return { loading, posts, users, skeleton };
+    return { loading, posts, users};
 };
 
 export default useEmphasisPostsAndUser;

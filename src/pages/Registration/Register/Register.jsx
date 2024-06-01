@@ -65,7 +65,6 @@ const Register = ({ setModal }) => {
           created: Date.now(),
         });
         navigate("/");
-        toast.success("Conta criada com sucesso!");
         setModal(false);
       }
     } catch (error) {
