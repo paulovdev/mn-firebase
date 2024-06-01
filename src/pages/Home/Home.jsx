@@ -5,7 +5,7 @@ import AllPosts from "../../components/PostsContainer/AllPosts/AllPosts";
 import RandomTopics from "../../components/TopicsContainer/RandomTopics/RandomTopics"
 import EmphasisPosts from './../../components/PostsContainer/EmphasisPosts/EmphasisPosts';
 
-import { Transition } from "../../utils/Transition/Transition";
+
 import "./Home.scss";
 
 const Home = () => {
@@ -43,4 +43,4 @@ const Home = () => {
   );
 };
 
-export default Transition(Home);
+export default Home;

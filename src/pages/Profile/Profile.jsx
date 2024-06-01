@@ -8,7 +8,7 @@ import { doc, getDoc, collection, query, getDocs } from "firebase/firestore";
 import { Blog } from "../../context/Context";
 import { db } from "../../firebase/Config";
 import { toast } from "react-toastify";
-import { Transition } from "../../utils/Transition/Transition";
+
 import "./Profile.scss";
 
 const Profile = () => {
@@ -103,4 +103,4 @@ const Profile = () => {
   );
 };
 
-export default Transition(Profile);
+export default Profile;

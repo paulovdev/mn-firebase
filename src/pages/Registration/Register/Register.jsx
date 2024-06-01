@@ -7,7 +7,6 @@ import { useNavigate } from "react-router-dom";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 
 import "./Register.scss";
-import { Transition } from "../../../utils/Transition/Transition";
 
 const Register = ({ setModal }) => {
   const navigate = useNavigate();
@@ -141,4 +140,4 @@ const Register = ({ setModal }) => {
   );
 };
 
-export default Transition(Register);
+export default Register;

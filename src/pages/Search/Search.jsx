@@ -11,7 +11,6 @@ import { FaClock } from "react-icons/fa";
 import useSearchPostsAndUser from "../../hooks/useSearchPostsAndUser";
 
 import "./Search.scss";
-import { Transition } from "../../utils/Transition/Transition";
 
 const Search = () => {
   const location = useLocation();
@@ -111,4 +110,4 @@ const Search = () => {
   );
 };
 
-export default Transition(Search);
+export default Search;

@@ -19,7 +19,6 @@ import { IoIosArrowRoundBack } from "react-icons/io";
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
 import "./Dashboard.scss";
-import { Transition } from '../../utils/Transition/Transition';
 
 const Dashboard = () => {
   const { currentUser, userLoading } = Blog();
@@ -131,4 +130,4 @@ const Dashboard = () => {
   );
 };
 
-export default Transition(Dashboard);
+export default Dashboard;

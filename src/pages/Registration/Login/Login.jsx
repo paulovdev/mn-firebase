@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import { MdVisibilityOff, MdVisibility } from "react-icons/md";
 
 import "./Login.scss";
-import { Transition } from "../../../utils/Transition/Transition";
+
 
 const Login = () => {
   const navigate = useNavigate();
@@ -86,4 +86,4 @@ const Login = () => {
   );
 };
 
-export default Transition(Login);
+export default Login;

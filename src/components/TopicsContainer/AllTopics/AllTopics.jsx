@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import topicsData from '../../../data/TopicsData';
 import { IoIosArrowRoundBack, IoIosSearch } from "react-icons/io";
-import { Transition } from '../../../utils/Transition/Transition';
+
 import './AllTopics.scss'
 
 const AllTopics = () => {
@@ -60,4 +60,4 @@ const AllTopics = () => {
     );
 };
 
-export default Transition(AllTopics);
+export default AllTopics;

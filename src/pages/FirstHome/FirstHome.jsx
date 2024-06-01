@@ -2,7 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Blog } from "../../context/Context";
 import ScrollDown from "../../utils/ScrollDown/ScrollDown";
-import { Transition } from "../../utils/Transition/Transition";
 
 import './FirstHome.scss'
 const FirstHome = () => {
@@ -24,4 +23,4 @@ const FirstHome = () => {
   )
 }
 
-export default Transition(FirstHome);
+export default FirstHome;

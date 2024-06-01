@@ -1,6 +1,5 @@
 import React from "react";
 import { Link, useParams } from "react-router-dom";
-import { Transition } from "../../utils/Transition/Transition";
 import useTopicPostsAndUser from "../../hooks/useTopicPostsAndUser";
 import FormatDate from "../../utils/FormatDate";
 import { readTime } from "../../utils/ReadTime";
@@ -107,4 +106,4 @@ const TopicPost = () => {
   );
 };
 
-export default Transition(TopicPost);
+export default TopicPost;

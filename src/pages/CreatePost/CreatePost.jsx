@@ -14,7 +14,6 @@ import ScrollTop from "../../utils/ScrollTop/ScrollTop";
 import TopicInput from "../../components/TopicsContainer/TopicInput/TopicInput";
 import topicsData from "../../data/TopicsData";
 import StepIndicators from "../../components/StepIndicators/StepIndicators";
-import { Transition } from '../../utils/Transition/Transition';
 
 import "./CreatePost.scss";
 
@@ -329,4 +328,4 @@ const CreatePost = () => {
   );
 };
 
-export default Transition(CreatePost);
+export default CreatePost;

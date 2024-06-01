@@ -16,7 +16,7 @@ import UserComments from './Actions/UserComments/UserComments'
 import ScrollTop from "../../utils/ScrollTop/ScrollTop";
 import { readTime } from "../../utils/ReadTime";
 import ScrollDown from "../../utils/ScrollDown/ScrollDown";
-import { Transition } from "../../utils/Transition/Transition";
+
 import "./Post.scss";
 
 const Post = () => {
@@ -239,4 +239,4 @@ const Post = () => {
   );
 };
 
-export default Transition(Post);
+export default Post;
