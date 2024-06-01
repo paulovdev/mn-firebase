@@ -7,12 +7,14 @@
   align-items: start;
   justify-content: start;
   flex-direction: column;
+
   .border-bottom {
     width: 100%;
     height: 1px;
     margin: 2rem 0;
     background-color: $border;
-}
+  }
+
   .container {
     position: relative;
     width: 100%;
@@ -236,137 +238,149 @@
     margin: 1rem 0;
 
     display: flex;
-    align-items: start;
+    align-items: center;
     justify-content: center;
 
     gap: 1rem;
 
-    .profile-photo {
-      display: flex;
-      align-items: start;
-      flex-direction: column;
-      gap: 3rem;
-
-    }
-
-    form {
-      position: absolute;
-      width: 95%;
-      height: fit-content;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-
-      padding: 1rem;
-      border: 1px solid $border;
-      background-color: $background;
-      box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,
-        rgba(27, 31, 35, 0.103) 0px 0px 0px 1px;
-      border-radius: 0.5rem;
-
+    .container {
+      position: relative;
+      width: 100%;
+      height: 100%;
 
       display: flex;
       align-items: center;
       justify-content: center;
       flex-direction: column;
+      gap: 2rem;
 
-      gap: 1rem;
-      z-index: 999;
-
-      .close-edit {
-        position: relative;
-        width: 100%;
-
+      .profile-photo {
         display: flex;
-        justify-content: end;
-        cursor: pointer;
+        align-items: center;
+        flex-direction: column;
+        gap: 3rem;
 
-        svg {
-          color: var(--s);
-          transform: scale(0.9);
-          transition: all 0.3s;
-
-          &:hover {
-            transform: scale(1);
-          }
-        }
       }
 
-      .image-profile {
+      form {
+        position: absolute;
+        width: 400px;
+        height: 600px;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+
+        padding: 1rem;
+        border: 1px solid $border;
+        background-color: $background;
+        box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,
+          rgba(27, 31, 35, 0.103) 0px 0px 0px 1px;
+        border-radius: 0.5rem;
+
+
         display: flex;
         align-items: center;
         justify-content: center;
-        cursor: pointer;
+        flex-direction: column;
 
-        img {
-          width: 80px;
-          height: 80px;
-          border-radius: 100%;
-          border: 1px solid $border;
-          filter: brightness(80%);
-          transition: all 1s cubic-bezier(0.075, 0.82, 0.165, 1);
-        }
+        gap: 1rem;
+        z-index: 999;
 
-        svg {
-          position: absolute;
-          font-size: 24px;
-          color: $p-2;
-          transition: all 1s cubic-bezier(0.075, 0.82, 0.165, 1);
-        }
+        .close-edit {
+          position: relative;
+          width: 100%;
 
-        &:hover {
+          display: flex;
+          justify-content: end;
+          cursor: pointer;
 
-          img {
-            filter: brightness(70%);
+          svg {
+            color: var(--s);
+            transform: scale(0.9);
+            transition: all 0.3s;
+
+            &:hover {
+              transform: scale(1);
+            }
           }
         }
-      }
 
-      input,
-      textarea {
-        width: 100%;
-        padding: 0.6rem 1rem;
+        .image-profile {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          cursor: pointer;
 
-        outline: none;
-        background-color: transparent;
-        border-radius: 0.5rem;
-        border: 1px solid $border;
+          img {
+            width: 80px;
+            height: 80px;
+            border-radius: 100%;
+            border: 1px solid $border;
+            filter: brightness(80%);
+            transition: all 1s cubic-bezier(0.075, 0.82, 0.165, 1);
+          }
 
-        font-size: 18px;
-        color: $p;
-      }
+          svg {
+            position: absolute;
+            font-size: 24px;
+            color: $p-2;
+            transition: all 1s cubic-bezier(0.075, 0.82, 0.165, 1);
+          }
 
-      input:disabled {
-        background-color: $bg;
-        color: $p-2;
-      }
+          &:hover {
 
-      textarea {
-        resize: none;
-      }
+            img {
+              filter: brightness(70%);
+            }
+          }
+        }
 
-      p {
-        font-size: 16px;
-        font-weight: 300;
-        margin: 1rem 0;
-      }
+        input,
+        textarea {
+          width: 100%;
+          padding: 0.6rem 1rem;
 
-      button {
-        position: relative;
-        width: 100%;
-        margin-bottom: 1rem;
-        padding: 0.6rem 1rem;
+          outline: none;
+          background-color: transparent;
+          border-radius: 0.5rem;
+          border: 1px solid $border;
 
-        outline: none;
-        border: none;
+          font-size: 18px;
+          color: $p;
+        }
 
-        background-color: $p;
-        border-radius: 0.5rem;
-        border: 1px solid $border;
+        input:disabled {
+          background-color: $bg;
+          color: $p-2;
+        }
 
-        font-size: 18px;
-        color: $p-2;
-        cursor: pointer;
+        textarea {
+          resize: none;
+        }
+
+        p {
+          font-size: 16px;
+          font-weight: 300;
+          margin: 1rem 0;
+        }
+
+        button {
+          position: relative;
+          width: 100%;
+          margin-bottom: 1rem;
+          padding: 0.6rem 1rem;
+
+          outline: none;
+          border: none;
+
+          background-color: $p;
+          border-radius: 0.5rem;
+          border: 1px solid $border;
+
+          font-size: 18px;
+          color: $p-2;
+          cursor: pointer;
+        }
       }
     }
   }
