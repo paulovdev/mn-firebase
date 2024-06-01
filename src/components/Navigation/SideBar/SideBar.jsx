@@ -1,21 +1,26 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { NavLink } from "react-router-dom";
 import { GoHomeFill } from "react-icons/go";
 import { IoMdCube, IoMdCloudUpload } from "react-icons/io";
 import { IoNotifications } from "react-icons/io5";
-
 import { MdCategory } from "react-icons/md";
 import './SideBar.scss';
-import { Blog } from '../../../context/Context';
+
+import useNotifications from '../../../hooks/useNotifications';
 
 const SideBar = () => {
-    const { currentUser } = Blog()
+    const { notifications } = useNotifications();
+    const [notificationLength, setNotificationLength] = useState(0);
+
+    useEffect(() => {
+        setNotificationLength(notifications.length);
+    }, [notifications]);
+
     return (
         <aside id="sidebar">
-
             <ul>
                 <li>
-                    <NavLink exact to="/" activeClassName="active" className="side-container">
+                    <NavLink to="/" className={({ isActive }) => isActive ? 'active side-container' : 'side-container'}>
                         <div className='side-icon'>
                             <GoHomeFill size={22} />
                         </div>
@@ -24,61 +29,48 @@ const SideBar = () => {
                         </div>
                     </NavLink>
                 </li>
-
                 <li>
-                    <NavLink to="/allTopics" activeClassName="active" className="side-container">
-
+                    <NavLink to="/allTopics" className={({ isActive }) => isActive ? 'active side-container' : 'side-container'}>
                         <div className='side-icon'>
-
                             <MdCategory size={22} />
-
                         </div>
                         <div className="side-text">
                             <span>Topicos</span>
                         </div>
                     </NavLink>
                 </li>
-
                 <li>
-                    <NavLink to={`/me/notifications`} activeClassName="active" className="side-container">
-
+                    <NavLink to={`/me/notifications`} className={({ isActive }) => isActive ? 'active side-container' : 'side-container'}>
                         <div className='side-icon'>
-
                             <IoNotifications size={22} />
-
-
+                            {notificationLength > 0 && (
+                                <div className="notification-container">
+                                    <span>{notificationLength}</span>
+                                </div>
+                            )}
                         </div>
                         <div className="side-text">
                             <span>Notificações</span>
                         </div>
                     </NavLink>
                 </li>
-
-
-
                 <li>
-                    <NavLink to="/post/create" activeClassName="active" className="side-container">
-
+                    <NavLink to="/post/create" className={({ isActive }) => isActive ? 'active side-container' : 'side-container'}>
                         <div className='side-icon'>
                             <IoMdCloudUpload size={22} />
-
                         </div>
                         <div className="side-text">
                             <span>Publicar</span>
-
                         </div>
                     </NavLink>
                 </li>
                 <li>
-                    <NavLink to="/dashboard" activeClassName="active" className="side-container">
-
+                    <NavLink to="/dashboard" className={({ isActive }) => isActive ? 'active side-container' : 'side-container'}>
                         <div className='side-icon'>
                             <IoMdCube size={22} />
-
                         </div>
                         <div className="side-text">
                             <span>Dashboard</span>
-
                         </div>
                     </NavLink>
                 </li>

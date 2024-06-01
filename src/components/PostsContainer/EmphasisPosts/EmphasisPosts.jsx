@@ -13,7 +13,7 @@ import useEmphasisPostsAndUser from "../../../hooks/useEmphasisPostsAndUser";
 import "./EmphasisPosts.scss";
 
 const EmphasisPosts = () => {
-  const { posts,  users, loading } = useEmphasisPostsAndUser();
+  const { posts, users, loading } = useEmphasisPostsAndUser();
 
   return (
     <div id="emphasis-posts">
@@ -95,9 +95,6 @@ const EmphasisPosts = () => {
                     <div className="post-content">
                       <div className="post-right-content">
                         <span className="topic">{post.topic}</span>
-
-
-
                         <h1>{post.title}</h1>
                         <div className="read-topic">
 
@@ -106,7 +103,7 @@ const EmphasisPosts = () => {
                               <div className="profile-content">
                                 <img src={user.userImg} alt="" />
                                 <div className="profile-text-wrapper">
-                                <p>{user.username.split(" ")[0]}</p>
+                                  <p>{user.username.split(" ")[0]}</p>
                                   <span>•</span>
                                   <p>
                                     <FaClock />

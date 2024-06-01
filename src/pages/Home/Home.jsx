@@ -18,9 +18,8 @@ const Home = () => {
         <EmphasisPosts />
 
         <div className="emphasis-text">
-          <h1>Novos posts</h1>
+          <h1>Novos posts de quem você esta seguindo</h1>
         </div>
-        {/*  <p>Posts selecionados a dedo e que faz grande diferenca na vidas das pessoas</p> */}
         <NewPosts />
 
 

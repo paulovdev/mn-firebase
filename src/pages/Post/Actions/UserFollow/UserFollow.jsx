@@ -10,6 +10,8 @@ import './UserFollow.scss';
 
 const UserFollow = ({ userId }) => {
   const [followersCount, setFollowersCount] = useState(0);
+  const [followingCount, setFollowingCount] = useState(0);
+  const [isFollowing, setIsFollowing] = useState(false);
   const [loading, setLoading] = useState(false);
   const [isFollowed, setIsFollowed] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
@@ -29,6 +31,15 @@ const UserFollow = ({ userId }) => {
         setFollowersCount(followers.length);
         if (currentUser) {
           setIsFollowed(followers.some(follower => follower.userId === currentUser.uid));
+
+          // Fetching following count for current user
+          const followingQuery = query(
+            collection(db, "users", currentUser.uid, "following")
+          );
+          const followingSnapshot = await getDocs(followingQuery);
+          const following = followingSnapshot.docs.map(doc => doc.data());
+          setFollowingCount(following.length);
+          setIsFollowing(following.some(follow => follow.userId === userId));
         }
       } catch (error) {
         toast.error(error.message);
@@ -53,6 +64,8 @@ const UserFollow = ({ userId }) => {
     setIsProcessing(true);
     try {
       const followRef = doc(db, "users", userId, "followers", currentUser.uid);
+      const followingRef = doc(db, "users", currentUser.uid, "following", userId);
+
       if (isFollowed) {
         await deleteDoc(followRef);
         setFollowersCount(prevCount => prevCount - 1);
@@ -63,6 +76,17 @@ const UserFollow = ({ userId }) => {
         setFollowersCount(prevCount => prevCount + 1);
       }
       setIsFollowed(!isFollowed);
+
+      if (isFollowing) {
+        await deleteDoc(followingRef);
+        setFollowingCount(prevCount => prevCount - 1);
+      } else {
+        await setDoc(followingRef, {
+          userId: userId
+        });
+        setFollowingCount(prevCount => prevCount + 1);
+      }
+      setIsFollowing(!isFollowing);
     } catch (error) {
       toast.error(error.message);
     } finally {
@@ -75,7 +99,7 @@ const UserFollow = ({ userId }) => {
     try {
       const notificationRef = doc(db, "users", userId, "notifications", currentUser.uid);
       await setDoc(notificationRef, {
-        timestamp: new Date().getTime(),
+        timestamp:new Date().getTime(),
         userId: currentUser.uid
       });
       setLoading(false);
@@ -90,6 +114,7 @@ const UserFollow = ({ userId }) => {
     try {
       const notificationRef = doc(db, "users", userId, "notifications", currentUser.uid);
       await deleteDoc(notificationRef);
+
     } catch (error) {
       toast.error(error.message);
       setLoading(false);
@@ -107,12 +132,16 @@ const UserFollow = ({ userId }) => {
       ) : (
         <>
           <p>{followersCount} Seguidores</p>
+          {currentUser && currentUser.uid === userId && (
+            <p>{followingCount} Seguindo</p>
+          )}
+
           {currentUser && isFollowed ? (
             <button onClick={handleDeleteNotification} disabled={isProcessing}>
               Deixar de seguir
             </button>
           ) : (
-            <button onClick={handleNotificationToggle} disabled={isProcessing}>
+            <button onClick={handleNotificationToggle } disabled={isProcessing}>
               {currentUser ? "Seguir" : "Você precisa estar conectado para seguir"}
             </button>
           )}

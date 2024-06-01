@@ -15,7 +15,7 @@
 
     display: flex;
     align-items: start;
-    justify-content: start;
+    justify-content: center;
     flex-direction: column;
     gap: 2rem;
 
@@ -27,7 +27,7 @@
         margin: 0;
         padding: 0;
         display: flex;
-        align-items: flex-start;
+        align-items: start;
         gap: 0.5rem;
         flex-direction: column;
 
@@ -56,23 +56,51 @@
                     justify-content: center;
 
                     cursor: pointer;
+
+                    .notification-container {
+                        position: absolute;
+
+                        left: 50px;
+
+                        width: 15px;
+                        height: 15px;
+
+                        border-radius: 100%;
+                        background-color: $bg;
+
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+
+                        span {
+                            font-size: 16px;
+                            font-family: 900;
+                        }
+                    }
                 }
 
                 .side-text {
                     width: 0;
                     height: 50px;
+
                     outline: none;
                     border: none;
+
                     background-color: transparent;
                     border-radius: 0.5rem;
-                    font-size: 14px;
-                    font-weight: 400;
-                    color: $p;
-                    transition: width 0.3s cubic-bezier(0.455, 0.03, 0.515, 0.955);
-                    padding-left: 0;
-                    padding-right: 0;
+
+                    span {
+                        font-size: 14px;
+                        font-weight: 500;
+                        color: $p;
+                        margin-left: 1rem;
+                    }
+
+
                     display: flex;
                     align-items: center;
+
+                    transition: width 0.3s cubic-bezier(0.455, 0.03, 0.515, 0.955);
 
                     &::placeholder {
                         color: $s;

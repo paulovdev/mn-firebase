@@ -1,20 +1,16 @@
 import React from "react";
 import { Link } from "react-router-dom";
-
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
-
 import { FaClock } from 'react-icons/fa';
 import { SiReadme } from 'react-icons/si';
-
 import FormatDate from "../../../utils/FormatDate";
 import { readTime } from "../../../utils/ReadTime";
-
 import useFetchNewPostsAndUser from "../../../hooks/useFetchNewPostsAndUser";
 import "./NewPosts.scss";
 
 const NewPosts = () => {
-  const { posts, users, loading} = useFetchNewPostsAndUser();
+  const { posts, users, loading } = useFetchNewPostsAndUser();
 
   return (
     <div id="new-posts">
@@ -31,7 +27,6 @@ const NewPosts = () => {
         </>
       ) : posts.length > 0 ? (
         posts.map((post, i) => {
-          const user = users[post.userId];
           return (
             <Link
               to={`/post/${post.id}`}
