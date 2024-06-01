@@ -49,7 +49,7 @@ const Notifications = () => {
                 </div>
 
                 <div className="user-text">
-                  <p><span>{user.username}</span> started following you</p>
+                  <p><span>{user.username}</span> começou a seguir você</p>
                   <FormatHour date={notification.timestamp} />
                 </div>
               </div>
