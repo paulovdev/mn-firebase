@@ -171,7 +171,7 @@ aside:hover~section {
             flex-direction: row;
             align-items: center;
             justify-content: center;
-            gap: 3rem;
+            gap: 2rem;
 
             li {
                 .side-container {
@@ -184,6 +184,11 @@ aside:hover~section {
                     .side-icon {
                         width: 50px;
                         height: 50px;
+
+
+                        .notification-container {
+                            left: 50%;
+                        }
                     }
 
                     .side-text {
