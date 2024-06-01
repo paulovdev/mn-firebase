@@ -21,42 +21,41 @@ const AllTopics = () => {
 
     return (
         <section id='all-topics'>
-            <div className="container">
-                <Link to="/" className="back">
-                    <IoIosArrowRoundBack size={32} />
-                    <p>Voltar</p>
-                </Link>
+            <Link to="/" className="back">
+                <IoIosArrowRoundBack size={32} />
+                <p>Inicio</p>
+            </Link>
+            <h1>Topicos</h1>
+            <div className="border-bottom"></div>
 
-                <h1>Topicos</h1>
-
-                <div className="search-input">
-                    <button type="submit">
-                        <IoIosSearch size={20} />
-                    </button>
-                    <input
-                        type="text"
-                        placeholder="Pesquisar tópicos..."
-                        value={searchQuery}
-                        onChange={handleSearch}
-                        className="search-input"
-                    />
-                </div>
-                <br />
-                <ul className='topic-container'>
-                    {filteredTopics.map((category, index) => (
-                        <div key={index} className='topic'>
-                            <h2>{category.name}</h2>
-                            <ul>
-                                {category.topics.map((topic, idx) => (
-                                    <li key={idx}>
-                                        <Link to={`/topic/${topic}`}>{topic}</Link>
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
-                    ))}
-                </ul>
+            <div className="search-input">
+                <button type="submit">
+                    <IoIosSearch size={20} />
+                </button>
+                <input
+                    type="text"
+                    placeholder="Pesquisar tópicos..."
+                    value={searchQuery}
+                    onChange={handleSearch}
+                    className="search-input"
+                />
             </div>
+            <br />
+            <ul className='topic-container'>
+                {filteredTopics.map((category, index) => (
+                    <div key={index} className='topic'>
+                        <h2>{category.name}</h2>
+                        <ul>
+                            {category.topics.map((topic, idx) => (
+                                <li key={idx}>
+                                    <Link to={`/topic/${topic}`}>{topic}</Link>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                ))}
+            </ul>
+
         </section>
     );
 };

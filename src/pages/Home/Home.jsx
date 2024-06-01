@@ -15,6 +15,8 @@ const Home = () => {
     <>
       <section id="home">
         <h1>Em destaque</h1>
+        <div className="border-bottom"></div>
+
         <EmphasisPosts />
 
         <div className="emphasis-text">

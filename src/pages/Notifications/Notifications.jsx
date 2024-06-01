@@ -2,10 +2,13 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Blog } from "../../context/Context";
 import useNotifications from "../../hooks/useNotifications";
-import "./Notifications.scss";
+import { IoIosArrowRoundBack } from "react-icons/io";
+
 import { toast } from "react-toastify";
 import FormatHour from "../../utils/FormatHour";
 import Skeleton from "react-loading-skeleton";
+
+import "./Notifications.scss";
 
 const Notifications = () => {
   const { notifications, loading, users } = useNotifications();
@@ -17,6 +20,10 @@ const Notifications = () => {
 
   return (
     <section id="notifications">
+      <Link to="/" className="back">
+        <IoIosArrowRoundBack size={32} />
+        <p>Inicio</p>
+      </Link>
       <h1>Notificações</h1>
       <div className="border-bottom"></div>
       {loading ? (

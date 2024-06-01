@@ -99,7 +99,7 @@ const UserFollow = ({ userId }) => {
     try {
       const notificationRef = doc(db, "users", userId, "notifications", currentUser.uid);
       await setDoc(notificationRef, {
-        timestamp:new Date().getTime(),
+        timestamp: new Date().getTime(),
         userId: currentUser.uid
       });
       setLoading(false);
@@ -131,17 +131,19 @@ const UserFollow = ({ userId }) => {
         </>
       ) : (
         <>
-          <p>{followersCount} Seguidores</p>
-          {currentUser && currentUser.uid === userId && (
-            <p>{followingCount} Seguindo</p>
-          )}
+          <div className="followers-container">
+            <p>{followersCount} Seguidores</p>
+            {currentUser && currentUser.uid === userId && (
+              <p>{followingCount} Seguindo</p>
+            )}
+          </div>
 
           {currentUser && isFollowed ? (
             <button onClick={handleDeleteNotification} disabled={isProcessing}>
               Deixar de seguir
             </button>
           ) : (
-            <button onClick={handleNotificationToggle } disabled={isProcessing}>
+            <button onClick={handleNotificationToggle} disabled={isProcessing}>
               {currentUser ? "Seguir" : "Você precisa estar conectado para seguir"}
             </button>
           )}

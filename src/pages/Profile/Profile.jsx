@@ -94,6 +94,7 @@ const Profile = () => {
                 )}
               </div>
             </div>
+            <div className="border-bottom"></div>
             <UserFollow userId={userId} followersCount={followersCount} />
           </div>
         </section>

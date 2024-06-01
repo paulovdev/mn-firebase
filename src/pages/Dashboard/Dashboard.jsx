@@ -15,7 +15,7 @@ import { toast } from "react-toastify";
 import { MdOutlineVisibility } from "react-icons/md";
 import { MdDeleteOutline } from "react-icons/md";
 import { MdEdit } from "react-icons/md";
-import Loading from "../../components/Loading/Loading";
+import { IoIosArrowRoundBack } from "react-icons/io";
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
 import "./Dashboard.scss";
@@ -67,10 +67,12 @@ const Dashboard = () => {
   return (
     <>
       <section id="dashboard">
-
-        <h1>Notificações</h1>
+        <Link to="/" className="back">
+          <IoIosArrowRoundBack size={32} />
+          <p>Inicio</p>
+        </Link>
+        <h1>Dashboard</h1>
         <div className="border-bottom"></div>
-
 
         <div className="posts">
           {loading ? (

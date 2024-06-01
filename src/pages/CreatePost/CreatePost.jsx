@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Editor from "../../utils/Editor/Editor";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import { db, storage } from "../../firebase/Config";
 import { addDoc, collection } from "firebase/firestore";
@@ -9,6 +9,7 @@ import { Blog } from "../../context/Context";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { IoImageOutline } from "react-icons/io5";
 import { FaSave } from "react-icons/fa";
+import { IoIosArrowRoundBack } from "react-icons/io";
 import ScrollTop from "../../utils/ScrollTop/ScrollTop";
 import TopicInput from "../../components/TopicsContainer/TopicInput/TopicInput";
 import topicsData from "../../data/TopicsData";
@@ -99,6 +100,13 @@ const CreatePost = () => {
 
   return (
     <section id="create-post">
+      <Link to="/" className="back">
+        <IoIosArrowRoundBack size={32} />
+        <p>Inicio</p>
+      </Link>
+      <h1>Criar postagem</h1>
+      <div className="border-bottom"></div>
+
       <AnimatePresence mode='wait'>
         <motion.div
           key={`step-indicator-${currentStep}`}

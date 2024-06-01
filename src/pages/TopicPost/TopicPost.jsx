@@ -18,7 +18,6 @@ const TopicPost = () => {
 
   return (
     <section id="topic-post">
-      <div className="container">
         <Link to="/" className="back">
           <IoIosArrowRoundBack size={32} />
           <p>Voltar</p>
@@ -27,6 +26,8 @@ const TopicPost = () => {
         <h1>
           Encontramos {loading ? "..." : posts.length} resultado{posts.length === 1 ? "" : "s"} para "{postId}":
         </h1>
+        <div className="border-bottom"></div>
+
         {loading ? (
           <div id="topic-posts">
             <Link to="/" className="post-container">
@@ -102,7 +103,6 @@ const TopicPost = () => {
             )}
           </div>
         )}
-      </div>
     </section>
   );
 };
