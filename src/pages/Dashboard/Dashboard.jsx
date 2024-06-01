@@ -67,10 +67,10 @@ const Dashboard = () => {
   return (
     <>
       <section id="dashboard">
-        <div className="container">
-          <h1>Dashboard</h1>
-          <p>Gerencie seus posts</p>
-        </div>
+
+        <h1>Notificações</h1>
+        <div className="border-bottom"></div>
+
 
         <div className="posts">
           {loading ? (

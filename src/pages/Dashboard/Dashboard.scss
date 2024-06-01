@@ -8,27 +8,18 @@
   justify-content: start;
   flex-direction: column;
 
-  .container {
-    position: relative;
+  h1 {
+    font-size: 38px;
+    font-weight: 900;
+    letter-spacing: -1px;
+    margin: 0 0 2rem 0;
+  }
+
+  .border-bottom {
     width: 100%;
-    margin-bottom: 1rem;
-
-    display: flex;
-    align-items: start;
-    justify-content: start;
-    flex-direction: column;
-
-    h1 {
-      font-size: 26px;
-      font-weight: 900;
-      letter-spacing: -1px;
-    }
-
-    p {
-      color: $p;
-      font-weight: 500;
-      font-size: 16px;
-    }
+    height: 1px;
+    margin: 2rem 0;
+    background-color: $border;
   }
 
   .posts {
