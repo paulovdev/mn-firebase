@@ -22,6 +22,8 @@ const useSearchPostsAndUser = (search) => {
           const fetchedPosts = [];
           const fetchedUsers = {};
 
+    
+
           for (const postDoc of postsSnapshot.docs) {
             const postData = postDoc.data();
             const postId = postDoc.id;

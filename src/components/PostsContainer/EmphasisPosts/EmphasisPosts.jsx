@@ -87,6 +87,7 @@ const EmphasisPosts = () => {
               return (
                 <Link to={`/post/${post.id}`} className="post-container small-post" key={i}>
                   <div className="post">
+                
                     <div className="img-post">
                       <img src={post.postImg} alt="Imagem do post" />
                     </div>

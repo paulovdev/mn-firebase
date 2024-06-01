@@ -77,7 +77,7 @@ const Post = () => {
     fetchComments();
   }, [postId]);
 
-  const { title, desc, postImg, color, created, topic } = post;
+  const { title, desc, postImg, created, topic } = post;
   const { username, userImg, userId } = user;
 
   const isAuthor = currentUser && currentUser.uid === userId;
@@ -112,6 +112,7 @@ const Post = () => {
     <>
       {skeleton ? (
         <section id="post-solo">
+
           <div className="container">
             <div className="image-background">
               <Skeleton width={948} height={498} />
@@ -166,7 +167,7 @@ const Post = () => {
             </div>
 
             <span className="topic">{topic}</span>
-
+            
             <div className="title-text">
               <h1>{title}</h1>
               <p> {created}</p>

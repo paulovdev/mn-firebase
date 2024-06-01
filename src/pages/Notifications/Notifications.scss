@@ -1,0 +1,55 @@
+@import "../../index.scss";
+
+#notifications {
+    position: relative;
+
+    display: flex;
+    align-items: start;
+    justify-content: start;
+    flex-direction: column;
+
+    h1 {
+        font-size: 38px;
+        font-weight: 900;
+        letter-spacing: -1px;
+        margin: 0 0 2rem 0;
+    }
+
+    .border-bottom {
+        width: 100%;
+        height: 1px;
+        margin: 3rem 0;
+        background-color: $border;
+    }
+
+    .notification-item {
+        width: 100%;
+
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+
+        .user-info {
+            img {
+                width: 50px;
+                height: 50px;
+                border-radius: 100%;
+            }
+        }
+
+        .user-text {
+            width: 100%;
+
+            p {
+                font-size: 14px;
+                color: $p;
+
+                span {
+                    font-weight: 900;
+                    font-size: 14px;
+                    color: $p;
+                }
+            }
+        }
+    }
+}

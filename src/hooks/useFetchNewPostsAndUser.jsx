@@ -17,6 +17,7 @@ const useFetchNewPostsAndUser = () => {
                 const usersCollection = collection(db, "users");
 
                 const postsSnapshot = await getDocs(query(postsCollection, orderBy("created", "desc"), limit(2)));
+                
                 const fetchedPosts = [];
                 const fetchedUsers = {};
 

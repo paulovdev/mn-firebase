@@ -33,6 +33,7 @@ import CreatePost from "./pages/CreatePost/CreatePost";
 import Search from "./pages/Search/Search";
 import TopicPost from "./pages/TopicPost/TopicPost";
 import FirstHome from "./pages/FirstHome/FirstHome";
+import Notifications from "./pages/Notifications/Notifications";
 
 const App = () => {
   const { currentUser } = Blog();
@@ -61,6 +62,7 @@ const App = () => {
             <Route index path="/" element={!currentUser ? <FirstHome /> : < Home />} />
             <Route path="/dashboard" element={!currentUser ? <Login /> : <Dashboard />} />
             <Route path="/home" element={!currentUser ? <FirstHome /> : <Home />} />
+            <Route path="/me/notifications" element={<Notifications />} />
             <Route path="/profile/:userId" element={<Profile />} />
             <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login />} />

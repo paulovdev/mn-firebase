@@ -2,13 +2,17 @@ import React from 'react';
 import { NavLink } from "react-router-dom";
 import { GoHomeFill } from "react-icons/go";
 import { IoMdCube, IoMdCloudUpload } from "react-icons/io";
+import { IoNotifications } from "react-icons/io5";
+
 import { MdCategory } from "react-icons/md";
 import './SideBar.scss';
+import { Blog } from '../../../context/Context';
 
 const SideBar = () => {
+    const { currentUser } = Blog()
     return (
         <aside id="sidebar">
-           
+
             <ul>
                 <li>
                     <NavLink exact to="/" activeClassName="active" className="side-container">
@@ -20,12 +24,13 @@ const SideBar = () => {
                         </div>
                     </NavLink>
                 </li>
+
                 <li>
                     <NavLink to="/allTopics" activeClassName="active" className="side-container">
 
                         <div className='side-icon'>
-                            <MdCategory size={22} />
 
+                            <MdCategory size={22} />
 
                         </div>
                         <div className="side-text">
@@ -33,6 +38,24 @@ const SideBar = () => {
                         </div>
                     </NavLink>
                 </li>
+
+                <li>
+                    <NavLink to={`/me/notifications`} activeClassName="active" className="side-container">
+
+                        <div className='side-icon'>
+
+                            <IoNotifications size={22} />
+
+
+                        </div>
+                        <div className="side-text">
+                            <span>Notificações</span>
+                        </div>
+                    </NavLink>
+                </li>
+
+
+
                 <li>
                     <NavLink to="/post/create" activeClassName="active" className="side-container">
 

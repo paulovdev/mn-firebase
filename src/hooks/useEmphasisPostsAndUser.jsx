@@ -9,7 +9,7 @@ const useEmphasisPostsAndUser = () => {
     const [users, setUsers] = useState({});
     const [skeleton, setSkeleton] = useState(false);
 
-    const desiredPostIds = ["XSOcAo0Rxfq1AGUlpoWP", "XIkpkijBgoyF1LoshOET", "XIV0ZhuITDoP8CtcWqqX", "BGNkIQ5rZ6cqJcvCYnJ9"];
+    const desiredPostIds = ["lE72M0ZgG2cnUtzSCXf1", "WujsdcHDIdhxLsqz4145", "GcSOkURm9Bvxc8yMLxLJ", "unbYyrAdCqFy3I3SnFRI"];
 
     useEffect(() => {
         const fetchPostsEmphasis = async () => {
@@ -42,8 +42,6 @@ const useEmphasisPostsAndUser = () => {
                         }
                     }
                 });
-
-                await Promise.all(userFetchPromises);
 
                 setPosts(fetchedPosts);
                 setUsers(fetchedUsers);

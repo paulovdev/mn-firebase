@@ -9,7 +9,6 @@ import { Blog } from "../../context/Context";
 import { db } from "../../firebase/Config";
 import { toast } from "react-toastify";
 import { Transition } from "../../utils/Transition/Transition";
-
 import "./Profile.scss";
 
 const Profile = () => {

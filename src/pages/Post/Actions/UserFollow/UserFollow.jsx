@@ -4,8 +4,9 @@ import { Blog } from "../../../../context/Context";
 import { db } from "../../../../firebase/Config";
 import { toast } from "react-toastify";
 import Skeleton from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css';
 
-import './UserFollow.scss'
+import './UserFollow.scss';
 
 const UserFollow = ({ userId }) => {
   const [followersCount, setFollowersCount] = useState(0);
@@ -17,6 +18,7 @@ const UserFollow = ({ userId }) => {
   useEffect(() => {
     const fetchFollowers = async () => {
       setLoading(true);
+
       try {
         const followersQuery = query(
           collection(db, "users", userId, "followers")
@@ -55,7 +57,9 @@ const UserFollow = ({ userId }) => {
         await deleteDoc(followRef);
         setFollowersCount(prevCount => prevCount - 1);
       } else {
-        await setDoc(followRef, { userId: currentUser.uid });
+        await setDoc(followRef, {
+          userId: currentUser.uid
+        });
         setFollowersCount(prevCount => prevCount + 1);
       }
       setIsFollowed(!isFollowed);
@@ -66,8 +70,37 @@ const UserFollow = ({ userId }) => {
     }
   };
 
+  const handleNotificationToggle = async () => {
+    setLoading(true);
+    try {
+      const notificationRef = doc(db, "users", userId, "notifications", currentUser.uid);
+      await setDoc(notificationRef, {
+        timestamp:new Date().getTime(),
+        userId: currentUser.uid
+      });
+      setLoading(false);
+      toast.success("Notificação enviada");
+    } catch (error) {
+      toast.error(error.message);
+      setLoading(false);
+    }
+    handleFollowToggle();
+  };
+
+  const handleDeleteNotification = async () => {
+    try {
+      const notificationRef = doc(db, "users", userId, "notifications", currentUser.uid);
+      await deleteDoc(notificationRef);
+      toast.success("Notificação excluída");
+    } catch (error) {
+      toast.error(error.message);
+      setLoading(false);
+    }
+    handleFollowToggle();
+  };
+
   return (
-    <div id="user-follow" onClick={handleFollowToggle}>
+    <div id="user-follow">
       {loading ? (
         <>
           <Skeleton width={200} height={10} />
@@ -77,11 +110,11 @@ const UserFollow = ({ userId }) => {
         <>
           <p>{followersCount} Seguidores</p>
           {currentUser && isFollowed ? (
-            <button>
+            <button onClick={handleDeleteNotification} disabled={isProcessing}>
               Deixar de seguir
             </button>
           ) : (
-            <button>
+            <button onClick={handleNotificationToggle} disabled={isProcessing}>
               {currentUser ? "Seguir" : "Você precisa estar conectado para seguir"}
             </button>
           )}
