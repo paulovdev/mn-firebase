@@ -4,9 +4,9 @@ import { useParams } from "react-router-dom";
 import Loading from "../../components/Loading/Loading";
 import EditProfile from "./EditProfile";
 import UserFollow from "../Post/Actions/UserFollow/UserFollow";
-import { motion } from 'framer-motion';
 
 import useUserData from "../../hooks/useUserData";
+import { motion, AnimatePresence } from "framer-motion";
 
 import "./Profile.scss";
 import { Blog } from "../../context/Context";
@@ -31,39 +31,45 @@ const Profile = () => {
       ) : isError ? (
         <div>Error: {error.message}</div>
       ) : (
-        <section id="my-profile">
-          <div className="container">
-            <div className="profile-photo">
-              <img src={userData.userImg} alt={userData.username} />
-              <div className="wrapper-text">
-                <h1>{userData.username}</h1>
-                <p>{userData.bio}</p>
-                {isAuthor && (
-                  <>
-                    <button onClick={() => setModal(!modal)}>
-                      Editar perfil
-                    </button>
-                    {modal && (
-                      <motion.div
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                      >
-                        <EditProfile
-                          onClick={() => setModal(!modal)}
-                          getUserData={userData}
-                          onProfileUpdate={handleProfileUpdate}
-                        />
-                      </motion.div>
-                    )}
-                  </>
-                )}
+        <AnimatePresence mode='wait'>
+          <motion.section id="my-profile"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.5 }}>
+            <div className="container">
+              <div className="profile-photo">
+                <img src={userData.userImg} alt={userData.username} />
+                <div className="wrapper-text">
+                  <h1>{userData.username}</h1>
+                  <p>{userData.bio}</p>
+                  {isAuthor && (
+                    <>
+                      <button onClick={() => setModal(!modal)}>
+                        Editar perfil
+                      </button>
+                      {modal && (
+                        <motion.div
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          exit={{ opacity: 0 }}
+                        >
+                          <EditProfile
+                            onClick={() => setModal(!modal)}
+                            getUserData={userData}
+                            onProfileUpdate={handleProfileUpdate}
+                          />
+                        </motion.div>
+                      )}
+                    </>
+                  )}
+                </div>
               </div>
+              <div className="border-bottom"></div>
+              <UserFollow userId={userId} followersCount={followersCount} />
             </div>
-            <div className="border-bottom"></div>
-            <UserFollow userId={userId} followersCount={followersCount} />
-          </div>
-        </section>
+          </motion.section>
+        </AnimatePresence>
       )}
     </>
   );

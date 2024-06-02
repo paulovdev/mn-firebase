@@ -7,8 +7,11 @@ import Skeleton from 'react-loading-skeleton';
 import ScrollTop from "../../utils/ScrollTop/ScrollTop";
 import { readTime } from "../../utils/ReadTime";
 import ScrollDown from "../../utils/ScrollDown/ScrollDown";
+import { motion, AnimatePresence } from "framer-motion";
+
 import "./Post.scss";
 import usePostDetails from '../../hooks/usePostDetails';
+
 const Post = () => {
   const { postId } = useParams();
   const navigate = useNavigate();
@@ -40,51 +43,57 @@ const Post = () => {
 
   if (isLoading) {
     return (
-      <section id="post-solo">
-        <div className="container">
-          <div className="image-background">
-            <Skeleton width={948} height={498} />
-          </div>
-          <Skeleton width={120} height={20} />
-          <br />
-          <div className="title-text">
-            <Skeleton width={1265} height={30} />
-            <Skeleton width={250} height={15} />
-            <Skeleton width={250} height={15} />
-            <Skeleton width={250} height={15} />
-            <div className="profile">
-              <div className="profile-image">
-                <Skeleton circle={true} height={50} width={50} />
-              </div>
-              <div className="profile-info">
-                <Skeleton width={180} height={10} />
-              </div>
+      <AnimatePresence mode='wait'>
+        <motion.section id="post-solo"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.5 }}>
+          <div className="container">
+            <div className="image-background">
+              <Skeleton width={948} height={498} />
             </div>
-            <div className="action-icons">
-              <div className="action-icon">
-                <Skeleton width={`40%`} height={20} />
+            <Skeleton width={120} height={20} />
+            <br />
+            <div className="title-text">
+              <Skeleton width={1265} height={30} />
+              <Skeleton width={250} height={15} />
+              <Skeleton width={250} height={15} />
+              <Skeleton width={250} height={15} />
+              <div className="profile">
+                <div className="profile-image">
+                  <Skeleton circle={true} height={50} width={50} />
+                </div>
+                <div className="profile-info">
+                  <Skeleton width={180} height={10} />
+                </div>
               </div>
-              <div className="action-icon">
-                <a href="#user-comments">
+              <div className="action-icons">
+                <div className="action-icon">
                   <Skeleton width={`40%`} height={20} />
-                </a>
-              </div>
-              <div className="action-icon" onClick={sharePost}>
-                <Skeleton width={`40%`} height={20} />
+                </div>
+                <div className="action-icon">
+                  <a href="#user-comments">
+                    <Skeleton width={`40%`} height={20} />
+                  </a>
+                </div>
+                <div className="action-icon" onClick={sharePost}>
+                  <Skeleton width={`40%`} height={20} />
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <div className="post">
-          <div className="body-post">
-            <Skeleton width={`100%`} count={2} />
-            <br />
-            <Skeleton width={`100%`} count={4} />
-            <br />
-            <Skeleton width={`100%`} count={6} />
+          <div className="post">
+            <div className="body-post">
+              <Skeleton width={`100%`} count={2} />
+              <br />
+              <Skeleton width={`100%`} count={4} />
+              <br />
+              <Skeleton width={`100%`} count={6} />
+            </div>
           </div>
-        </div>
-      </section>
+        </motion.section>
+      </AnimatePresence>
     );
   }
 

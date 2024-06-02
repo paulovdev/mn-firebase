@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 import { Blog } from "./context/Context";
 import { ToastContainer } from "react-toastify";
@@ -24,30 +24,40 @@ import Notifications from "./pages/Notifications/Notifications";
 const App = () => {
   const { currentUser } = Blog();
   const location = useLocation();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    const overflow = () => {
+      window.document.body.style.overflowY = "hidden"
+      setTimeout(() => {
+        window.document.body.style.overflowY = "auto"
+      }, 100);
+    }
+    overflow()
+  }, [location.pathname]);
 
   return (
-      <SkeletonTheme baseColor="#3a3a3a" highlightColor="#262626">
-        <Navbar />
-        {currentUser && <SideBar />}
-        <ToastContainer />
-        <Routes location={location} key={location.pathname}>
-          <Route index path="/" element={!currentUser ? <FirstHome /> : <Home />} />
-          <Route path="/dashboard" element={!currentUser ? <Login /> : <Dashboard />} />
-          <Route path="/home" element={!currentUser ? <FirstHome /> : <Home />} />
-          <Route path="/me/notifications" element={<Notifications />} />
-          <Route path="/profile/:userId" element={<Profile />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/dashboard" element={!currentUser ? <Login /> : <Dashboard />} />
-          <Route path="/post/create" element={!currentUser ? <Login /> : <CreatePost />} />
-          <Route path="/post/:postId" element={<Post />} />
-          <Route path="/editPost/:uid" element={<EditPost />} />
-          <Route path="/topic/:postId" element={<TopicPost />} />
-          <Route path="/allTopics" element={<AllTopics />} />
-          <Route path="/search" element={<Search />} />
-          <Route path="*" element={<Navigate to={!currentUser ? "/login" : "/home"} />} />
-        </Routes>
-      </SkeletonTheme>
+    <SkeletonTheme baseColor="#3a3a3a" highlightColor="#262626">
+      <Navbar />
+      {currentUser && <SideBar />}
+      <ToastContainer />
+      <Routes location={location} key={location.pathname}>
+        <Route index path="/" element={!currentUser ? <FirstHome /> : <Home />} />
+        <Route path="/dashboard" element={!currentUser ? <Login /> : <Dashboard />} />
+        <Route path="/home" element={!currentUser ? <FirstHome /> : <Home />} />
+        <Route path="/me/notifications" element={<Notifications />} />
+        <Route path="/profile/:userId" element={<Profile />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/dashboard" element={!currentUser ? <Login /> : <Dashboard />} />
+        <Route path="/post/create" element={!currentUser ? <Login /> : <CreatePost />} />
+        <Route path="/post/:postId" element={<Post />} />
+        <Route path="/editPost/:uid" element={<EditPost />} />
+        <Route path="/topic/:postId" element={<TopicPost />} />
+        <Route path="/allTopics" element={<AllTopics />} />
+        <Route path="/search" element={<Search />} />
+        <Route path="*" element={<Navigate to={!currentUser ? "/login" : "/home"} />} />
+      </Routes>
+    </SkeletonTheme>
   );
 };
 

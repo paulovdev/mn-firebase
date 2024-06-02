@@ -18,11 +18,11 @@ import StepIndicators from "../../components/StepIndicators/StepIndicators";
 import "./CreatePost.scss";
 
 const CreatePost = () => {
+  const { currentUser } = Blog();
   const imageRef = useRef(null);
   const [uploadingImage, setUploadingImage] = useState(false);
   const [imageUrl, setImageUrl] = useState("");
   const [desc, setDesc] = useState("");
-  const { currentUser } = Blog();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [preview, setPreview] = useState({
@@ -118,6 +118,7 @@ const CreatePost = () => {
           <StepIndicators currentStep={currentStep} />
         </motion.div>
       </AnimatePresence>
+
       <form onSubmit={handleSubmit}>
         <AnimatePresence mode='wait'>
           {currentStep === 1 && (
