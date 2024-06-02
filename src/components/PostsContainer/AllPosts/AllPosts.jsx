@@ -1,10 +1,8 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Blog } from "../../../context/Context";
-
 import { readTime } from "../../../utils/ReadTime";
 import FormatDate from "../../../utils/FormatDate";
-
 import Loading from "../../Loading/Loading";
 
 import { SiReadme } from "react-icons/si";
@@ -52,7 +50,7 @@ const AllPosts = () => {
                             <div className="profile-content">
                               <img src={user.userImg} alt="" />
                               <div className="profile-text-wrapper">
-                                <p>{user.username.split(" ")[0]}</p>
+                                <p>{user.username}</p>
                                 <span>•</span>
                                 <p>
                                   <FaClock />

@@ -10,11 +10,11 @@ import useFetchNewPostsAndUser from "../../../hooks/useFetchNewPostsAndUser";
 import "./NewPosts.scss";
 
 const NewPosts = () => {
-  const { posts, users, loading } = useFetchNewPostsAndUser();
+  const { data: postsAndUsers, isLoading, isError } = useFetchNewPostsAndUser();
 
   return (
     <div id="new-posts">
-      {loading ? (
+      {isLoading ? (
         <>
           <div className="post-container large-post">
             <Skeleton height={300} />
@@ -25,52 +25,52 @@ const NewPosts = () => {
             </div>
           ))}
         </>
-      ) : posts.length > 0 ? (
-        posts.map((post, i) => {
-          return (
-            <Link
-              to={`/post/${post.id}`}
-              className={`post-container ${i === 0 ? 'large-post' : 'small-post'}`}
-              key={post.id}
-            >
-              <div className="post">
-                <div className="img-post">
-                  <img src={post.postImg || 'fallback-image-url.jpg'} alt="postImg" />
-                </div>
-                <div className="post-content">
-                  <div className="post-right-content">
-                    <span className="topic">{post.topic}</span>
-                    <h1>{post.title}</h1>
-                    <div
-                      className="body-posts"
-                      dangerouslySetInnerHTML={{
-                        __html: post.desc.slice(0, 250),
-                      }}
-                    ></div>
-                    <div className="read-topic">
-                      <div className="topic-profile-container">
-                        {users[post.userId] && (
-                          <div className="profile-content">
-                            <img src={users[post.userId].userImg} alt="" />
-                            <div className="profile-text-wrapper">
-                              <p>{users[post.userId].username.split(" ")[0]}</p>
-                              <span>•</span>
-                              <p>
-                                <FaClock />
-                                <FormatDate date={post.created} />
-                              </p>
-                            </div>
+      ) : isError ? (
+        <p>Erro ao carregar os posts.</p>
+      ) : postsAndUsers && postsAndUsers.fetchedPosts.length > 0 ? (
+        postsAndUsers.fetchedPosts.map((post, i) => (
+          <Link
+            to={`/post/${post.id}`}
+            className={`post-container ${i === 0 ? 'large-post' : 'small-post'}`}
+            key={post.id}
+          >
+            <div className="post">
+              <div className="img-post">
+                <img src={post.postImg || 'fallback-image-url.jpg'} alt="postImg" />
+              </div>
+              <div className="post-content">
+                <div className="post-right-content">
+                  <span className="topic">{post.topic}</span>
+                  <h1>{post.title}</h1>
+                  <div
+                    className="body-posts"
+                    dangerouslySetInnerHTML={{
+                      __html: post.desc.slice(0, 250),
+                    }}
+                  ></div>
+                  <div className="read-topic">
+                    <div className="topic-profile-container">
+                      {post.user && (
+                        <div className="profile-content">
+                          <img src={post.user.userImg} alt="" />
+                          <div className="profile-text-wrapper">
+                            <p>{post.user.username.split(" ")[0]}</p>
+                            <span>•</span>
+                            <p>
+                              <FaClock />
+                              <FormatDate date={post.created} />
+                            </p>
                           </div>
-                        )}
-                      </div>
-                      <span><SiReadme /> {readTime({ __html: post.desc })} min de leitura</span>
+                        </div>
+                      )}
                     </div>
+                    <span><SiReadme /> {readTime({ __html: post.desc })} min de leitura</span>
                   </div>
                 </div>
               </div>
-            </Link>
-          )
-        })
+            </div>
+          </Link>
+        ))
       ) : (
         <p>Sem Posts com Ênfase disponíveis</p>
       )}

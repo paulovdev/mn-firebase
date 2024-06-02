@@ -1,22 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Blog } from "../../context/Context";
-import useNotifications from "../../hooks/useNotifications";
 import { IoIosArrowRoundBack } from "react-icons/io";
-
-import { toast } from "react-toastify";
+import "./Notifications.scss";
 import FormatHour from "../../utils/FormatHour";
 import Skeleton from "react-loading-skeleton";
-
-import "./Notifications.scss";
+import useNotifications from './../../hooks/useNotifications';
 
 const Notifications = () => {
-  const { notifications, loading, users } = useNotifications();
-  const { currentUser } = Blog();
-
-  if (!currentUser) {
-    toast.error("Você precisa estar conectado para comentar.");
-  }
+  const { data: notifications, isLoading, isError } = useNotifications();
 
   return (
     <section id="notifications">
@@ -26,42 +17,47 @@ const Notifications = () => {
       </Link>
       <h1>Notificações</h1>
       <div className="border-bottom"></div>
-      {loading ? (
+
+      {isError && "aasoidjaosijdoasijd"}
+
+      {isLoading ? (
         <div>
           <div className="notification-item">
             <div className="user-info">
-              <Link>
+              <Link to="/profile"> {/* Adicione um link aqui */}
                 <Skeleton borderRadius={100} width={50} height={50} />
               </Link>
             </div>
             <div className="user-text">
-              <p><Skeleton width={100} height={10} /></p>
+              <p><Skeleton width={300} height={10} /></p>
               <Skeleton width={100} height={10} />
             </div>
           </div>
         </div>
-
-
       ) : (
         <div>
-          {notifications.map((notification, index) => {
-            const user = users[notification.userId];
-            return (
-              <div key={index} className="notification-item">
-
-                <div className="user-info">
-                  <Link to={`/profile/${user.userId}`}>
-                    <img src={user.userImg} alt={`${notification.username}'s profile`} />
-                  </Link>
+          {notifications && notifications.fetchedNotifications.length > 0 ? (
+            notifications.fetchedNotifications.map((notification, index) => {
+              const user = notifications.fetchedUsers[notification.userId];
+              return (
+                <div key={index} className="notification-item">
+                  <div className="user-info">
+                    <Link to={`/profile/${user.userId}`}>
+                      <img src={user.userImg} alt={`${notification.username}'s profile`} />
+                    </Link>
+                  </div>
+                  <div className="user-text">
+                    <p><span>{user.username}</span> começou a seguir você</p>
+                    <FormatHour date={notification.timestamp} />
+                  </div>
                 </div>
-
-                <div className="user-text">
-                  <p><span>{user.username}</span> começou a seguir você</p>
-                  <FormatHour date={notification.timestamp} />
-                </div>
-              </div>
-            );
-          })}
+              );
+            })
+          ) : (
+            <div className="notification-item">
+              <p>Nenhuma notificação encontrada.</p>
+            </div>
+          )}
         </div>
       )}
     </section>

@@ -1,20 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { NavLink } from "react-router-dom";
 import { GoHomeFill } from "react-icons/go";
 import { IoMdCube, IoMdCloudUpload } from "react-icons/io";
 import { IoNotifications } from "react-icons/io5";
 import { MdCategory } from "react-icons/md";
-import './SideBar.scss';
-
 import useNotifications from '../../../hooks/useNotifications';
 
-const SideBar = () => {
-    const { notifications } = useNotifications();
-    const [notificationLength, setNotificationLength] = useState(0);
+import './SideBar.scss';
 
-    useEffect(() => {
-        setNotificationLength(notifications.length);
-    }, [notifications]);
+const SideBar = () => {
+    const { data: { fetchedNotifications: notifications } = { fetchedNotifications: [] } } = useNotifications(); // Adjusted here
 
     return (
         <aside id="sidebar">
@@ -43,9 +38,9 @@ const SideBar = () => {
                     <NavLink to={`/me/notifications`} className={({ isActive }) => isActive ? 'active side-container' : 'side-container'}>
                         <div className='side-icon'>
                             <IoNotifications size={22} />
-                            {notificationLength > 0 && (
+                            {notifications && notifications.length > 0 && (
                                 <div className="notification-container">
-                                    <span>{notificationLength}</span>
+                                    <span>{notifications.length}</span>
                                 </div>
                             )}
                         </div>

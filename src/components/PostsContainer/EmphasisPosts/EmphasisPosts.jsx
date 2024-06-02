@@ -1,23 +1,19 @@
 import React from "react";
 import { Link } from "react-router-dom";
-
 import Skeleton from 'react-loading-skeleton';
-
 import { SiReadme } from "react-icons/si";
 import { FaClock } from "react-icons/fa";
-
 import FormatDate from "../../../utils/FormatDate";
 import { readTime } from "../../../utils/ReadTime";
-
 import useEmphasisPostsAndUser from "../../../hooks/useEmphasisPostsAndUser";
 import "./EmphasisPosts.scss";
 
 const EmphasisPosts = () => {
-  const { posts, users, loading } = useEmphasisPostsAndUser();
+  const { data: postsAndUsers, isLoading, isError } = useEmphasisPostsAndUser();
 
   return (
     <div id="emphasis-posts">
-      {loading ? (
+      {isLoading ? (
         <>
           <div className="post-container large-post">
             <Skeleton height={450} />
@@ -34,10 +30,12 @@ const EmphasisPosts = () => {
             ))}
           </div>
         </>
-      ) : posts.length > 0 ? (
+      ) : isError ? (
+        <p>Erro ao carregar os posts.</p>
+      ) : postsAndUsers && postsAndUsers.fetchedPosts.length > 0 ? (
         <>
-          {posts.slice(0, 1).map((post, i) => {
-            const user = users[post.userId];
+          {postsAndUsers.fetchedPosts.slice(0, 1).map((post, i) => {
+            const user = postsAndUsers.fetchedUsers[post.userId];
             return (
               <Link to={`/post/${post.id}`} className="post-container large-post" key={i}>
                 <div className="post">
@@ -56,7 +54,6 @@ const EmphasisPosts = () => {
                         }}
                       ></div>
                       <div className="read-topic">
-
                         <div className="topic-profile-container">
                           {user && (
                             <div className="profile-content">
@@ -72,7 +69,6 @@ const EmphasisPosts = () => {
                             </div>
                           )}
                         </div>
-
                         <span>< SiReadme /> {readTime({ __html: post.desc })} min de leitura</span>
                       </div>
                     </div>
@@ -82,22 +78,19 @@ const EmphasisPosts = () => {
             );
           })}
           <div className="grid-container">
-            {posts.slice(1).map((post, i) => {
-              const user = users[post.userId];
+            {postsAndUsers.fetchedPosts.slice(1).map((post, i) => {
+              const user = postsAndUsers.fetchedUsers[post.userId];
               return (
                 <Link to={`/post/${post.id}`} className="post-container small-post" key={i}>
                   <div className="post">
-
                     <div className="img-post">
                       <img src={post.postImg} alt="Imagem do post" />
                     </div>
-
                     <div className="post-content">
                       <div className="post-right-content">
                         <span className="topic">{post.topic}</span>
                         <h1>{post.title}</h1>
                         <div className="read-topic">
-
                           <div className="topic-profile-container">
                             {user && (
                               <div className="profile-content">
@@ -113,7 +106,6 @@ const EmphasisPosts = () => {
                               </div>
                             )}
                           </div>
-
                           <span>< SiReadme /> {readTime({ __html: post.desc })} min de leitura</span>
                         </div>
                       </div>
