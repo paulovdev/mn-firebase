@@ -4,12 +4,26 @@ import { GoHomeFill } from "react-icons/go";
 import { IoMdCube, IoMdCloudUpload } from "react-icons/io";
 import { IoNotifications } from "react-icons/io5";
 import { MdCategory } from "react-icons/md";
-import useNotifications from '../../../hooks/useNotifications';
-
+import { useQuery } from "react-query";
+import { Blog } from "../../../context/Context";
+import { fetchNotifications } from "../../../hooks/useNotifications";
+import { useRealtimeNotifications } from '../../../hooks/useRealtimeNotifications'; // Atualizado
 import './SideBar.scss';
 
 const SideBar = () => {
-    const { data: { fetchedNotifications: notifications } = { fetchedNotifications: [] } } = useNotifications(); // Adjusted here
+    const { currentUser } = Blog();
+
+    const { data } = useQuery(
+        ["notifications", currentUser],
+        () => fetchNotifications(currentUser),
+        {
+            enabled: !!currentUser,
+        }
+    );
+
+    useRealtimeNotifications(currentUser);
+
+    const notifications = data?.notifications || [];
 
     return (
         <aside id="sidebar">
@@ -38,7 +52,7 @@ const SideBar = () => {
                     <NavLink to={`/me/notifications`} className={({ isActive }) => isActive ? 'active side-container' : 'side-container'}>
                         <div className='side-icon'>
                             <IoNotifications size={22} />
-                            {notifications && notifications.length > 0 && (
+                            {notifications.length > 0 && (
                                 <div className="notification-container">
                                     <span>{notifications.length}</span>
                                 </div>
@@ -72,6 +86,6 @@ const SideBar = () => {
             </ul>
         </aside>
     );
-}
+};
 
 export default SideBar;

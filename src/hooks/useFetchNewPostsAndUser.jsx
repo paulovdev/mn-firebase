@@ -13,6 +13,10 @@ const fetchNewPostsAndUser = async (currentUser) => {
     const followingSnapshot = await getDocs(followingQuery);
     const followingIds = followingSnapshot.docs.map(doc => doc.id);
 
+    if (followingIds.length === 0) {
+      return { fetchedPosts: [], fetchedUsers: {} };
+    }
+
     const postsQuery = query(
       collection(db, "posts"),
       where("userId", "in", followingIds),
@@ -38,6 +42,7 @@ const fetchNewPostsAndUser = async (currentUser) => {
     throw new Error("Error fetching posts: " + error.message);
   }
 };
+
 
 const useFetchNewPostsAndUser = () => {
   const { currentUser } = Blog();

@@ -1,30 +1,21 @@
-import React, { useState, useRef, useEffect } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
-import { motion } from "framer-motion";
-import { toast } from "react-toastify";
-import { signOut } from "firebase/auth";
-import { auth } from "../../../firebase/Config";
+import React, { useState, useRef, useEffect } from 'react';
+import { NavLink } from 'react-router-dom';
+import { motion } from 'framer-motion';
 
-import "./UserModal.scss";
-import { Blog } from "../../../context/Context";
+import { Blog } from '../../../context/Context';
+
+import useLogout from '../../../hooks/useLogout';
+import './UserModal.scss';
 
 const UserModal = () => {
   const { currentUser, allUsers } = Blog();
   const getUserData = allUsers.find((user) => user.id === currentUser?.uid);
   const username = getUserData?.username;
-  const firstWord = username ? username.split(" ").slice(0, 2).join(" ") : "";
-  const navigate = useNavigate();
+  const firstWord = username ? username.split(' ').slice(0, 2).join(' ') : '';
   const [modal, setModal] = useState(false);
   const dropdownRef = useRef(null);
 
-  const logout = async () => {
-    try {
-      await signOut(auth);
-      navigate("/login");
-    } catch (error) {
-      toast.error(error.message);
-    }
-  };
+  const { mutate: logout, isLoading } = useLogout();
 
   const handleClickOutside = (event) => {
     if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
@@ -37,9 +28,9 @@ const UserModal = () => {
   };
 
   useEffect(() => {
-    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener('mousedown', handleClickOutside);
     return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener('mousedown', handleClickOutside);
     };
   }, []);
 
@@ -47,12 +38,12 @@ const UserModal = () => {
     <>
       <div className="user-modal">
         <div className="profile-image" onClick={() => setModal(!modal)}>
-          <img src={getUserData?.userImg || "/profile.jpg"} alt="Profile" />
+          <img src={getUserData?.userImg || '/profile.jpg'} alt="Profile" />
         </div>
 
         <motion.div
           ref={dropdownRef}
-          className={`dropdown ${modal ? "" : "dropdown-active"}`}
+          className={`dropdown ${modal ? '' : 'dropdown-active'}`}
           initial={{ opacity: modal ? 1 : 0 }}
           animate={{ opacity: modal ? 1 : 0 }}
           exit={{ opacity: modal ? 1 : 0 }}
@@ -70,7 +61,7 @@ const UserModal = () => {
             Perfil
           </NavLink>
 
-          <button onClick={() => { logout(); handleButtonClick(); }} className="profile-button">
+          <button onClick={() => { logout(); handleButtonClick(); }} className="profile-button" disabled={isLoading}>
             Sair
           </button>
         </motion.div>

@@ -1,42 +1,28 @@
-import React, { useState } from "react";
-import { toast } from "react-toastify";
-import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../../../firebase/Config";
-import { useNavigate } from "react-router-dom";
-import { Link } from "react-router-dom";
-import { MdVisibilityOff, MdVisibility } from "react-icons/md";
+import React, { useState } from 'react';
+import { toast } from 'react-toastify';
+import { Link } from 'react-router-dom';
+import { MdVisibilityOff, MdVisibility } from 'react-icons/md';
+import useLogin from '../../../hooks/useLogin';
 
-import "./Login.scss";
-
+import './Login.scss';
 
 const Login = () => {
-  const navigate = useNavigate();
   const [form, setForm] = useState({
-    email: "",
-    password: "",
+    email: '',
+    password: '',
   });
-
-  const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const { mutate: login, isLoading } = useLogin();
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
 
     if (!form.email || !form.password) {
-      toast.error("Todos os campos são necessários!");
+      toast.error('Todos os campos são necessários!');
       return;
     }
 
-    setLoading(true);
-
-    try {
-      await signInWithEmailAndPassword(auth, form.email, form.password);
-      navigate("/");
-    } catch (error) {
-      toast.error(error.message);
-    } finally {
-      setLoading(false);
-    }
+    login({ email: form.email, password: form.password });
   };
 
   return (
@@ -58,7 +44,7 @@ const Login = () => {
 
         <div className="password-input">
           <input
-            type={showPassword ? "text" : "password"}
+            type={showPassword ? 'text' : 'password'}
             name="password"
             placeholder="Senha"
             required
@@ -75,8 +61,8 @@ const Login = () => {
           <Link to="/register">Crie uma agora!</Link>
         </div>
 
-        {!loading && <button className="btn">Entrar</button>}
-        {loading && (
+        {!isLoading && <button className="btn">Entrar</button>}
+        {isLoading && (
           <button className="btn" disabled>
             Entrando...
           </button>

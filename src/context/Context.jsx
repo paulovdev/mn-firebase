@@ -5,7 +5,6 @@ import { createContext } from "react";
 import { auth, db } from "../firebase/Config";
 import Loading from "../components/Loading/Loading";
 import { collection, onSnapshot, query } from "firebase/firestore";
-import useFetch from "../hooks/useFetch";
 
 const BlogContext = createContext();
 
@@ -21,11 +20,7 @@ const Context = ({ children }) => {
   const [desc, setDesc] = useState("");
   const [color, setColor] = useState("#f3f175");
   const [img, setImg] = useState("#f3f175");
-  const [publish, setPublish] = useState(false);
-  const [comments, setComments] = useState([]);
-  const addComment = (newComment) => {
-    setComments([...comments, newComment]);
-  };
+
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -39,6 +34,7 @@ const Context = ({ children }) => {
 
     return () => unsubscribe();
   }, [currentUser]);
+
 
   useEffect(() => {
     const getUsers = () => {
@@ -56,9 +52,6 @@ const Context = ({ children }) => {
     getUsers();
   }, []);
 
-  const { data: postData, loading: postLoading } = useFetch("posts");
-  const { data: getData } = useFetch("users");
-
 
   return (
     <BlogContext.Provider
@@ -67,8 +60,7 @@ const Context = ({ children }) => {
         setCurrentUser,
         allUsers,
         userLoading,
-        publish,
-        setPublish,
+
         updateData,
         setUpdateData,
         title,
@@ -79,13 +71,8 @@ const Context = ({ children }) => {
         setColor,
         img,
         setImg,
-        postData,
-        postLoading,
-        getData,
         authModel,
         setAuthModel,
-        comments,
-        addComment,
       }}
     >
       {loading ? <Loading /> : children}

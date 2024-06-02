@@ -9,11 +9,11 @@ import useEmphasisPostsAndUser from "../../../hooks/useEmphasisPostsAndUser";
 import "./EmphasisPosts.scss";
 
 const EmphasisPosts = () => {
-  const { data: postsAndUsers, isLoading, isError } = useEmphasisPostsAndUser();
+  const { data: postsAndUsers, isLoading, error } = useEmphasisPostsAndUser();
 
   return (
     <div id="emphasis-posts">
-      {isLoading ? (
+      {isLoading && (
         <>
           <div className="post-container large-post">
             <Skeleton height={450} />
@@ -30,9 +30,13 @@ const EmphasisPosts = () => {
             ))}
           </div>
         </>
-      ) : isError ? (
+      )}
+
+      {error && (
         <p>Erro ao carregar os posts.</p>
-      ) : postsAndUsers && postsAndUsers.fetchedPosts.length > 0 ? (
+      )}
+
+      {!isLoading && !error && postsAndUsers && postsAndUsers.fetchedPosts.length > 0 ? (
         <>
           {postsAndUsers.fetchedPosts.slice(0, 1).map((post, i) => {
             const user = postsAndUsers.fetchedUsers[post.userId];

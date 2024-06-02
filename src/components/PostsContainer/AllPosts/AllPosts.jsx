@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Blog } from "../../../context/Context";
 import { readTime } from "../../../utils/ReadTime";
 import FormatDate from "../../../utils/FormatDate";
 import Loading from "../../Loading/Loading";
@@ -12,7 +11,7 @@ import useFetchPostsAndUser from "../../../hooks/useFetchPostsAndUser";
 import "./AllPosts.scss";
 
 const AllPosts = () => {
-  const { postLoading } = Blog();
+
   const { posts, users, loading, fetchPosts, lastPostElementRef } = useFetchPostsAndUser();
 
   useEffect(() => {
@@ -21,7 +20,7 @@ const AllPosts = () => {
 
   return (
     <>
-      {postLoading && loading ? (
+      { loading ? (
         <Loading />
       ) : (
         <>

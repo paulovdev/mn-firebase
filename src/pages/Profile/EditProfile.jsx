@@ -3,7 +3,6 @@ import { toast } from "react-toastify";
 import { FaCamera } from "react-icons/fa";
 import { MdOutlineClose } from "react-icons/md";
 import { motion } from "framer-motion";
-import { useMutation, useQueryClient } from "react-query"; // Importe useMutation e useQueryClient do react-query
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { db, storage } from "../../firebase/Config";
 import { doc, updateDoc } from "firebase/firestore";
@@ -11,7 +10,7 @@ import "./Profile.scss";
 
 const EditProfile = ({ getUserData, onClick, onProfileUpdate }) => {
   const imgRef = useRef(null);
-  const queryClient = useQueryClient(); // Instancie o cliente de consulta
+  const [loading, setLoading] = useState(false);
   const [form, setForm] = useState({
     username: "",
     userImg: "",
@@ -41,47 +40,46 @@ const EditProfile = ({ getUserData, onClick, onProfileUpdate }) => {
     setForm({ ...form, [name]: value });
   };
 
-  // Defina a mutação para atualizar o perfil
-  const updateProfileMutation = useMutation(async () => {
-    let imageUrl = form.userImg;
-    if (form.userImg instanceof File) {
-      const storageRef = ref(storage, `image/${form.userImg.name}`);
-      await uploadBytes(storageRef, form.userImg);
-      imageUrl = await getDownloadURL(storageRef);
-    }
-
-    const docRef = doc(db, "users", getUserData?.userId);
-    await updateDoc(docRef, {
-      bio: form.bio,
-      username: form.username,
-      userImg: imageUrl,
-    });
-
-    return { // Retorne os novos dados do usuário após a atualização
-      ...getUserData,
-      bio: form.bio,
-      username: form.username,
-      userImg: imageUrl,
-    };
-  }, {
-    onSuccess: (data) => {
-      onProfileUpdate(data); // Atualize o estado do usuário após o sucesso da mutação
-      onClick(); // Feche o modal após a atualização bem-sucedida
-      queryClient.invalidateQueries('user'); // Invalidate a query para atualizar os dados do usuário na UI
-    },
-    onError: (error) => {
-      toast.error("Erro ao atualizar perfil: " + error.message);
-    },
-  });
-
-  const saveForm = (e) => {
+  const saveForm = async (e) => {
     e.preventDefault();
     if (!form.username) {
       toast.error("Por favor, coloque seu nome.");
       return;
     }
 
-    updateProfileMutation.mutate(); // Execute a mutação ao enviar o formulário
+    setLoading(true);
+
+    try {
+      let imageUrl = form.userImg;
+      if (form.userImg instanceof File) {
+        const storageRef = ref(storage, `image/${form.userImg.name}`);
+        await uploadBytes(storageRef, form.userImg);
+        imageUrl = await getDownloadURL(storageRef);
+      }
+
+      const docRef = doc(db, "users", getUserData?.userId);
+      await updateDoc(docRef, {
+        bio: form.bio,
+        username: form.username,
+        userImg: imageUrl,
+      });
+
+      toast.success("Perfil atualizado com sucesso!");
+
+      // Notify the parent component about the profile update
+      onProfileUpdate({
+        ...getUserData,
+        bio: form.bio,
+        username: form.username,
+        userImg: imageUrl,
+      });
+
+      onClick(); // Close the modal
+    } catch (error) {
+      toast.error("Erro ao atualizar perfil: " + error.message);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -137,8 +135,8 @@ const EditProfile = ({ getUserData, onClick, onProfileUpdate }) => {
         value={getUserData?.email}
       />
 
-      <button id="save-button" type="submit" disabled={updateProfileMutation.isLoading}>
-        {updateProfileMutation.isLoading ? "Salvando..." : "Salvar"}
+      <button id="save-button" type="submit" disabled={loading}>
+        {loading ? "Salvando..." : "Salvar"}
       </button>
     </motion.form>
   );

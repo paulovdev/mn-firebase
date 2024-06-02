@@ -1,10 +1,9 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 import { Blog } from "./context/Context";
 import { ToastContainer } from "react-toastify";
 import { SkeletonTheme } from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
-import { QueryClient, QueryClientProvider } from 'react-query';
 
 import Navbar from "./components/Navigation/Navbar/Navbar";
 import SideBar from './components/Navigation/SideBar/SideBar';
@@ -22,14 +21,11 @@ import TopicPost from "./pages/TopicPost/TopicPost";
 import FirstHome from "./pages/FirstHome/FirstHome";
 import Notifications from "./pages/Notifications/Notifications";
 
-const queryClient = new QueryClient();
-
 const App = () => {
   const { currentUser } = Blog();
   const location = useLocation();
 
   return (
-    <QueryClientProvider client={queryClient}>
       <SkeletonTheme baseColor="#3a3a3a" highlightColor="#262626">
         <Navbar />
         {currentUser && <SideBar />}
@@ -52,7 +48,6 @@ const App = () => {
           <Route path="*" element={<Navigate to={!currentUser ? "/login" : "/home"} />} />
         </Routes>
       </SkeletonTheme>
-    </QueryClientProvider>
   );
 };
 

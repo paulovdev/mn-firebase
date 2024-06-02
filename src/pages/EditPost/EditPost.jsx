@@ -3,7 +3,6 @@ import { toast } from "react-toastify";
 import { useNavigate, useLocation } from "react-router-dom";
 import { doc, updateDoc } from "firebase/firestore";
 import { db, storage } from "../../firebase/Config";
-import Loading from "../../components/Loading/Loading";
 import Editor from "../../utils/Editor/Editor";
 import { MdEdit, MdAddPhotoAlternate } from "react-icons/md";
 import { Blog } from "../../context/Context";
@@ -12,7 +11,7 @@ import "./EditPost.scss";
 
 const EditPost = () => {
   const [loading, setLoading] = useState(false);
-  const { updateData, title, setTitle, desc, setDesc, color, img, setImg } = Blog();
+  const { updateData, title, setTitle, desc, setDesc, img, setImg } = Blog();
 
   const { pathname } = useLocation();
   const postId = pathname.split("/")[2];

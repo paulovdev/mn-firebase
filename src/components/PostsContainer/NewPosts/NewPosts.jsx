@@ -10,11 +10,11 @@ import useFetchNewPostsAndUser from "../../../hooks/useFetchNewPostsAndUser";
 import "./NewPosts.scss";
 
 const NewPosts = () => {
-  const { data: postsAndUsers, isLoading, isError } = useFetchNewPostsAndUser();
+  const { data: postsAndUsers, isLoading, error } = useFetchNewPostsAndUser();
 
   return (
     <div id="new-posts">
-      {isLoading ? (
+      {isLoading && (
         <>
           <div className="post-container large-post">
             <Skeleton height={300} />
@@ -25,9 +25,13 @@ const NewPosts = () => {
             </div>
           ))}
         </>
-      ) : isError ? (
+      )}
+
+      {error && (
         <p>Erro ao carregar os posts.</p>
-      ) : postsAndUsers && postsAndUsers.fetchedPosts.length > 0 ? (
+      )}
+
+      {!isLoading && !error && postsAndUsers && postsAndUsers.fetchedPosts.length > 0 ? (
         postsAndUsers.fetchedPosts.map((post, i) => (
           <Link
             to={`/post/${post.id}`}
@@ -72,7 +76,7 @@ const NewPosts = () => {
           </Link>
         ))
       ) : (
-        <p>Sem Posts com Ênfase disponíveis</p>
+        <p>Você não segue nenhuma pessoa ainda :(</p>
       )}
     </div>
   );

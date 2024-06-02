@@ -1,77 +1,46 @@
-import { useState } from "react";
-import { toast } from "react-toastify";
-import { Link } from "react-router-dom";
-import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth, db } from "../../../firebase/Config";
-import { useNavigate } from "react-router-dom";
-import { doc, getDoc, setDoc } from "firebase/firestore";
+import { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import useRegister from '../../../hooks/useRegister';
+import './Register.scss';
 
-import "./Register.scss";
-
-const Register = ({ setModal }) => {
+const Register = () => {
   const navigate = useNavigate();
-  const [loading, setLoading] = useState(false);
   const [form, setForm] = useState({
-    username: "",
-    email: "",
-    password: "",
-    confirmPassword: "",
+    username: '',
+    email: '',
+    password: '',
+    confirmPassword: '',
   });
-  const [error, setError] = useState(null);
 
-  const handleSubmit = async (e) => {
+  const { mutate, isLoading, error } = useRegister();
+
+  const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (
-      !form.username ||
-      !form.email ||
-      !form.password ||
-      !form.confirmPassword
-    ) {
-      toast.error("Todos os campos são obrigatórios.");
+    if (!form.username || !form.email || !form.password || !form.confirmPassword) {
+      toast.error('Todos os campos são obrigatórios.');
       return;
     }
 
     if (form.password.length < 6) {
-      toast.error("A senha deve ter pelo menos 6 caracteres.");
+      toast.error('A senha deve ter pelo menos 6 caracteres.');
       return;
     }
 
     if (form.password !== form.confirmPassword) {
-      toast.error("As senhas não coincidem.");
+      toast.error('As senhas não coincidem.');
       return;
     }
 
-    setLoading(true);
-
-    try {
-      const { user } = await createUserWithEmailAndPassword(
-        auth,
-        form.email,
-        form.password
-      );
-
-      const ref = doc(db, "users", user.uid);
-      const userDoc = await getDoc(ref);
-
-      if (!userDoc.exists()) {
-        await setDoc(ref, {
-          userId: user.uid,
-          username: form.username,
-          email: form.email,
-          userImg: "",
-          bio: "",
-          created: Date.now(),
-        });
-        navigate("/");
-        setModal(false);
+    mutate(
+      { email: form.email, password: form.password, username: form.username },
+      {
+        onSuccess: () => {
+          navigate('/');
+        },
       }
-    } catch (error) {
-      console.error("Erro ao criar conta:", error);
-      setError("Ocorreu um erro. Tente novamente mais tarde.");
-    } finally {
-      setLoading(false);
-    }
+    );
   };
 
   return (
@@ -120,21 +89,19 @@ const Register = ({ setModal }) => {
           minLength={6}
           required
           value={form.confirmPassword}
-          onChange={(e) =>
-            setForm({ ...form, confirmPassword: e.target.value })
-          }
+          onChange={(e) => setForm({ ...form, confirmPassword: e.target.value })}
         />
         <div className="no-have-account">
           <p>Já tem uma conta?</p>
           <Link to="/login">Faça login</Link>
         </div>
-        {!loading && <button className="btn">Cadastre-se</button>}
-        {loading && (
+        {!isLoading && <button className="btn">Cadastre-se</button>}
+        {isLoading && (
           <button className="btn" disabled>
             Cadastrando...
           </button>
         )}
-        {error && <span className="error">{error}</span>}
+        {error && <span className="error">Ocorreu um erro. Tente novamente mais tarde.</span>}
       </form>
     </section>
   );
