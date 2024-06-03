@@ -1,0 +1,14 @@
+{name: "publish.", short_name: "publish.", start_url: "/", display: "standalone"
+}
+display
+: "standalone"
+
+name
+: "publish."
+prefer_related_applications
+: true
+
+short_name
+: "publish."
+start_url
+: "/FirstHome"

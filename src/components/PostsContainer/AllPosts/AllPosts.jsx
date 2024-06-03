@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { Link } from "react-router-dom";
 import { readTime } from "../../../utils/ReadTime";
 import FormatDate from "../../../utils/FormatDate";
@@ -22,7 +22,7 @@ const AllPosts = () => {
 
   const { ref, inView } = useInView();
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (inView && hasNextPage) {
       fetchNextPage();
     }

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { collection, query, getDocs, doc, getDoc } from "firebase/firestore";
+import { collection, getDocs, doc, getDoc } from "firebase/firestore";
 import { db } from "../firebase/Config";
 
 const useSearchPostsAndUser = (search) => {

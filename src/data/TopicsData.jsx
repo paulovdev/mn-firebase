@@ -1,43 +1,86 @@
-
-import { FaStarOfLife } from "react-icons/fa";
-import { MdOutlineHomeWork } from "react-icons/md";
-import { MdOutlineSelfImprovement } from "react-icons/md";
+import { FaRegLightbulb } from "react-icons/fa";
+import { MdMovie } from "react-icons/md";
+import { FaRegGrinStars } from "react-icons/fa";
 import { GrTechnology } from "react-icons/gr";
-import { GrMultimedia } from "react-icons/gr";
-import { IoShareSocial } from "react-icons/io5";
-import { MdAgriculture } from "react-icons/md";
-import { TbWorld } from "react-icons/tb";
+import { FaPaintBrush } from "react-icons/fa";
+import { IoIosPeople } from "react-icons/io";
+import { MdLibraryBooks } from "react-icons/md";
+import { IoMdGlobe } from "react-icons/io";
 
 export const topicsData = {
     "categories": [
         {
-            "name": "Vida",
-            "icon": FaStarOfLife,
+            "name": "Tecnologia",
+            "color": "#ff5733",
+            "icon": GrTechnology,
             "topics": [
-                "Vida",
-                "Família",
-                "Adoção",
-                "Crianças",
-                "Cuidados com Idosos",
-                "Paternidade",
-                "Maternidade",
-                "Saúde",
-                "Envelhecimento",
-                "Coronavírus",
-                "Covid-19",
-                "Morte e Morrer",
-                "Doença",
-                "Relacionamentos",
-                "Namoro",
-                "Divórcio",
-                "Amizade",
-                "Amor",
-                "Casamento"
+                "Tecnologia",
+                "Inteligência Artificial",
+                "ChatGPT",
+                "IA Conversacional",
+                "Aprendizado Profundo",
+                "Grandes Modelos de Linguagem",
+                "Aprendizado de Máquina",
+                "Blockchain",
+                "Bitcoin",
+                "Criptomoeda",
+                "Finanças Descentralizadas",
+                "Ethereum",
+                "NFT",
+                "Ciência de Dados",
+                "Análise",
+                "Engenharia de Dados",
+                "Visualização de Dados",
+                "Design de Banco de Dados",
+                "SQL",
+                "Desenvolvimento de Software",
+                "Programação",
+                "Desenvolvimento Android",
+                "Codificação",
+                "Flutter",
+                "Engenharia Front-end",
+                "Desenvolvimento iOS",
+                "Linguagens de Programação",
+                "Angular",
+                "CSS",
+                "HTML",
+                "Java",
+                "JavaScript",
+                "DevOps",
+                "AWS",
+                "Databricks",
+                "Docker",
+                "Kubernetes",
+                "Terraform"
+            ]
+        },
+        {
+            "name": "Séries e Filmes",
+            "color": "#ff33f6",
+            "icon": MdMovie,
+            "topics": [
+                "Séries",
+                "Filmes",
+                "Documentários",
+                "Animações",
+                "Streaming",
+                "Netflix",
+                "Hulu",
+                "Amazon Prime",
+                "Disney+",
+                "HBO Max",
+                "Críticas de Filmes",
+                "Críticas de Séries",
+                "Premiações",
+                "Cinematografia",
+                "Roteirização",
+                "Direção"
             ]
         },
         {
             "name": "Autoaperfeiçoamento",
-            "icon": MdOutlineSelfImprovement,
+            "color": "#33ff57",
+            "icon": FaRegLightbulb,
             "topics": [
                 "Autoaperfeiçoamento",
                 "Saúde Mental",
@@ -61,79 +104,11 @@ export const topicsData = {
             ]
         },
         {
-            "name": "Trabalho",
-            "icon": MdOutlineHomeWork,
+            "name": "Arte",
+            "color": "#ffae33",
+            "icon": FaPaintBrush,
             "topics": [
-                "Trabalho",
-                "Negócios",
-                "Empreendedorismo",
-                "Freelancing",
-                "Pequenas Empresas",
-                "Startups",
-                "Capital de Risco",
-                "Marketing",
-                "Publicidade",
-                "Branding",
-                "Marketing de Conteúdo",
-                "Estratégia de Conteúdo",
-                "Marketing Digital",
-                "Liderança",
-                "Engajamento de Funcionários",
-                "Coaching de Liderança",
-                "Desenvolvimento de Liderança",
-                "Gerenciamento",
-                "Reuniões"
-            ]
-        },
-        {
-            "name": "Tecnologia",
-            "icon": GrTechnology,
-            "topics": [
-                "Tecnologia",
-                "Inteligência Artificial",
-                "ChatGPT",
-                "IA Conversacional",
-                "Aprendizado Profundo",
-                "Grandes Modelos de Linguagem",
-                "Aprendizado de Máquina",
-                "Blockchain",
-                "Bitcoin",
-                "Criptomoeda",
-                "Finanças Descentralizadas",
-                "Ethereum",
-                "Nft",
-                "Ciência de Dados",
-                "Análise",
-                "Engenharia de Dados",
-                "Visualização de Dados",
-                "Design de Banco de Dados",
-                "Sql",
-                "Desenvolvimento de Software",
-                "Programação",
-                "Desenvolvimento Android",
-                "Codificação",
-                "Flutter",
-                "Engenharia Front-end",
-                "Desenvolvimento iOS",
-                "Linguagens de Programação",
-                "Angular",
-                "CSS",
-                "HTML",
-                "Java",
-                "JavaScript",
-                "DevOps",
-                "AWS",
-                "Databricks",
-                "Docker",
-                "Kubernetes",
-                "Terraform"
-            ]
-        },
-        {
-            "name": "Mídia",
-            "icon": GrMultimedia,
-            "topics": [
-                "Mídia",
+                "Arte",
                 "Escrita",
                 "Desafio de 30 Dias",
                 "Resenhas de Livros",
@@ -156,7 +131,8 @@ export const topicsData = {
         },
         {
             "name": "Sociedade",
-            "icon": IoShareSocial,
+            "color": "#33c1ff",
+            "icon": IoIosPeople,
             "topics": [
                 "Sociedade",
                 "Economia",
@@ -181,7 +157,8 @@ export const topicsData = {
         },
         {
             "name": "Cultura",
-            "icon": MdAgriculture,
+            "color": "#ff3385",
+            "icon": FaRegGrinStars,
             "topics": [
                 "Cultura",
                 "Filosofia",
@@ -205,10 +182,35 @@ export const topicsData = {
             ]
         },
         {
-            "name": "Mundo",
-            "icon": TbWorld,
+            "name": "Livros",
+            "color": "#8e44ad",
+            "icon": MdLibraryBooks,
             "topics": [
-                "Mundo",
+                "Livros",
+                "Literatura",
+                "Ficção",
+                "Não Ficção",
+                "Romances",
+                "Mistério",
+                "Ficção Científica",
+                "Biografias",
+                "Fantasias",
+                "Poesia",
+                "Autobiografias",
+                "Livros de Autoajuda",
+                "Livros de Negócios",
+                "Livros de História",
+                "Clássicos",
+                "Livros Infantis"
+            ]
+        },
+        {
+            "name": "Viagens",
+            "color": "#27ae60",
+            "icon": IoMdGlobe,
+            "topics": [
+                "Viagens",
+                "Turismo",
                 "Cidades",
                 "Abu Dhabi",
                 "Amsterdã",
@@ -221,7 +223,6 @@ export const topicsData = {
                 "Mudanças Climáticas",
                 "Conservação",
                 "Caminhadas",
-                "Viagens",
                 "Turismo",
                 "Dicas de Viagem",
                 "Escrita de Viagem",

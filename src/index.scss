@@ -3,7 +3,7 @@
 $p: #fefefe;
 $p-2: #141414;
 $s: #828282;
-$background: #151515;
+$background: #111111;
 $bg: #868686;
 $border: #262626;
 
@@ -42,6 +42,53 @@ button {
   cursor: pointer;
 }
 
+.loading-container {
+  position: relative;
+  width: 100%;
+  height: 75px;
+  top: 0;
+  display: flex;
+  align-items: end;
+  justify-content: center;
+
+  .loading {
+    width: 24px;
+    height: 24px;
+    border-radius: 100%;
+
+    border: 4px solid;
+
+    border-color: $p;
+    border-right-color: $mt;
+    animation: spinner-d3wgkg 1s infinite linear;
+  }
+}
+
+.loading-container.initial {
+  width: 100%;
+  height: 100vh;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .loading.initial {
+    width: 50px;
+    height: 50px;
+
+    border: 6px solid;
+
+    border-color: $p;
+    border-right-color: $mt;
+    animation: spinner-d3wgkg 1s infinite linear;
+  }
+}
+
+@keyframes spinner-d3wgkg {
+  to {
+    transform: rotate(1turn);
+  }
+}
 
 img {
   image-rendering: optimizeSpeed;

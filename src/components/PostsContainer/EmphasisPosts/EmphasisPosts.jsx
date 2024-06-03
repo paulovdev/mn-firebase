@@ -44,7 +44,7 @@ const EmphasisPosts = () => {
               <Link to={`/post/${post.id}`} className="post-container large-post" key={i}>
                 <div className="post">
                   <div className="img-post">
-                    <img src={post.postImg} alt="Imagem do post" />
+                    <img src={post.postImg} loading="lazy" alt="Imagem do post" />
                   </div>
 
                   <div className="post-content">

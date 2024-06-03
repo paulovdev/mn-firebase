@@ -10,10 +10,9 @@ import { FaClock } from "react-icons/fa";
 
 import useSearchPostsAndUser from "../../hooks/useSearchPostsAndUser";
 
-import "./Search.scss";
 import PostUserNav from "../../components/Navigation/PostUserNav/PostUserNav";
 
-const Search = () => {
+const Users = () => {
   const location = useLocation();
   const search = new URLSearchParams(location.search).get("q");
   const { posts, users, loading } = useSearchPostsAndUser(search);
@@ -111,4 +110,4 @@ const Search = () => {
   );
 };
 
-export default Search;
+export default Users;

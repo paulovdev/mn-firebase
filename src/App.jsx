@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 import { Blog } from "./context/Context";
 import { ToastContainer } from "react-toastify";
@@ -20,10 +20,20 @@ import Search from "./pages/Search/Search";
 import TopicPost from "./pages/TopicPost/TopicPost";
 import FirstHome from "./pages/FirstHome/FirstHome";
 import Notifications from "./pages/Notifications/Notifications";
+import Users from "./pages/Users/Users";
 
 const App = () => {
   const { currentUser } = Blog();
   const location = useLocation();
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 800);
+    return () => clearTimeout(timer);
+  }, []);
+
   useEffect(() => {
     window.scrollTo(0, 0);
     const overflow = () => {
@@ -34,6 +44,14 @@ const App = () => {
     }
     overflow()
   }, [location.pathname]);
+
+  if (loading) {
+    return <div className="loading-container initial">
+      <div className="loading initial">
+
+      </div>
+    </div>;
+  }
 
   return (
     <SkeletonTheme baseColor="#3a3a3a" highlightColor="#262626">
@@ -55,6 +73,7 @@ const App = () => {
         <Route path="/topic/:postId" element={<TopicPost />} />
         <Route path="/allTopics" element={<AllTopics />} />
         <Route path="/search" element={<Search />} />
+        <Route path="/users" element={<Users />} />
         <Route path="*" element={<Navigate to={!currentUser ? "/login" : "/home"} />} />
       </Routes>
     </SkeletonTheme>

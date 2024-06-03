@@ -15,10 +15,10 @@ const RandomTopics = () => {
         <div id='random-topics'>
             <ul className='post-topic-container'>
                 {randomCategories.map((category, index) => (
-                    <Link to={`/topic/${category.name}`} key={index} className='post-topic'>
+                    <Link to={`/topic/${category.name}`} key={index} className='post-topic' style={{ border: `1px solid ${category.color}` }}>
                         <h1>{category.name}</h1>
-                        <div className="icon-background">
-                            {React.createElement(category.icon)}
+                        <div className="icon-background" >
+                            {React.createElement(category.icon, { style: { color: category.color } })}
                         </div>
                     </Link>
                 ))}
